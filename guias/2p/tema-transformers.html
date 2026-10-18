@@ -1,0 +1,5173 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de estudio de Inteligencia Artificial (CCPG1044, ESPOL · FIEC): clases, guías por evaluación, tareas y evaluaciones anteriores.">
+      
+      
+        <meta name="author" content="Ayudantía de Inteligencia Artificial">
+      
+      
+        <link rel="canonical" href="https://jfcofer.github.io/ia-ccpg1044/guias/2p/tema-transformers.html">
+      
+      
+      
+        <link rel="prev" href="./tema-rnn-lstm-gru.html">
+      
+      
+        <link rel="next" href="./tema-evaluacion-de-modelos.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.71">
+    
+    
+      
+        <title>Transformers - IA · CCPG1044</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.e442bf79.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.b60ce83d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-hidden="true"></label>
+    <div data-md-component="skip">
+      <a href="#__skip" class="md-skip">
+        Saltar a contenido
+      </a>
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../index.html" title="IA · CCPG1044" class="md-header__button md-logo" aria-label="IA · CCPG1044" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navegación">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IA · CCPG1044
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Transformers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun-moon" viewBox="0 0 24 24"><path d="M12 2v2M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715M16 12a4 4 0 0 0-4-4M19 5l-1.256 1.256M20 12h2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Preferencia del sistema"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Preferencia del sistema" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Buscar">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Buscar">
+  <button type="button" class="md-search__button">
+    Buscar
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../clases/index.html" class="md-tabs__link">
+          
+  
+  Clases y sílabo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../index.html" class="md-tabs__link">
+          
+  
+  Guías de estudio
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../evaluaciones/index.html" class="md-tabs__link">
+          
+  
+  Evaluaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tareas/index.html" class="md-tabs__link">
+          
+  
+  Tareas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../proyecto/index.html" class="md-tabs__link">
+          
+  
+  Proyecto final
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../laboratorios/index.html" class="md-tabs__link">
+          
+  
+  Laboratorios
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../bibliografia/index.html" class="md-tabs__link">
+          
+  
+  Bibliografía
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../fe-de-erratas.html" class="md-tabs__link">
+        
+  
+  Fe de erratas
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="IA · CCPG1044" class="md-nav__button md-logo" aria-label="IA · CCPG1044" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    IA · CCPG1044
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Inicio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Clases y sílabo
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Clases y sílabo
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/c01-presentacion-del-curso/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primer parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Primer parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c02-definiciones-y-estado-del-arte/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  02 · Definiciones y estado del arte
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c03-fundamentos-y-tipos-de-aprendizaje/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  03 · Fundamentos y tipos de aprendizaje
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c04-regresion-lineal/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  04 · Regresión lineal
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c05-descenso-de-gradiente-y-regresion-polinomial/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  05 · Descenso de gradiente y regresión polinomial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c06-regresion-logistica/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  06 · Regresión logística
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c07-perceptron-y-funciones-de-activacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  07 · Perceptrón y funciones de activación
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c08-mlp-como-clasificador/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  08 · MLP como clasificador
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c09-aprendizaje-en-mlp-regla-delta/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  09 · Aprendizaje en MLP
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c10-backpropagation-y-tensores/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  10 · Backpropagation y notación vectorial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c11-mlp-vectorizado-y-regularizacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  11 · Backpropagation, Jacobiano y regularización
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c12-cnn-introduccion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  12 · Introducción a las CNN
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c13-cnn-parametros-y-pooling/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  13 · CNN: parámetros, pooling y aprendizaje
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c14-examen-del-primer-parcial/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  14 · Examen del primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/c15-rnn-y-nlp/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Segundo parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Segundo parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c16-bptt-y-desvanecimiento-del-gradiente/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  16 · BPTT y desvanecimiento del gradiente
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c17-lstm-gru-e-introduccion-a-transformers/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  17 · LSTM, GRU e introducción a los Transformers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c18-transformers-autoatencion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  18 · Transformers: autoatención
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c19-transformers-matrices-y-codificacion-posicional/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  19 · Transformers: matrices, embeddings y posición
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c20-comportamiento-inteligente/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  20 · Comportamiento inteligente y estrategias de búsqueda
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c21-metricas-y-busqueda-no-informada/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  21 · Métricas de evaluación y búsqueda no informada
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c22-busqueda-heuristica/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  22 · Búsqueda heurística
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c23-a-estrella-y-backtracking/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  23 · A*, backtracking y representación del conocimiento
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c24-logica-inferencia-y-unificacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  24 · Lógica, inferencia y unificación
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c25-resolucion-forma-clausal-y-extraccion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  25 · Resolución, forma clausal y extracción de respuestas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/variantes-2024-2/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Diapositivas PAO 2024-II
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/variantes-2026-1/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Diapositivas PAO 2026-I
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guías de estudio
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Guías de estudio
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../1p/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primer parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_3_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Primer parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/leccion-1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #1
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/leccion-2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #2
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/examen-1p.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del examen del 1P
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/tema-guia-general.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía general del primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/tema-apuntes-consolidados.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Apuntes consolidados de clase (1P)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Segundo parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Segundo parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./leccion-3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #3
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./leccion-4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #4
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./examen-2p.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del examen del 2P (examen final)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-rnn-lstm-gru.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Secuencias — RNN, BPTT, LSTM y GRU
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Transformers
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="tema-transformers.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Transformers
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#20-mapa-del-volumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.0 Mapa del volumen
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-por-que-morir-la-rnn-los-cuatro-retos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1 Por qué morir la RNN: los cuatro retos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Por qué morir la RNN: los cuatro retos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#desglose-de-cada-reto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Desglose de cada reto
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definicion-del-curso-que-es-un-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Definición del curso: ¿qué es un Transformer?
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-la-arquitectura-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2 La arquitectura global
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 La arquitectura global">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-decoder-es-autoregresivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El decoder es autoregresivo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-auto-atencion-la-idea-antes-de-las-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.3 Auto-atención: la idea, antes de las matrices
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Auto-atención: la idea, antes de las matrices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-problema-que-resuelve" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El problema que resuelve
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-k-q-v-la-parte-mas-importante-del-volumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.4 K, Q, V — la parte más importante del volumen
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 K, Q, V — la parte más importante del volumen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#las-definiciones-del-profesor-palabra-por-palabra" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Las definiciones del profesor, palabra por palabra
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-metafora-de-la-biblioteca-el-mismo-dijo-que-es-el-gancho-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La metáfora de la biblioteca — él mismo dijo que es el gancho de memoria
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-aprende-cada-matriz-de-pesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Qué aprende cada matriz de pesos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-error-que-el-profesor-corrigio-en-vivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 El error que el profesor corrigió en vivo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-el-calculo-de-la-auto-atencion-paso-a-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5 El cálculo de la auto-atención, paso a paso
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 El cálculo de la auto-atención, paso a paso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#los-seis-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Los seis pasos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#251-ejemplo-completamente-resuelto-el-de-la-diapositiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5.1 EJEMPLO COMPLETAMENTE RESUELTO — el de la diapositiva
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252-ejemplo-parcialmente-resuelto-z2-y-z3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5.2 Ejemplo parcialmente resuelto — <code>Z₂</code> y <code>Z₃</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#253-problema-sin-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5.3 Problema sin resolver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#254-la-matriz-de-similitud" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5.4 La matriz de similitud
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-el-escalado-d_k-derivacion-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.6 El escalado <code>√d_k</code> — derivación completa
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.6 El escalado √d_k — derivación completa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-parcialmente-resuelto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ejemplo parcialmente resuelto
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-sin-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Problema sin resolver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-multi-head-attention-y-wo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.7 Multi-head attention y <code>W^O</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7 Multi-head attention y W^O">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Qué es
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-metafora-de-los-ocho-expertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La metáfora de los ocho expertos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-conteo-de-matrices-pregunta-de-examen-en-potencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔢 El conteo de matrices — pregunta de examen en potencia
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-mlp-por-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El MLP por token
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-sumar-y-normalizar-y-las-conexiones-salteadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.8 «Sumar y normalizar» y las conexiones salteadas
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-embeddings-de-palabra-como-se-fabrican" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.9 Embeddings de palabra: cómo se fabrican
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.9 Embeddings de palabra: cómo se fabrican">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-mecanismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El mecanismo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-completamente-resuelto-la-diapositiva-de-la-clase-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        EJEMPLO COMPLETAMENTE RESUELTO — la diapositiva de la Clase 20
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-atajo-del-one-hot-dicho-por-el-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔑 El atajo del one-hot — dicho por él en clase
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-pregunta-de-dimensiones-aparecio-en-una-leccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔢 La pregunta de dimensiones — apareció en una lección
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padding" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Padding
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-sin-resolver_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Problema sin resolver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#210-positional-encoding-donde-vive-la-secuencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.10 Positional encoding — dónde vive la secuencia
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.10 Positional encoding — dónde vive la secuencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El problema
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-distincion-que-hay-que-tener-grabada" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 La distinción que hay que tener grabada
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-mecanica" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La mecánica
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#las-senales-senocoseno" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Las señales seno/coseno
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-completamente-resuelto-humano-come-ballena" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        EJEMPLO COMPLETAMENTE RESUELTO — «humano come ballena»
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-sin-resolver_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Problema sin resolver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#211-el-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.11 El decoder
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.11 El decoder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sus-tres-subcapas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sus tres subcapas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-cruza-del-encoder-al-decoder-dato-de-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔑 Qué cruza del encoder al decoder — dato de examen
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-attention-vs-encoder-decoder-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Self-attention vs encoder-decoder attention
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-se-entrena-el-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Cómo se entrena el decoder
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-el-contexto-entra-a-todas-las-capas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Por qué el contexto entra a todas las capas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-patron-de-examen-como-se-ha-evaluado-este-volumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.12 Patrón de examen — cómo se ha evaluado este volumen
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.12 Patrón de examen — cómo se ha evaluado este volumen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-real-de-atencion-revisado-en-clase-con-sus-veredictos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ítem real de atención revisado en clase, con sus veredictos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#familias-de-preguntas-esperables" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Familias de preguntas esperables
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213-checkpoint-de-recuperacion-volumen-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.13 Checkpoint de recuperación — Volumen 2
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#214-cierre-del-volumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.14 Cierre del volumen
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-evaluacion-de-modelos.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluación de modelos — matriz de confusión y métricas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-metricas-kmeans-busqueda-y-logica.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Métricas, K-means, búsqueda y lógica
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-resolucion-y-forma-clausal.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Resolución, forma clausal y extracción de respuestas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mejoramiento.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del mejoramiento (todo el curso)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../evaluaciones/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Evaluaciones
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/1p/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/2p/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Segundo parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/mejoramiento/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Mejoramiento
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tareas/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tareas
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../proyecto/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Proyecto final
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../laboratorios/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Laboratorios
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../bibliografia/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Bibliografía
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fe-de-erratas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Fe de erratas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#20-mapa-del-volumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.0 Mapa del volumen
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-por-que-morir-la-rnn-los-cuatro-retos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1 Por qué morir la RNN: los cuatro retos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Por qué morir la RNN: los cuatro retos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#desglose-de-cada-reto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Desglose de cada reto
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definicion-del-curso-que-es-un-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Definición del curso: ¿qué es un Transformer?
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-la-arquitectura-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2 La arquitectura global
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 La arquitectura global">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-decoder-es-autoregresivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El decoder es autoregresivo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-auto-atencion-la-idea-antes-de-las-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.3 Auto-atención: la idea, antes de las matrices
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Auto-atención: la idea, antes de las matrices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-problema-que-resuelve" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El problema que resuelve
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-k-q-v-la-parte-mas-importante-del-volumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.4 K, Q, V — la parte más importante del volumen
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 K, Q, V — la parte más importante del volumen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#las-definiciones-del-profesor-palabra-por-palabra" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Las definiciones del profesor, palabra por palabra
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-metafora-de-la-biblioteca-el-mismo-dijo-que-es-el-gancho-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La metáfora de la biblioteca — él mismo dijo que es el gancho de memoria
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-aprende-cada-matriz-de-pesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Qué aprende cada matriz de pesos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-error-que-el-profesor-corrigio-en-vivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 El error que el profesor corrigió en vivo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-el-calculo-de-la-auto-atencion-paso-a-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5 El cálculo de la auto-atención, paso a paso
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 El cálculo de la auto-atención, paso a paso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#los-seis-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Los seis pasos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#251-ejemplo-completamente-resuelto-el-de-la-diapositiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5.1 EJEMPLO COMPLETAMENTE RESUELTO — el de la diapositiva
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252-ejemplo-parcialmente-resuelto-z2-y-z3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5.2 Ejemplo parcialmente resuelto — <code>Z₂</code> y <code>Z₃</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#253-problema-sin-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5.3 Problema sin resolver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#254-la-matriz-de-similitud" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5.4 La matriz de similitud
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-el-escalado-d_k-derivacion-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.6 El escalado <code>√d_k</code> — derivación completa
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.6 El escalado √d_k — derivación completa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-parcialmente-resuelto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ejemplo parcialmente resuelto
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-sin-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Problema sin resolver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-multi-head-attention-y-wo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.7 Multi-head attention y <code>W^O</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7 Multi-head attention y W^O">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Qué es
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-metafora-de-los-ocho-expertos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La metáfora de los ocho expertos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-conteo-de-matrices-pregunta-de-examen-en-potencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔢 El conteo de matrices — pregunta de examen en potencia
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-mlp-por-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El MLP por token
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-sumar-y-normalizar-y-las-conexiones-salteadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.8 «Sumar y normalizar» y las conexiones salteadas
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-embeddings-de-palabra-como-se-fabrican" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.9 Embeddings de palabra: cómo se fabrican
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.9 Embeddings de palabra: cómo se fabrican">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-mecanismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El mecanismo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-completamente-resuelto-la-diapositiva-de-la-clase-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        EJEMPLO COMPLETAMENTE RESUELTO — la diapositiva de la Clase 20
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-atajo-del-one-hot-dicho-por-el-en-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔑 El atajo del one-hot — dicho por él en clase
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-pregunta-de-dimensiones-aparecio-en-una-leccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔢 La pregunta de dimensiones — apareció en una lección
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padding" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Padding
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-sin-resolver_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Problema sin resolver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#210-positional-encoding-donde-vive-la-secuencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.10 Positional encoding — dónde vive la secuencia
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.10 Positional encoding — dónde vive la secuencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El problema
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-distincion-que-hay-que-tener-grabada" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 La distinción que hay que tener grabada
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-mecanica" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La mecánica
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#las-senales-senocoseno" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Las señales seno/coseno
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-completamente-resuelto-humano-come-ballena" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        EJEMPLO COMPLETAMENTE RESUELTO — «humano come ballena»
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-sin-resolver_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Problema sin resolver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#211-el-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.11 El decoder
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.11 El decoder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sus-tres-subcapas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Sus tres subcapas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#que-cruza-del-encoder-al-decoder-dato-de-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔑 Qué cruza del encoder al decoder — dato de examen
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-attention-vs-encoder-decoder-attention" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Self-attention vs encoder-decoder attention
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-se-entrena-el-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Cómo se entrena el decoder
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-el-contexto-entra-a-todas-las-capas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Por qué el contexto entra a todas las capas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212-patron-de-examen-como-se-ha-evaluado-este-volumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.12 Patrón de examen — cómo se ha evaluado este volumen
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.12 Patrón de examen — cómo se ha evaluado este volumen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-real-de-atencion-revisado-en-clase-con-sus-veredictos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ítem real de atención revisado en clase, con sus veredictos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#familias-de-preguntas-esperables" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Familias de preguntas esperables
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213-checkpoint-de-recuperacion-volumen-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.13 Checkpoint de recuperación — Volumen 2
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#214-cierre-del-volumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.14 Cierre del volumen
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../index.html" class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../index.html" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Guías de estudio
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="./index.html" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Segundo parcial
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                <a id="__skip" tabindex="-1"></a>
+                
+                  
+
+
+<h1 id="transformers">Transformers<a class="headerlink" href="#transformers" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Escrita en PAO 2026-I</p>
+<p>Esta guía usa la <strong>numeración de clases de PAO 2026-I</strong>. En 2026-II el segundo parcial va una o dos clases
+antes (la Clase 14 fue el examen del 1P y el 2P termina en la Clase 25): consulta la
+<a href="../../clases/index.html#otras-versiones-de-las-diapositivas">tabla de equivalencias</a>. Lo que dice que «va al examen» o que «el profesor anunció» es de
+2026-I: úsalo como pista, no como garantía. El alcance vigente de cada evaluación está en su guía.</p>
+</div>
+<blockquote>
+<p><strong>Qué cubre este volumen:</strong> Clase 18 (secciones 2.x), Clase 19 completa, Clase 20 completa.
+<strong>Prerrequisitos:</strong> Volumen 1 completo, en especial embeddings estáticos vs contextuales (§1.3), el desvanecimiento del gradiente (§1.8) y la noción de MLP.
+<strong>Maestría esperada:</strong> explicar por qué el Transformer sustituye a la RNN; ejecutar a mano el cálculo de auto-atención para un token; saber qué es exactamente Q, K y V y cuál se multiplica con cuál; derivar <code>√d_k</code>; contar las matrices de un encoder; describir el encoder y el decoder capa por capa; explicar dónde vive la posición y calcularla; y resistir los distractores de «seleccione todas las verdaderas» sobre atención.</p>
+</blockquote>
+<hr />
+<h2 id="20-mapa-del-volumen">2.0 Mapa del volumen<a class="headerlink" href="#20-mapa-del-volumen" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>   Limitaciones de la RNN  ──►  ¿por qué un Transformer?
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        (lento O(N), desvanecimiento, unidireccional, orden)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                    │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                    ▼
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        Arquitectura ENCODER – DECODER  (6 + 6 capas)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                    │
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     ┌──────────────┴──────────────┐
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>     ▼                             ▼
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  ENCODER                       DECODER
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  · self-attention              · self-attention (enmascarada)
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  · K, Q, V                     · encoder-decoder attention (K y V del contexto)
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  · multi-head (8)              · MLP
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  · sumar y normalizar          · lineal + softmax → token
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  · MLP                         · autoregresivo hasta &lt;EOS&gt;
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>     │
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>     └── entrada = embedding de palabra  +  positional encoding
+</code></pre></div>
+<hr />
+<h2 id="21-por-que-morir-la-rnn-los-cuatro-retos">2.1 Por qué morir la RNN: los cuatro retos<a class="headerlink" href="#21-por-que-morir-la-rnn-los-cuatro-retos" title="Permanent link">&para;</a></h2>
+<p>La Clase 18 abre con un diagrama de una RNN procesando «lecho del río banco de …» y lista los
+retos, literalmente:</p>
+<blockquote>
+<p><strong>Retos:</strong>
+• <strong>Lento O(N)</strong>: N = # de tokens
+• <strong>Desvanecimiento del gradiente</strong>
+• <strong>Unidireccional: Izquierda – derecha</strong>
+– Banco de arena vs. Arena en el banco</p>
+</blockquote>
+<h3 id="desglose-de-cada-reto">Desglose de cada reto<a class="headerlink" href="#desglose-de-cada-reto" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Reto</th>
+<th>Qué significa</th>
+<th>Cómo lo arregla el Transformer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lento, O(N)</strong></td>
+<td>los pasos son secuenciales: para calcular <code>h_t</code> hace falta <code>h_{t−1}</code>. No se puede paralelizar el tiempo.</td>
+<td><strong>paralelización</strong>: todos los tokens se procesan a la vez</td>
+</tr>
+<tr>
+<td><strong>Desvanecimiento del gradiente</strong></td>
+<td>§1.8</td>
+<td>no hay cadena temporal de multiplicaciones: «<strong>en los transformers, la distancia es una</strong>»</td>
+</tr>
+<tr>
+<td><strong>Unidireccional</strong></td>
+<td>sólo mira hacia la izquierda; no generaliza a idiomas de derecha a izquierda ni verticales</td>
+<td>atención bidireccional (BERT)</td>
+</tr>
+<tr>
+<td><strong>Orden de las palabras</strong></td>
+<td>«banco de arena» ≠ «arena en el banco»</td>
+<td><strong>positional encoding</strong> (§2.9)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>«<strong>En las RNNs, el tamaño de la ventana definía los time steps, y esa era la dependencia. La
+distancia, por lo tanto, está en los time steps. En los transformers, la distancia es una.
+Cada token está cerca del otro, porque es en paralelo.</strong>» — Clase 18</p>
+<p><strong>Matiz que el profesor insiste en corregir:</strong> que el Transformer sea mejor <strong>no</strong> hace mala a la
+RNN. «<strong>No es que una red recurrente es mala, de hecho sigue siendo vigente en los transformers…
+Mientras más corto es [el contexto], las RNN son muy buenas.</strong>» Un distractor que diga «las RNN
+quedaron obsoletas» es falso según el curso.</p>
+</blockquote>
+<h3 id="definicion-del-curso-que-es-un-transformer">Definición del curso: ¿qué es un Transformer?<a class="headerlink" href="#definicion-del-curso-que-es-un-transformer" title="Permanent link">&para;</a></h3>
+<p>Literal de la Clase 18:</p>
+<blockquote>
+<p>• Es un tipo de RN para tareas tipo <strong>Seq2Seq</strong>.
+• Arquitectura <strong>encoder-decoder</strong>.
+• <strong>Sin desvanecimiento del gradiente.</strong>
+• <strong>Sin problema con las dependencias largas.</strong>
+• Utilizan <strong>attention</strong> para aumentar la precisión y velocidad de entrenamiento.
+• Propuesto en «<strong>Attention is all you need</strong>».
+• <strong>Su mayor beneficio, la paralelización.</strong>
+• Disponible en TensorFlow como parte de Tensor2Tensor. También está en PyTorch.</p>
+</blockquote>
+<p>Y la línea de tiempo que da la diapositiva:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>   2013 — Word2Vec
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>   2014 — RNNs, modelos de lenguaje
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>   2017 — Transformers
+</code></pre></div>
+<blockquote>
+<p>«Estándar de rendimiento en una variedad de tareas de NLP: <strong>BERT</strong> (Bidirectional Encoder
+Representation Transformer), <strong>GPT</strong> (Generative Pre-trained Transformer) y otros. Estos modelos
+son capaces de captar sutilezas del lenguaje y generar texto.» — Clase 18</p>
+</blockquote>
+<p><strong>Memoriza los acrónimos desarrollados</strong>: BERT = <em>Bidirectional Encoder Representation
+Transformer</em>; GPT = <em>Generative Pre-trained Transformer</em>. Son material de pregunta de una línea.</p>
+<blockquote>
+<p>🚨 <strong>Trampa de arquitectura (aclaración del profesor en clase).</strong></p>
+<ul>
+<li><strong>GPT</strong> usa <strong>sólo una torre</strong>: la del <strong>decodificador</strong>.</li>
+<li><strong>BERT</strong> y el <strong>Vision Transformer</strong> usan <strong>sólo el codificador</strong>. Sobre el ViT: «<strong>El Vision
+  Transformer utiliza el codificador, no el decodificador.</strong>» ¿Por qué? Porque «<strong>la torre de
+  codificación… encuentra características. Extrae características</strong>», y luego un MLP + softmax
+  da la clase.</li>
+<li>El Transformer <strong>original</strong> (Attention is all you need) usa <strong>las dos torres</strong>.</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="22-la-arquitectura-global">2.2 La arquitectura global<a class="headerlink" href="#22-la-arquitectura-global" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>                                        ┌───────────────────────┐
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>                                        │      SOFTMAX          │
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>                                        └───────────▲───────────┘
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>                                        ┌───────────┴───────────┐
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>                                        │ FUNCIÓN UMBRAL–LINEAL │
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>     ┌──────────────┐                   └───────────▲───────────┘
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>     │  ENCODER #6  │───── contexto ───►┌───────────┴───────────┐
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>     ├──────────────┤          │        │      DECODER #6       │
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>     │      ⋮       │          │        ├───────────────────────┤
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>     ├──────────────┤          ├───────►│          ⋮            │
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>     │  ENCODER #1  │          │        ├───────────────────────┤
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>     └──────▲───────┘          └───────►│      DECODER #1       │
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>            │                           └───────────▲───────────┘
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>   embedding + posición                    embedding + posición
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>   «soy estudiante politécnico»            «salida anterior»
+</code></pre></div>
+<p>Datos duros de la diapositiva y de clase:</p>
+<ul>
+<li><strong>6 capas de encoder y 6 de decoder</strong> en la versión original.
+  «<strong>No es un número mágico… De hecho, cuando lo hacemos desde cero, hacemos menos. Son seis capas.
+  Y ocho cabezas.</strong>»</li>
+<li>«<strong>Encoders son idénticos, pero no comparten los pesos.</strong>» ← literal de la Clase 19. Es un
+  enunciado de examen: misma arquitectura, pesos distintos.</li>
+<li>Cada encoder contiene, de abajo hacia arriba: <strong>AUTO-ATENCIÓN</strong> → <strong>RED NEURONAL – MLP</strong>.</li>
+<li><strong>El contexto</strong> (salida del encoder #6) entra a <strong>todas</strong> las capas del decoder, no sólo a la primera.</li>
+</ul>
+<h3 id="el-decoder-es-autoregresivo">El decoder es autoregresivo<a class="headerlink" href="#el-decoder-es-autoregresivo" title="Permanent link">&para;</a></h3>
+<p>Las diapositivas de la Clase 20 muestran la traducción «soy estudiante politécnico» → ucraniano
+paso a paso:</p>
+<table>
+<thead>
+<tr>
+<th>Paso</th>
+<th>Entrada del decoder («salida anterior»)</th>
+<th>Salida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>—</td>
+<td><code>Я</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>Я</code></td>
+<td><code>Я студент</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>Я студент</code></td>
+<td><code>Я студент політехніки</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>Я студент політехніки</code></td>
+<td><code>Я студент політехніки &lt;end of sentence&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cómo sabe cuándo parar:</strong> por el token especial del tokenizador. «Recuerden el tokenizer,
+creaba dos tokens adicionales: <strong>CLS</strong>… y el otro se llamaba <strong>End of Sentence o End of Sequence</strong>.
+Eso quiere decir que hasta ahí es donde va.»</p>
+<hr />
+<h2 id="23-auto-atencion-la-idea-antes-de-las-matrices">2.3 Auto-atención: la idea, antes de las matrices<a class="headerlink" href="#23-auto-atencion-la-idea-antes-de-las-matrices" title="Permanent link">&para;</a></h2>
+<h3 id="el-problema-que-resuelve">El problema que resuelve<a class="headerlink" href="#el-problema-que-resuelve" title="Permanent link">&para;</a></h3>
+<p>Un embedding estático da a <em>banco</em> el mismo vector en «banco de arena» y en «fui al banco». La
+auto-atención construye, para cada token, un <strong>embedding contextual</strong> <code>y_i</code> mezclando información
+de todos los demás tokens de la oración.</p>
+<p>Las diapositivas de la Clase 19 lo dibujan como una fila de bloques idénticos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>   Embeddings
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>   contextuales      y₀      y₁      y₂      y₃      y₄      y₅
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                      ▲       ▲       ▲       ▲       ▲       ▲
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>                  ┌───┴───┬───┴───┬───┴───┬───┴───┬───┴───┬───┴───┐
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                  │ Auto- │ Auto- │ Auto- │ Auto- │ Auto- │ Auto- │
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                  │atención│atención│atención│atención│atención│atención│
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                  └───▲───┴───▲───┴───▲───┴───▲───┴───▲───┴───▲───┘
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>   Embeddings         │       │       │       │       │       │
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>   NO contextuales   x₀      x₁      x₂      x₃      x₄      x₅
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                   lecho    del     río    banco     de    [mask]
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                                          ↑ token Query
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>                   └────────────── tokens Key ──────────────┘
+</code></pre></div>
+<p>La secuencia de diapositivas repite este dibujo cuatro veces, moviendo el rótulo <strong>token Query</strong>
+de <code>x₀</code> a <code>x₁</code>, luego a <code>x₂</code>, luego a <code>x₃</code>. <strong>Ese es el mensaje:</strong> el proceso se repite una vez por
+token, y en cada repetición <strong>un</strong> token es el Query y <strong>todos</strong> (incluido él mismo) son Keys.</p>
+<blockquote>
+<p>🚨 <strong>La afirmación que hay que tener clara.</strong> Un estudiante preguntó exactamente la trampa:
+«¿O sea que los otros tokens no afectan la salida de ese particular token?» Respuesta:
+«<strong>Todos los tokens afectan la salida de todos los tokens.</strong> Porque attention es la que va a
+permitir establecer qué importancia tiene esta palabra con respecto a esta… <strong>cada una se procesa
+de manera paralela, pero tiene información de los demás.</strong>»</p>
+<p>Es decir: <strong>paralelo ≠ independiente.</strong> Éste es el distractor más probable del tema.</p>
+</blockquote>
+<hr />
+<h2 id="24-k-q-v-la-parte-mas-importante-del-volumen">2.4 K, Q, V — la parte más importante del volumen<a class="headerlink" href="#24-k-q-v-la-parte-mas-importante-del-volumen" title="Permanent link">&para;</a></h2>
+<h3 id="las-definiciones-del-profesor-palabra-por-palabra">Las definiciones del profesor, palabra por palabra<a class="headerlink" href="#las-definiciones-del-profesor-palabra-por-palabra" title="Permanent link">&para;</a></h3>
+<p>Ésta es la formulación que él pidió explícitamente memorizar:</p>
+<blockquote>
+<p>«<strong>El key es el contexto. Por lo tanto, el query es la relevancia en el contexto. No hay cómo
+olvidarse, es sencillo. El value es la respuesta a lo que está entendiendo. Recuerden que el
+value es la información que el token va a proveer una vez que es encontrado. Para ser
+encontrado, los keys deben contener las características de todos y cada uno de los tokens para
+que pueda ser buscado, para que pueda ser encontrado. Ok, espero que lo recuerden.</strong>»</p>
+</blockquote>
+<p>Y la versión de tres preguntas, que es la más fácil de reconstruir bajo presión:</p>
+<blockquote>
+<p>«Y eso es lo que le hace súper preciso, porque entonces, <strong>¿qué es lo que necesito?, ¿dónde lo
+busco? y ¿qué me produce?</strong>»</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Pregunta</th>
+<th>Definición del profesor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Q</strong> (Query)</td>
+<td><strong>¿qué necesito?</strong></td>
+<td>«la representación que la palabra dice que <strong>debe buscar</strong> en el resto… es lo que yo estoy buscando. <strong>Por eso se llama query.</strong>»</td>
+</tr>
+<tr>
+<td><strong>K</strong> (Key)</td>
+<td><strong>¿dónde lo busco?</strong></td>
+<td>«<strong>El key es el contexto.</strong> Contiene los valores de las características que representan cada token… <strong>Es como el espacio de búsqueda de ese query.</strong>»</td>
+</tr>
+<tr>
+<td><strong>V</strong> (Value)</td>
+<td><strong>¿qué me produce?</strong></td>
+<td>«<strong>es el contenido del query buscado en esos keys</strong>» / «la información que el token va a proveer una vez que es encontrado»</td>
+</tr>
+</tbody>
+</table>
+<h3 id="la-metafora-de-la-biblioteca-el-mismo-dijo-que-es-el-gancho-de-memoria">La metáfora de la biblioteca — él mismo dijo que es el gancho de memoria<a class="headerlink" href="#la-metafora-de-la-biblioteca-el-mismo-dijo-que-es-el-gancho-de-memoria" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>Cada libro tiene una ficha técnica, donde dice qué año fue editado, quién fue el autor. Esa es
+la información que yo puedo compartir cuando encuentran el título de ese libro. Y el título de ese
+libro es como la búsqueda que hace el K. Y el contenido del libro sería el V.</strong>»</p>
+<p>«<strong>¿Sí? ¿Está bien? No lo olvides. Si entiendes esta parte es sencillo entender las matrices.</strong>»</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Biblioteca</th>
+<th>Transformer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lo que yo busco</td>
+<td><strong>Q</strong></td>
+</tr>
+<tr>
+<td>el título / la ficha por la que el libro se deja encontrar</td>
+<td><strong>K</strong></td>
+</tr>
+<tr>
+<td>el contenido del libro</td>
+<td><strong>V</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="que-aprende-cada-matriz-de-pesos">Qué aprende cada matriz de pesos<a class="headerlink" href="#que-aprende-cada-matriz-de-pesos" title="Permanent link">&para;</a></h3>
+<p>Hay <strong>tres matrices entrenables por cabeza</strong>: <code>W^Q</code>, <code>W^K</code>, <code>W^V</code>. La diapositiva las llama
+«<strong>parámetros del modelo</strong>».</p>
+<blockquote>
+<ul>
+<li><code>W^Q</code> «<strong>aprende qué tipo de preguntas puede hacer, qué cosas puede buscar</strong>»</li>
+<li><code>W^K</code> «<strong>aprende qué características cada token contiene para poder ser buscado</strong>»</li>
+<li><code>W^V</code> «<strong>aprende la información que puede cada token compartir una vez que es encontrado</strong>»</li>
+</ul>
+</blockquote>
+<p>Y se obtienen por multiplicación directa, como muestran las diapositivas de la Clase 19:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>   key_i   =  x_i · K          ←  para TODOS los tokens
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>   Query   =  x_j · Q          ←  sólo para el token analizado
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>   valor_i =  x_i · V          ←  para TODOS los tokens
+</code></pre></div>
+<blockquote>
+<p>⚠ <strong>Cuidado con la notación de la diapositiva.</strong> La Clase 19 usa <code>K</code>, <code>Q</code>, <code>V</code> para las
+<strong>matrices de pesos</strong> y <code>key_i</code>, <code>Query</code>, <code>valor_i</code> para los <strong>vectores resultantes</strong>. La Clase 19
+más adelante y la literatura usan <code>W^K</code>, <code>W^Q</code>, <code>W^V</code> para los pesos y <code>K</code>, <code>Q</code>, <code>V</code> para los
+vectores. <strong>Ambas notaciones aparecen en el material del curso.</strong> Al responder, define lo que uses.</p>
+</blockquote>
+<h3 id="el-error-que-el-profesor-corrigio-en-vivo">🚨 El error que el profesor corrigió en vivo<a class="headerlink" href="#el-error-que-el-profesor-corrigio-en-vivo" title="Permanent link">&para;</a></h3>
+<p>Un estudiante dijo que el producto punto se hace entre «el vector query y el vector <strong>value</strong>».
+Reacción inmediata:</p>
+<blockquote>
+<p>«<strong>¿Y la relación entre key y key? Entre el vector query y el vector value. No. Query… ¿Y el
+tercero que te falta? Key. Key, query, key.</strong>»</p>
+</blockquote>
+<p><strong>La similitud se calcula entre Q y K. Nunca entre Q y V.</strong> El <code>V</code> entra <em>después</em>, ponderado por
+la atención ya calculada. Éste es probablemente el distractor mejor documentado del tema.</p>
+<hr />
+<h2 id="25-el-calculo-de-la-auto-atencion-paso-a-paso">2.5 El cálculo de la auto-atención, paso a paso<a class="headerlink" href="#25-el-calculo-de-la-auto-atencion-paso-a-paso" title="Permanent link">&para;</a></h2>
+<h3 id="los-seis-pasos">Los seis pasos<a class="headerlink" href="#los-seis-pasos" title="Permanent link">&para;</a></h3>
+<p>Siguiendo la secuencia de diapositivas de la Clase 19 para el token <code>x₃</code> = «banco»:</p>
+<p><strong>Paso 1 — Keys de todos los tokens.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>   x₀ ─┐            key₀
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>   x₁  │            key₁
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>   x₂  │            key₂
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>   x₃  ├─ × K  =    key₃
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>   x₄  │            key₄
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>   x₅ ─┘            key₅
+</code></pre></div>
+<p><strong>Paso 2 — Query del token analizado.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>   x₃ × Q  =  Query
+</code></pre></div>
+<p><strong>Paso 3 — Similitud de Q contra cada K.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>   key₀       s₀
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>   key₁       s₁
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>   key₂       s₂
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>   key₃ ·Query = s₃          Sᵢ = Similaridad
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>   key₄       s₄
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>   key₅       s₅
+</code></pre></div>
+<p>La diapositiva rotula esta operación como «<strong>Métrica de similaridad</strong>» y añade:
+«<strong>También conocido como el Coseno de Similaridad</strong>».</p>
+<blockquote>
+<p><strong>CONVENCIÓN DEL CURSO:</strong> el profesor llama a <code>q · kᵀ</code> «producto punto» y «métrica de similaridad»,
+y la diapositiva la equipara al coseno de similaridad.
+<strong>NOTA ESTÁNDAR:</strong> estrictamente, el coseno de similaridad es <code>(q·k)/(‖q‖‖k‖)</code>; el Transformer usa
+el producto punto <strong>sin normalizar por las normas</strong>, y compensa dividiendo entre <code>√d_k</code>. Son
+primos, no idénticos. En el examen usa el término del curso; si te piden la fórmula, escribe el
+producto punto escalado.</p>
+</blockquote>
+<p>Interpretación geométrica que él desarrolla: «hacemos la <strong>proyección</strong>… misma dirección = similar,
+dirección opuesta = opuesto, perpendicular = sin relación. <strong>Y yo puedo medir el ángulo.</strong>»</p>
+<p><strong>Paso 4 — Escalar dividiendo entre <code>√d_k</code>.</strong> (§2.6)</p>
+<p><strong>Paso 5 — Softmax.</strong> Convierte las similitudes en pesos que suman 1.</p>
+<blockquote>
+<p>«esto dividido por 8 me da un valor, y eso por softmax me da la distribución probabilística <strong>de
+esa fila</strong> en esa matriz… <strong>Si yo sumo esto me debe dar exactamente 1.</strong>»</p>
+</blockquote>
+<p><strong>Paso 6 — Valores ponderados y suma.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>   s₀   valor₀        s₀ · valor₀ ┐
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>   s₁   valor₁        s₁ · valor₁ │
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>   s₂   valor₂        s₂ · valor₂ │
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>   s₃ × valor₃   =    s₃ · valor₃ ├─ +  =  y₃
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>   s₄   valor₄        s₄ · valor₄ │
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>   s₅   valor₅        s₅ · valor₅ ┘
+</code></pre></div>
+<blockquote>
+<p><strong>¿Por qué se suman?</strong> «<strong>Porque cada uno de estos tiene algo que decir con respecto al banco.
+Por eso lo tengo que sumar.</strong>»</p>
+</blockquote>
+<p><strong>Forma matricial compacta:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>   Z = softmax( Q · Kᵀ / √d_k ) · V
+</code></pre></div>
+<h3 id="251-ejemplo-completamente-resuelto-el-de-la-diapositiva">2.5.1 EJEMPLO COMPLETAMENTE RESUELTO — el de la diapositiva<a class="headerlink" href="#251-ejemplo-completamente-resuelto-el-de-la-diapositiva" title="Permanent link">&para;</a></h3>
+<p>Frase: <strong>«soy estudiante politécnico»</strong>, <code>d_k = 8</code>. Se calcula <code>Z₁</code> (la salida para «soy»).</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>soy</th>
+<th>estudiante</th>
+<th>politécnico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Embedding</td>
+<td><code>X₁</code></td>
+<td><code>X₂</code></td>
+<td><code>X₃</code></td>
+</tr>
+<tr>
+<td>Queries <code>W^Q</code></td>
+<td><code>q₁</code></td>
+<td><code>q₂</code></td>
+<td><code>q₃</code></td>
+</tr>
+<tr>
+<td>Keys <code>W^K</code></td>
+<td><code>k₁</code></td>
+<td><code>k₂</code></td>
+<td><code>k₃</code></td>
+</tr>
+<tr>
+<td>Values <code>W^V</code></td>
+<td><code>v₁</code></td>
+<td><code>v₂</code></td>
+<td><code>v₃</code></td>
+</tr>
+<tr>
+<td><strong>Similitud</strong></td>
+<td><code>q₁·k₁ᵀ = 120</code></td>
+<td><code>q₁·k₂ᵀ = 82</code></td>
+<td><code>q₁·k₃ᵀ = 61</code></td>
+</tr>
+<tr>
+<td><strong>Dividir (<code>d_k = 8</code>)</strong></td>
+<td><code>15</code></td>
+<td><code>10.3</code></td>
+<td><code>7.6</code></td>
+</tr>
+<tr>
+<td><strong>Softmax</strong></td>
+<td><code>0.94</code></td>
+<td><code>0.65</code></td>
+<td><code>0.48</code></td>
+</tr>
+<tr>
+<td><strong>Softmax × Values</strong></td>
+<td><code>0.94·v₁</code></td>
+<td><code>0.65·v₂</code></td>
+<td><code>0.48·v₃</code></td>
+</tr>
+<tr>
+<td><strong>Suma</strong></td>
+<td><strong><code>Z₁ = 0.94·v₁ + 0.65·v₂ + 0.48·v₃</code></strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verificación de la fila «Dividir»:</strong> <code>120/8 = 15</code> ✓ · <code>82/8 = 10.25 ≈ 10.3</code> ✓ · <code>61/8 = 7.625 ≈ 7.6</code> ✓</p>
+<blockquote>
+<p>⚠ <strong>La fila «Softmax» de la diapositiva NO es una softmax.</strong>
+Una softmax real sobre <code>(15, 10.3, 7.6)</code> daría <code>(0.9904, 0.0090, 0.0006)</code>, que <strong>suma 1</strong>.
+Los valores impresos <code>(0.94, 0.65, 0.48)</code> <strong>suman 2.07</strong>. Son valores ilustrativos, no calculados.</p>
+<p>Esto importa porque el profesor sí insiste, oralmente y con énfasis, en la propiedad correcta:
+«<strong>Si yo sumo cada uno de estos valores, esto me debe dar 1. Si yo sumo esto me debe dar
+exactamente 1.</strong>»</p>
+<p><strong>Regla para el examen:</strong> si te dan puntajes y te piden la atención, aplica softmax de verdad y
+comprueba que la fila suma 1. Si un enunciado afirma que las filas de la matriz de atención suman
+algo distinto de 1, es <strong>falso</strong>.</p>
+</blockquote>
+<p><strong>Cálculo correcto, para que lo tengas hecho:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>   e^15   = 3 269 017.37
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>   e^10.3 =      29 732.62
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>   e^7.6  =       1 998.20
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>   Σ      = 3 300 748.19
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>   softmax = ( 0.99039 , 0.00901 , 0.00061 )      Σ = 1.00000  ✓
+</code></pre></div>
+<p>Lectura: «soy» se atiende casi por completo a sí misma. Es exactamente lo que el profesor anticipa:</p>
+<blockquote>
+<p>«si me voy al primer token, esto sería el token <em>soy</em>, <strong>¿cuánto se parece al soy? Por eso es más
+alto</strong>» / «<strong>la similaridad del token 3 va a ser más grande que el resto. Porque estoy comparando
+el mismo vector consigo mismo.</strong>»</p>
+</blockquote>
+<h3 id="252-ejemplo-parcialmente-resuelto-z2-y-z3">2.5.2 Ejemplo parcialmente resuelto — <code>Z₂</code> y <code>Z₃</code><a class="headerlink" href="#252-ejemplo-parcialmente-resuelto-z2-y-z3" title="Permanent link">&para;</a></h3>
+<p>Las dos diapositivas siguientes repiten la misma tabla con <code>##</code> en lugar de números, para <code>Z₂</code> y
+<code>Z₃</code>. Complétalas tú con estos puntajes (inventados con el mismo estilo):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>   Para Z₂ (query = «estudiante»):  q₂·k₁ᵀ = 40 ,  q₂·k₂ᵀ = 96 ,  q₂·k₃ᵀ = 72
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>   Dividir entre √d_k = 8:           ____   ,   ____   ,   ____
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>   Softmax:                          ____   ,   ____   ,   ____   (¡debe sumar 1!)
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>   Z₂ = ____·v₁ + ____·v₂ + ____·v₃
+</code></pre></div>
+<h3 id="253-problema-sin-resolver">2.5.3 Problema sin resolver<a class="headerlink" href="#253-problema-sin-resolver" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>P2.5.</strong> Con <code>d_k = 64</code> y puntajes <code>q·kᵀ = (32, 16, 8, 0)</code> para cuatro tokens:
+(a) escala, (b) aplica softmax, (c) comprueba que suma 1, (d) di qué token domina la salida y
+(e) explica qué habría pasado con los mismos puntajes <strong>sin</strong> escalar.</p>
+</blockquote>
+<h3 id="254-la-matriz-de-similitud">2.5.4 La matriz de similitud<a class="headerlink" href="#254-la-matriz-de-similitud" title="Permanent link">&para;</a></h3>
+<p>Cuando repites el proceso para todos los tokens, los puntajes forman una matriz <code>n × n</code>.</p>
+<blockquote>
+<p>«<strong>¿Por qué la matriz de similitud es una matriz?</strong> → <strong>Porque hay muchos tokens. Porque cada fila
+es un vector de tu frase.</strong>»</p>
+</blockquote>
+<p>Dos propiedades que se preguntan:</p>
+<ol>
+<li><strong>La diagonal es la más intensa</strong> (cada token se parece máximamente a sí mismo).</li>
+<li>🚨 <strong>La matriz NO es simétrica.</strong> Un estudiante lo notó: «Que el <em>lecho</em> sea similar a <em>banco</em> no
+   significa que <em>banco</em> es similar al <em>lecho</em>», y el profesor lo ratificó: «<strong>Claro… Exactamente,
+   depende del contexto. Y eso se va a ir mejorando con cada capa.</strong>»
+   <em>Motivo formal:</em> <code>q_i·k_j ≠ q_j·k_i</code> porque <code>W^Q ≠ W^K</code>.</li>
+</ol>
+<hr />
+<h2 id="26-el-escalado-d_k-derivacion-completa">2.6 El escalado <code>√d_k</code> — derivación completa<a class="headerlink" href="#26-el-escalado-d_k-derivacion-completa" title="Permanent link">&para;</a></h2>
+<p>Esta derivación la hizo <strong>dos veces</strong> en clase y dijo explícitamente que quería que se reconociera
+en la literatura.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>   d_model = 512            ← dimensión del embedding en la versión original
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>   h       = 8              ← número de cabezas
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>   d_k     = d_model / h = 512 / 8 = 64
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>   escala  = √d_k = √64 = 8
+</code></pre></div>
+<p><strong>Por qué se divide <code>d_model</code> entre <code>h</code>:</strong> «512 dividido para 8 cabezas… <strong>porque después se
+concatenan</strong>». Es decir, las 8 cabezas trabajan en 64 dimensiones cada una para que al concatenarlas
+se recuperen las 512.</p>
+<p><strong>Por qué se escala:</strong> «<strong>Para reducir el tamaño de las multiplicaciones que tienes que hacer.</strong>» /
+«<strong>Si no, eso explota.</strong>» / «Para que si la dimensión de la key es muy alta, <strong>los valores no
+[exploten]</strong>.»</p>
+<p>Y la licencia que él mismo concede:</p>
+<blockquote>
+<p>«<strong>Puede ser sin escalar… Solo que te estoy dando la arquitectura original. Pero cuando vean en la
+literatura dividido por la raíz, ¿qué cosa es eso? Ya saben de dónde viene. Y está en función de
+la arquitectura.</strong>»</p>
+</blockquote>
+<h3 id="ejemplo-parcialmente-resuelto">Ejemplo parcialmente resuelto<a class="headerlink" href="#ejemplo-parcialmente-resuelto" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Un modelo usa <code>d_model = 768</code> (el BERT original) con <code>h = 12</code> cabezas.
+<code>d_k = ____</code> · <code>√d_k = ____</code>
+<em>(Respuesta: 64 y 8 otra vez. Es por eso que 768/12 es un diseño común.)</em></p>
+</blockquote>
+<h3 id="problema-sin-resolver">Problema sin resolver<a class="headerlink" href="#problema-sin-resolver" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>P2.6.</strong> Un modelo tiene <code>d_model = 1024</code> y <code>h = 16</code>. Calcula <code>d_k</code> y el factor de escala. Si en
+vez de 16 cabezas usara 8, ¿qué pasaría con <code>d_k</code> y con el factor de escala? ¿Y con el costo de
+concatenar?</p>
+</blockquote>
+<hr />
+<h2 id="27-multi-head-attention-y-wo">2.7 Multi-head attention y <code>W^O</code><a class="headerlink" href="#27-multi-head-attention-y-wo" title="Permanent link">&para;</a></h2>
+<h3 id="que-es">Qué es<a class="headerlink" href="#que-es" title="Permanent link">&para;</a></h3>
+<p>En vez de una sola auto-atención, se ejecutan <strong>8 en paralelo</strong>, cada una con sus propias
+<code>W^Q, W^K, W^V</code>. La Clase 19 lo dibuja como pilas de matrices:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>   1        2          3                4              5
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>          ┌────┐   W₀^Q W₀^K W₀^V   →  Q₀ K₀ V₀  →  Z₀ ┐
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>   soy    │    │   W₁^Q W₁^K W₁^V   →  Q₁ K₁ V₁  →  Z₁ │        ┌──────┐
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>   estud. │ X  │          ⋮                ⋮        ⋮   ├─ × W^O │  Z   │
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>   polit. │    │   W₇^Q W₇^K W₇^V   →  Q₇ K₇ V₇  →  Z₇ ┘        └──────┘
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>          └────┘
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>          ┌────┐
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>          │ b  │
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>          └────┘
+</code></pre></div>
+<p><strong>Pasos:</strong> (1) tokens → (2) matriz <code>X</code> de embeddings (+ bias <code>b</code>) → (3) 8 tríos de matrices de peso
+→ (4) 8 tríos <code>Q,K,V</code> y sus 8 salidas <code>Z_i</code> → (5) concatenación de las 8 y multiplicación por <code>W^O</code>
+→ una única <code>Z</code>.</p>
+<h3 id="la-metafora-de-los-ocho-expertos">La metáfora de los ocho expertos<a class="headerlink" href="#la-metafora-de-los-ocho-expertos" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>Tienes ocho expertos y cada uno da una opinión sobre el parágrafo. Y unimos toda esa opinión y
+eso sacamos como un resumen bien ponderado de todo, y eso lo hace la W</strong> [<code>W^O</code>]… <strong>porque a la vez
+pueden haber opiniones que sean contradictorias entre sí, el W se encarga de ponderar.</strong>»</p>
+<p>🚨 <strong>Concatenar ≠ sumar.</strong> Ante la pregunta «los ocho Z, ¿los juntas, los sumas?», la respuesta
+fue <strong>no se suman, se juntan</strong> (yuxtaposición), y después <code>W^O</code> los pondera. Y ante «¿en el
+resumen se pierden características?»: «<strong>No, porque cada uno hizo de manera independiente.</strong>»</p>
+</blockquote>
+<h3 id="el-conteo-de-matrices-pregunta-de-examen-en-potencia">🔢 El conteo de matrices — pregunta de examen en potencia<a class="headerlink" href="#el-conteo-de-matrices-pregunta-de-examen-en-potencia" title="Permanent link">&para;</a></h3>
+<p>En clase enunció el conteo de matrices entrenables de <strong>una</strong> capa de encoder:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>   8 cabezas × 3 matrices (W^Q, W^K, W^V)  =  24
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>   + 2 matrices del MLP                    =  26
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>   + W^O                                   =  27
+</code></pre></div>
+<blockquote>
+<p>«Que es una matriz más de las <strong>24</strong>, más dos de la MLP, <strong>26</strong>, y esta sería la <strong>27</strong>.»</p>
+</blockquote>
+<p>Y como hay 6 capas de encoder: <strong>27 × 6 = 162</strong> matrices en la torre de codificación (sin contar
+embeddings). «<strong>Y lo hace seis veces.</strong>»</p>
+<h3 id="el-mlp-por-token">El MLP por token<a class="headerlink" href="#el-mlp-por-token" title="Permanent link">&para;</a></h3>
+<p>Después de la auto-atención, cada token pasa por un MLP.</p>
+<blockquote>
+<p>«<strong>La misma MLP. La misma en términos de la arquitectura. Pero con W's cada uno diferente. Porque
+lo aprendí de manera diferente.</strong>»</p>
+</blockquote>
+<p>Y el punto que él remarca como el más importante de todo el encoder:</p>
+<blockquote>
+<p>«<strong>Aunque es en paralelo, todos los tokens cuando salen aquí, los resultados del encoder conocen
+del resto.</strong> No es que conoce solamente <em>soy</em>… Conoce <em>soy</em> con respecto a estos dos, conoce
+<em>estudiante</em> con respecto a estos dos y <em>politécnico</em> con respecto a estos dos.»</p>
+</blockquote>
+<hr />
+<h2 id="28-sumar-y-normalizar-y-las-conexiones-salteadas">2.8 «Sumar y normalizar» y las conexiones salteadas<a class="headerlink" href="#28-sumar-y-normalizar-y-las-conexiones-salteadas" title="Permanent link">&para;</a></h2>
+<p>La Clase 20 dibuja el encoder completo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>   ENCODER #1
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>   ┌───────────────────────────────────────────────────────────┐
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>   │                  SUMAR Y NORMALIZAR                       │
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>   │   ┌─────────┐      ┌─────────┐      ┌─────────┐           │
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>   │   │ MLP     │      │ MLP     │      │ MLP     │           │
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>   │   └────▲────┘      └────▲────┘      └────▲────┘           │
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>   │       Z₁                Z₂               Z₃               │
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>   │                  CAPA-NORM   ( X  +  Z )                  │
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>   │       Z₁                Z₂               Z₃               │
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>   │   ┌───────────────── SELF-ATTENTION ─────────────────┐    │
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>   │   └──────▲───────────────▲──────────────────▲────────┘    │
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>   │         X₁              X₂                 X₃            │
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>   └──────────┼───────────────┼──────────────────┼─────────────┘
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>        Positional     Positional          Positional
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>        Encoding +     Encoding +          Encoding +
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>             X₁             X₂                  X₃
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>            soy        estudiante          politécnico
+</code></pre></div>
+<p>Dos ideas:</p>
+<ol>
+<li><strong><code>X + Z</code></strong> es una <strong>conexión salteada</strong> (<em>skip connection</em>): la entrada original se suma a la
+   salida de la subcapa. «<strong>El Transformer explota de una manera elegante… el skipping. ¿Se acuerdan
+   de los skips, cierto?</strong> … esta capa va a llevar información previa que no fue procesada.
+   <strong>Y eso le da precisión.</strong>»</li>
+<li><strong>La normalización es obligatoria.</strong> «<strong>tienes que normalizar siempre. De hecho el Transformer te
+   obliga a normalizar. Hay una capa de normalización. Si tú no lo haces, el Transformer lo va a
+   hacer por ti.</strong>»</li>
+</ol>
+<p>Y el resumen que da:</p>
+<blockquote>
+<p>«<strong>Sí, el Transformer explota todos los conceptos que hemos visto hasta ahora. Todos.</strong>»</p>
+</blockquote>
+<p><strong>Propiedad dimensional que se pregunta:</strong> «<strong>¿En cada capa se mantienen las mismas dimensiones?
+Sí, en todo el transformer.</strong>» Esto es lo que permite apilar 6 capas y sumar la conexión salteada.</p>
+<hr />
+<h2 id="29-embeddings-de-palabra-como-se-fabrican">2.9 Embeddings de palabra: cómo se fabrican<a class="headerlink" href="#29-embeddings-de-palabra-como-se-fabrican" title="Permanent link">&para;</a></h2>
+<h3 id="el-mecanismo">El mecanismo<a class="headerlink" href="#el-mecanismo" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«La creación de los embeddings generalmente se realiza a través de <strong>redes neuronales simples</strong>…»
+«Recordar que en la entrada de las neuronas se evalúa la sumatoria de la multiplicación de las
+entradas por los pesos, así: <code>y = f(Σ Wᵀx)</code>»
+«Recordar al inicio los pesos son aleatorios.»
+«<strong>Backpropagation optimiza estos valores en cada paso</strong>, lo que da como resultado estos pesos o
+parámetros.»</p>
+</blockquote>
+<p>Estructura, según la explicación de clase:</p>
+<ul>
+<li>entrada = <strong>one-hot</strong> de dimensión = tamaño del vocabulario</li>
+<li><strong>una sola capa</strong>, con <strong>función de activación lineal</strong></li>
+<li>salida = <code>d</code> neuronas = dimensión del embedding</li>
+<li><strong>sin bias</strong></li>
+</ul>
+<blockquote>
+<p>«se utiliza… neuronas cuya <strong>función de umbral es la función lineal</strong>. Eso quiere decir que no la
+cambia el valor, <strong>lo que hace es transformar la representación</strong>.»</p>
+</blockquote>
+<h3 id="ejemplo-completamente-resuelto-la-diapositiva-de-la-clase-20">EJEMPLO COMPLETAMENTE RESUELTO — la diapositiva de la Clase 20<a class="headerlink" href="#ejemplo-completamente-resuelto-la-diapositiva-de-la-clase-20" title="Permanent link">&para;</a></h3>
+<p>Vocabulario <code>{soy, estudiante, politécnico, eos}</code> (4 tokens), embedding de dimensión <strong>2</strong>.
+La diapositiva muestra la matriz de pesos con estos valores:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>                    soy    estudiante  politécnico   eos
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>   neurona 1      1.87       −0.78         ?          ?
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>   neurona 2      0.09        0.27         ?          ?
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>                                (los que la diapositiva resalta)
+</code></pre></div>
+<p><strong>Para «soy»:</strong> one-hot = <code>[1, 0, 0, 0]</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>   y₁ = 1·(1.87) + 0·(−0.78) + 0·(…) + 0·(…) = 1.87
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>   y₂ = 1·(0.09) + 0·( 0.27) + 0·(…) + 0·(…) = 0.09
+</code></pre></div>
+<blockquote>
+<p>«Entonces los valores de salida <strong>1.87 y 0.09</strong> son los números (embeddings) que representan la
+palabra "soy".»</p>
+</blockquote>
+<p><strong>Para «politécnico»:</strong> one-hot = <code>[0, 0, 1, 0]</code> → selecciona la tercera columna.</p>
+<blockquote>
+<p>«Al pasar por la red neuronal, tenemos los embeddings <strong>−0.78 y 0.27</strong> que representan la palabra
+"politécnico".»</p>
+</blockquote>
+<h3 id="el-atajo-del-one-hot-dicho-por-el-en-clase">🔑 El atajo del one-hot — dicho por él en clase<a class="headerlink" href="#el-atajo-del-one-hot-dicho-por-el-en-clase" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«Como el resto son ceros, <strong>la sumatoria que tengo aquí es solamente esta contribución</strong>… <strong>Quiere
+decir que en la primera iteración es 1.8709. Porque el resto es cero.</strong>»
+«lo hace súper eficiente, <strong>es como un lookup table</strong>.»</p>
+</blockquote>
+<p><strong>Multiplicar por un one-hot = seleccionar una columna.</strong> No hay que multiplicar nada. Es el mismo
+hecho que ya usaste en §1.4 del Volumen 1 para elegir columnas de <code>W_xh</code>.</p>
+<h3 id="la-pregunta-de-dimensiones-aparecio-en-una-leccion">🔢 La pregunta de dimensiones — apareció en una lección<a class="headerlink" href="#la-pregunta-de-dimensiones-aparecio-en-una-leccion" title="Permanent link">&para;</a></h3>
+<p>Ésta es una pregunta real que él revisó en clase y cuya regla drilleó:</p>
+<blockquote>
+<p>«<strong>¿Cómo se calculan las dimensiones de la matriz? El número de neuronas de la siguiente capa por
+el número de neuronas de la capa anterior.</strong>»</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>   W  :  (neuronas de salida) × (neuronas de entrada)  =  2 × 4
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>   x  :  4 × 1
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>   y = W·x  :  2 × 1
+</code></pre></div>
+<p>Y para toda la frase de 4 tokens: «la matriz de salida del embedding va a ser el agregado de las
+cuatro. <strong>Dos por uno, dos por uno, dos por uno. Por lo tanto, la matriz debería tener dos por
+cuatro.</strong>»</p>
+<blockquote>
+<p><strong>Veredicto que él dio:</strong> «<strong>La respuesta correcta era dos por cuatro</strong> … te he aceptado la
+respuesta [4×2] <strong>porque no puse cómo se construía el embedding</strong> … <strong>Pero matemáticamente
+hablando es dos por cuatro, la matriz del embedding.</strong>»</p>
+<p><strong>Para el examen: <code>W</code> del embedding es <code>d × |V|</code> = (dimensión del embedding) × (tamaño del
+vocabulario).</strong> Si te aceptan la transpuesta, es por generosidad, no por corrección.</p>
+</blockquote>
+<p>Cómo descartó los distractores de aquella pregunta (método reutilizable):</p>
+<blockquote>
+<p>«había una opción que <strong>incluía entre los elementos un cero</strong>. Entonces eso lo invalidaba porque en
+mis conexiones yo <strong>no tenía ninguno de los valores, excepto el end of sentence, un cero</strong>…
+<strong>la D tampoco era</strong>, porque los valores <strong>no corresponden a los W</strong> que tenías en la matriz.
+<strong>Porque la primera columna debe coincidir con la primera columna.</strong>»</p>
+</blockquote>
+<h3 id="padding">Padding<a class="headerlink" href="#padding" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<em>Soy estudiante politécnico</em> <strong>no tienen el mismo tamaño</strong>… Por eso lo escogí a propósito.
+Entonces <em>soy</em>, igual lo tienes que poner en 512, <em>estudiante</em> igual en 512. Entonces lo que hace
+es <strong>rellenar</strong> [con ceros]. <strong>Antes de hacer el embedding.</strong>»</p>
+</blockquote>
+<h3 id="problema-sin-resolver_1">Problema sin resolver<a class="headerlink" href="#problema-sin-resolver_1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>P2.9.</strong> Vocabulario de 6 palabras, embedding de dimensión 3, activación lineal, sin bias.
+(a) ¿Qué dimensión tiene <code>W</code>? (b) Si el one-hot de la palabra #4 es <code>[0,0,0,1,0,0]</code>, ¿qué operación
+equivale al producto <code>W·x</code>? (c) Si la frase tiene 5 tokens, ¿qué dimensión tiene la matriz de
+embeddings de toda la frase?</p>
+</blockquote>
+<hr />
+<h2 id="210-positional-encoding-donde-vive-la-secuencia">2.10 Positional encoding — dónde vive la secuencia<a class="headerlink" href="#210-positional-encoding-donde-vive-la-secuencia" title="Permanent link">&para;</a></h2>
+<h3 id="el-problema">El problema<a class="headerlink" href="#el-problema" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>mantener el orden de las palabras es importante</strong>» — Clase 20, con el ejemplo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>     Humano come ballena        ≠        Ballena come humano
+</code></pre></div>
+</blockquote>
+<p>Como todos los tokens se procesan en paralelo, <strong>no hay pasos de tiempo</strong> que codifiquen el orden.</p>
+<blockquote>
+<p>«<strong>Como no hay timestamps, no hay forma de saber cuál es la secuencia de la oración. Se tiene que
+hacer a través del embedding.</strong>»
+«<strong>No es un tema de la arquitectura como ocurre en la RNN. En la RNN los time steps son los que te
+dicen la secuencia. Está embebido en la capa oculta y en las copias de la capa. Acá no existe eso…
+la codificación de la ubicación del token en la oración es una representación que SE SUMA al
+embedding.</strong>»</p>
+</blockquote>
+<h3 id="la-distincion-que-hay-que-tener-grabada">🚨 La distinción que hay que tener grabada<a class="headerlink" href="#la-distincion-que-hay-que-tener-grabada" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>RNN</strong></th>
+<th><strong>Transformer</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>¿Dónde está el orden?</td>
+<td>en la <strong>arquitectura</strong>: los <em>time steps</em> y las copias de la capa oculta</td>
+<td>en la <strong>representación de entrada</strong>: se <strong>suma</strong> un vector de posición al embedding</td>
+</tr>
+<tr>
+<td>Longitud de secuencia</td>
+<td>fija por la ventana: «<strong>Tú defines la ventana y eso es</strong>»</td>
+<td>dinámica: «no importa si son 10 palabras, no importa si son 10 000»</td>
+</tr>
+</tbody>
+</table>
+<h3 id="la-mecanica">La mecánica<a class="headerlink" href="#la-mecanica" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>              ENCODER #0
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>                  ▲
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>   Embeddings     │
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>   con positional  X₁        X₂         X₃
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>   encoding        =          =          =
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>   Positional     p₁         p₂         p₃
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>   Encoding        +          +          +
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>   Embeddings     X₁         X₂         X₃
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>   Entrada        soy    estudiante  politécnico
+</code></pre></div>
+<p><strong>La operación es una suma elemento a elemento</strong>, no una concatenación. El vector de posición tiene
+la misma dimensión que el embedding.</p>
+<blockquote>
+<p>«<strong>esto se suma. Este con este, este con este, este con este, y lo que tú tienes entonces al final
+es este valor. Y esto sería el posicional más el valor del token.</strong>»</p>
+</blockquote>
+<h3 id="las-senales-senocoseno">Las señales seno/coseno<a class="headerlink" href="#las-senales-senocoseno" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«Los valores de posición para la primera palabra provienen de los valores en el <strong>eje-Y de estas
+señales</strong>» — Clase 20
+«<strong>Seno pares, coseno impares</strong>» / «eso tiene una frecuencia, <strong>como el click del reloj</strong>»</p>
+</blockquote>
+<p><strong>Propiedad clave que él resalta:</strong> «<strong>mientras más tokens tienes, la frecuencia va a ser menor…
+Nunca se van a repetir.</strong>» La combinación de muchas frecuencias distintas hace que <strong>cada posición
+tenga un código único</strong>, y que el esquema funcione para longitudes no vistas en el entrenamiento.</p>
+<blockquote>
+<p><strong>CONVENCIÓN DEL CURSO:</strong> funciones seno y coseno alternadas por dimensión; «para la primera
+palabra, el primer valor embedding (en el extremo izquierdo) es <strong>0</strong>» — porque <code>sin(0) = 0</code>.
+«hoy vemos más allá de seno-coseno, hay unas opciones increíbles, pero en la versión original…
+son funciones seno-coseno.»</p>
+<p><strong>NOTA ESTÁNDAR</strong> (no exigida, útil para reproducir los ceros y unos de la diapositiva):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>  PE(pos, 2i)   = sin( pos / 10000^{2i/d} )
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>  PE(pos, 2i+1) = cos( pos / 10000^{2i/d} )
+</code></pre></div>
+<p>Con <code>pos = 0</code>: todos los senos valen 0 y todos los cosenos valen 1. Eso reproduce exactamente el
+vector <code>[0, 1, 0, 1]</code> de la primera palabra en el ejemplo de la diapositiva.</p>
+</blockquote>
+<h3 id="ejemplo-completamente-resuelto-humano-come-ballena">EJEMPLO COMPLETAMENTE RESUELTO — «humano come ballena»<a class="headerlink" href="#ejemplo-completamente-resuelto-humano-come-ballena" title="Permanent link">&para;</a></h3>
+<p>La Clase 20 muestra el cálculo con <strong>4 embeddings por palabra</strong>. Ésta es la tabla completa,
+transcrita de la diapositiva:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>humano</strong> (pos 0)</th>
+<th><strong>come</strong> (pos 1)</th>
+<th><strong>ballena</strong> (pos 2)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>one-hot</td>
+<td><code>[1,0,0,0]</code></td>
+<td><code>[0,1,0,0]</code></td>
+<td><code>[0,0,1,0]</code></td>
+</tr>
+<tr>
+<td><strong>embedding de palabra</strong></td>
+<td><code>0.2, −0.1, 1.2, −0.4</code></td>
+<td><code>1.1, 0.6, −1.3, 0.9</code></td>
+<td><code>−0.2, −0.9, 0.9, 0.2</code></td>
+</tr>
+<tr>
+<td><strong>+ positional encoding</strong></td>
+<td><code>0, 1, 0, 1</code></td>
+<td><code>−0.9, 0.4, 0.1, −0.9</code></td>
+<td><code>−0.9, −0.9, −0.7, 0.9</code></td>
+</tr>
+<tr>
+<td><strong>= entrada al encoder</strong></td>
+<td><code>0.2, 0.9, 1.2, 0.6</code></td>
+<td><code>0.2, 1.0, −1.2, 0.0</code></td>
+<td><code>−1.2, 0.0, 0.2, 1.1</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verificación componente a componente:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>   humano :  0.2+0 = 0.2 ✓   −0.1+1 = 0.9 ✓    1.2+0 = 1.2 ✓   −0.4+1 = 0.6 ✓
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>   come   :  1.1−0.9 = 0.2 ✓  0.6+0.4 = 1.0 ✓  −1.3+0.1 = −1.2 ✓  0.9−0.9 = 0.0 ✓
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>   ballena: −0.2−0.9 = −1.1 ⚠  −0.9−0.9 = −1.8 ⚠   0.9−0.7 = 0.2 ✓   0.2+0.9 = 1.1 ✓
+</code></pre></div>
+<blockquote>
+<p>⚠ Las dos primeras componentes de «ballena» en la diapositiva (<code>−1.2</code> y <code>0.0</code>) no cuadran con la
+suma de las filas mostradas (<code>−1.1</code> y <code>−1.8</code>). Es un error de la diapositiva o un valor de
+posición mal leído. <strong>El procedimiento es lo examinable; comprueba siempre tu propia suma.</strong></p>
+<p><strong>Fíjate en «humano» (posición 0):</strong> su vector de posición es <code>[0, 1, 0, 1]</code> — seno, coseno, seno,
+coseno evaluados en 0. Coincide exactamente con la NOTA ESTÁNDAR de arriba y con la frase de la
+diapositiva «para la primera palabra, el primer valor embedding es 0».</p>
+</blockquote>
+<h3 id="problema-sin-resolver_2">Problema sin resolver<a class="headerlink" href="#problema-sin-resolver_2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>P2.10.</strong> La frase «ballena come humano» usa exactamente los mismos embeddings de palabra que
+«humano come ballena», pero en otro orden. Construye la tabla de entrada al encoder (embedding +
+posición) para esta segunda frase y compárala con la primera. ¿Cuántas de las 12 componentes
+coinciden? Explica en una frase por qué el positional encoding resuelve el problema del ejemplo.</p>
+</blockquote>
+<hr />
+<h2 id="211-el-decoder">2.11 El decoder<a class="headerlink" href="#211-el-decoder" title="Permanent link">&para;</a></h2>
+<h3 id="sus-tres-subcapas">Sus tres subcapas<a class="headerlink" href="#sus-tres-subcapas" title="Permanent link">&para;</a></h3>
+<p>Según el diagrama de la Clase 20, un <code>DECODER #i</code> contiene, de abajo hacia arriba:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>   ┌──────────────────────────────┐
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>   │      SUMAR Y NORMALIZAR      │
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>   │      RED NEURONAL – MLP      │
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>   │      SUMAR Y NORMALIZAR      │
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>   │  ENCODER-DECODER ATTENTION   │  ← aquí entra el contexto
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>   │      SUMAR Y NORMALIZAR      │
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>   │        SELF-ATTENTION        │
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>   └──────────────▲───────────────┘
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>         embedding + positional encoding
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>              de la salida anterior
+</code></pre></div>
+<p>Y por encima del último decoder: <strong>FUNCIÓN UMBRAL – LINEAL</strong> → <strong>SOFTMAX</strong> → token.</p>
+<h3 id="que-cruza-del-encoder-al-decoder-dato-de-examen">🔑 Qué cruza del encoder al decoder — dato de examen<a class="headerlink" href="#que-cruza-del-encoder-al-decoder-dato-de-examen" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>El contexto está formado por K y V, no el [Q]. Estas dos matrices son las que voy a ingresar a
+cada decodificador.</strong>»</p>
+</blockquote>
+<p><strong>Sólo <code>K</code> y <code>V</code> viajan del encoder al decoder.</strong> El <code>Q</code> lo genera el propio decoder a partir de lo
+que lleva generado. Intuición con la metáfora de la biblioteca: el decoder <strong>pregunta</strong> (Q), y el
+catálogo (K) y los contenidos (V) vienen de la frase de origen.</p>
+<p>Esta subcapa se llama, en sus palabras: «<strong>Esto también se conoce como cross encoder decoder.</strong>»</p>
+<h3 id="self-attention-vs-encoder-decoder-attention">Self-attention vs encoder-decoder attention<a class="headerlink" href="#self-attention-vs-encoder-decoder-attention" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Self-attention</strong></th>
+<th><strong>Encoder-decoder attention</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dónde</td>
+<td>encoder y decoder</td>
+<td>sólo decoder</td>
+</tr>
+<tr>
+<td>De dónde sale <code>Q</code></td>
+<td>de la misma secuencia</td>
+<td>del decoder</td>
+</tr>
+<tr>
+<td>De dónde salen <code>K</code>, <code>V</code></td>
+<td>de la misma secuencia</td>
+<td><strong>del contexto del encoder</strong></td>
+</tr>
+<tr>
+<td>Para qué</td>
+<td>relacionar tokens entre sí</td>
+<td>alinear salida con entrada</td>
+</tr>
+</tbody>
+</table>
+<h3 id="como-se-entrena-el-decoder">Cómo se entrena el decoder<a class="headerlink" href="#como-se-entrena-el-decoder" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«el decodificador <strong>no memoriza la traducción</strong>… <strong>se obliga al decodificador a aprender. Por eso
+es que lo haces de uno a uno.</strong>» (entrenamiento con enmascaramiento)</p>
+</blockquote>
+<h3 id="por-que-el-contexto-entra-a-todas-las-capas">Por qué el contexto entra a todas las capas<a class="headerlink" href="#por-que-el-contexto-entra-a-todas-las-capas" title="Permanent link">&para;</a></h3>
+<p>El diagrama de la Clase 20 dibuja la flecha del <code>ENCODER #6</code> llegando a <code>DECODER #1</code>, <code>#2</code>, … Todas
+las capas del decoder reciben el mismo contexto.</p>
+<hr />
+<h2 id="212-patron-de-examen-como-se-ha-evaluado-este-volumen">2.12 Patrón de examen — cómo se ha evaluado este volumen<a class="headerlink" href="#212-patron-de-examen-como-se-ha-evaluado-este-volumen" title="Permanent link">&para;</a></h2>
+<p>Evidencia: <code>Preguntas examenes anteriores</code> (no hay ítems de Transformer — es material <strong>nuevo</strong>);
+MEGA (tampoco); revisión de lección en clase (ítems de atención y de matriz de embedding);
+anuncios del profesor.</p>
+<blockquote>
+<p>⚠ <strong>Aviso importante y honesto.</strong> Los Transformers <strong>no aparecen</strong> en el examen final 2021 ni en el
+banco MEGA. Son contenido <strong>añadido en PAO 2026-I</strong>. Eso significa dos cosas:</p>
+<ol>
+<li><strong>No hay precedente de examen</strong> para calibrar el formato exacto de estas preguntas.</li>
+<li><strong>No los descartes por eso.</strong> El profesor dedicó tres clases completas al tema y dijo:
+   «Voy a mirar el attention. Voy a hacer las ecuaciones. Voy a mirarlas en detalle. <strong>Ahí está la
+   parte más importante de los Transformers. Es la propuesta de los Transformers.</strong>»</li>
+</ol>
+<p>Las preguntas de este volumen se modelan sobre el <strong>estilo</strong> documentado del profesor (selección
+múltiple con distractores terminológicos, y cálculo corto), no sobre ítems previos reales.</p>
+</blockquote>
+<h3 id="item-real-de-atencion-revisado-en-clase-con-sus-veredictos">Ítem real de atención revisado en clase, con sus veredictos<a class="headerlink" href="#item-real-de-atencion-revisado-en-clase-con-sus-veredictos" title="Permanent link">&para;</a></h3>
+<p>Pregunta: <strong>«¿En qué se basa el mecanismo de atención de los transformers?»</strong> (selección múltiple)</p>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Veredicto</th>
+<th>Razón que dio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>«En calcular <strong>ponderaciones de importancia</strong> entre todos los elementos de la entrada»</td>
+<td>✅ <strong>VERDADERA</strong></td>
+<td>«<strong>sí son ponderaciones</strong>… Porque tú estás multiplicando el W por el vector y ahí estás ponderando.» <em>(varios estudiantes la marcaron falsa y él los corrigió)</em></td>
+</tr>
+<tr>
+<td>«En calcular la <strong>correlación</strong> entre diferentes partes de la entrada»</td>
+<td>✅ <strong>VERDADERA</strong></td>
+<td>«Recuerden que hasta lo escala y le saca la ponderación… basado en softmax, <strong>y la suma da uno</strong>.» <em>(también la marcaron falsa y los corrigió)</em></td>
+</tr>
+<tr>
+<td>«En la <strong>extracción de las características de los embeddings</strong>»</td>
+<td>❌ <strong>FALSA</strong></td>
+<td>«<strong>la salida de la attention no es el contexto</strong>… <strong>Es una sub-sub-subcapa del codificador.</strong> Las características, si tú quieres el contexto, <strong>es la salida de la última capa del codificador</strong>… Tienes <strong>seis capas</strong> de codificación.»</td>
+</tr>
+<tr>
+<td>«En permitir al modelo <strong>enfocarse en diferentes partes de la entrada de manera simultánea</strong>»</td>
+<td>✅ <strong>VERDADERA</strong></td>
+<td>«en paralelo y simultáneo… <strong>Todos los tokens [saben] de todos los otros tokens.</strong>»</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🚨 <strong>El distractor del tercer ítem es el más fino del volumen.</strong> «Extraer características» es lo
+que hace <strong>la torre completa de codificación</strong> (las 6 capas), <strong>no</strong> la subcapa de atención. Ojo
+con cualquier enunciado que equipare <em>atención</em> con <em>contexto</em>.</p>
+</blockquote>
+<h3 id="familias-de-preguntas-esperables">Familias de preguntas esperables<a class="headerlink" href="#familias-de-preguntas-esperables" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Selección múltiple sobre atención</strong> — ver el ítem de arriba.</li>
+<li><strong>Dimensiones de matrices</strong> (<code>W</code> del embedding, <code>d_k</code>, <code>Q/K/V</code>) — probada en lección.</li>
+<li><strong>Cálculo corto de atención</strong>: dados puntajes, escalar entre <code>√d_k</code>, aplicar softmax, verificar
+   que suma 1, combinar con <code>V</code>.</li>
+<li><strong>Conteo</strong>: cabezas, capas, matrices entrenables por capa.</li>
+<li><strong>¿Qué cruza al decoder?</strong> <code>K</code> y <code>V</code>.</li>
+<li><strong>Distinción encoder/decoder por modelo:</strong> GPT decoder-only; BERT y ViT encoder-only.</li>
+<li><strong>Comparación RNN vs Transformer</strong> por cualquiera de los cuatro retos de §2.1.</li>
+</ol>
+<hr />
+<h2 id="213-checkpoint-de-recuperacion-volumen-2">2.13 Checkpoint de recuperación — Volumen 2<a class="headerlink" href="#213-checkpoint-de-recuperacion-volumen-2" title="Permanent link">&para;</a></h2>
+<p>A libro cerrado. Verifica tus respuestas con las secciones de esta guía.</p>
+<ol>
+<li>Enumera los cuatro retos de la RNN que motivan el Transformer, y di qué mecanismo resuelve cada uno.</li>
+<li>Desarrolla los acrónimos BERT y GPT. ¿Cuál usa sólo encoder y cuál sólo decoder?</li>
+<li>Define Q, K y V con las tres preguntas del profesor. ¿Entre cuáles dos se calcula el producto punto?</li>
+<li>Escribe la fórmula matricial completa de la auto-atención.</li>
+<li>Con <code>d_model = 512</code> y <code>h = 8</code>, calcula <code>d_k</code> y el factor de escala. ¿Por qué se divide <code>d_model</code> entre <code>h</code>?</li>
+<li>Dados los puntajes <code>(15, 10.3, 7.6)</code> ya escalados, calcula la softmax. ¿Cuánto debe sumar?</li>
+<li>¿Es simétrica la matriz de atención? Justifica con las matrices de peso.</li>
+<li>¿Cuántas matrices entrenables tiene una capa de encoder? Desglosa el conteo.</li>
+<li>¿Cómo se combinan las 8 cabezas? ¿Se suman? ¿Qué papel juega <code>W^O</code>?</li>
+<li>¿Qué dimensión tiene la matriz <code>W</code> de un embedding con vocabulario de 4 y dimensión 2? ¿Por qué?</li>
+<li>Explica el atajo del one-hot en una frase.</li>
+<li>¿Dónde vive la información de orden en una RNN? ¿Y en un Transformer? ¿La operación es suma o concatenación?</li>
+<li>Un token en posición 0 con 4 dimensiones de posición: ¿qué vector de posición le corresponde y por qué?</li>
+<li>Nombra las tres subcapas de un decoder. ¿Qué matrices recibe del encoder?</li>
+<li>Marca V o F y corrige las falsas:<ul>
+<li>a) «El mecanismo de atención se basa en la extracción de características de los embeddings.»</li>
+<li>b) «Como el procesamiento es paralelo, cada token se calcula independientemente de los demás.»</li>
+<li>c) «Los encoders son idénticos y comparten los pesos.»</li>
+<li>d) «Las filas de la matriz de atención suman 1 después de la softmax.»</li>
+<li>e) «El producto punto de la atención se calcula entre el query y el value.»</li>
+<li>f) «Del encoder al decoder viajan las matrices Q y K.»</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="214-cierre-del-volumen">2.14 Cierre del volumen<a class="headerlink" href="#214-cierre-del-volumen" title="Permanent link">&para;</a></h2>
+<p><strong>Cubierto del ledger:</strong> Clase 18 pp. 15–18 · Clase 19 pp. 1–20 · Clase 20 pp. 1–20.</p>
+<p><strong>Diferido:</strong> nada de estas clases.</p>
+<p><strong>Ambigüedades de fuente registradas:</strong></p>
+<ol>
+<li>La fila «Softmax» de la tabla <code>q₁·k</code> de la Clase 19 (<code>0.94, 0.65, 0.48</code>) no es una softmax:
+   suma 2.07. Tratada como ilustrativa; se da el cálculo correcto.</li>
+<li>Las dos primeras componentes de «ballena» en el ejemplo de positional encoding no cuadran con la
+   suma de las filas mostradas. Se documenta y se enseña el procedimiento.</li>
+<li>La Clase 19 llama <code>K</code>, <code>Q</code>, <code>V</code> a las <strong>matrices de pesos</strong>; otras diapositivas y la literatura
+   usan esos nombres para los <strong>vectores</strong>. Ambas conviven en el material del curso.</li>
+<li>Ninguna diapositiva da las ecuaciones de la GRU ni de la normalización de capa; sólo diagramas.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="./tema-rnn-lstm-gru.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Secuencias — RNN, BPTT, LSTM y GRU">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Secuencias — RNN, BPTT, LSTM y GRU
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="./tema-evaluacion-de-modelos.html" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Evaluación de modelos — matriz de confusión y métricas">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Evaluación de modelos — matriz de confusión y métricas
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Diapositivas, enunciados y evaluaciones © Enrique Peláez, publicados con su autorización. Guías y organización: ayudantía de CCPG1044.
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog" role="status" aria-atomic="true">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["content.code.copy","content.tooltips","navigation.footer","navigation.indexes","navigation.path","navigation.sections","navigation.tabs","navigation.top","navigation.tracking","search.highlight","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.c47bb847.min.js","tags":null,"translations":{"clipboard.copied":"Copiado al portapapeles","clipboard.copy":"Copiar al portapapeles","clipboard.error":"Could not copy to clipboard","search.result.more.one":"1 más en esta página","search.result.more.other":"# más en esta página","search.result.none":"No se encontraron documentos","search.result.one":"1 documento encontrado","search.result.other":"# documentos encontrados","search.result.placeholder":"Teclee para comenzar búsqueda","search.result.term.missing":"Falta","select.version":"Seleccionar versión"},"version":null}</script>
+    
+    
+  
+      <script src="../../assets/javascripts/bundle.a2388154.min.js"></script>
+      
+    
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+    (function () {
+      function render(root) {
+        if (!window.renderMathInElement) return;
+        renderMathInElement(root, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\[", right: "\\]", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false }
+          ],
+          throwOnError: false
+        });
+      }
+      function alListo() {
+        if (window.document$ && window.document$.subscribe) {
+          window.document$.subscribe(function () { render(document.body); });
+        } else {
+          render(document.body);
+        }
+      }
+      window.addEventListener("load", alListo);
+    })();
+  </script>
+
+  </body>
+</html>

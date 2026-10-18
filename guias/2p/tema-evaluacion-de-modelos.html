@@ -1,0 +1,4658 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de estudio de Inteligencia Artificial (CCPG1044, ESPOL · FIEC): clases, guías por evaluación, tareas y evaluaciones anteriores.">
+      
+      
+        <meta name="author" content="Ayudantía de Inteligencia Artificial">
+      
+      
+        <link rel="canonical" href="https://jfcofer.github.io/ia-ccpg1044/guias/2p/tema-evaluacion-de-modelos.html">
+      
+      
+      
+        <link rel="prev" href="./tema-transformers.html">
+      
+      
+        <link rel="next" href="./tema-metricas-kmeans-busqueda-y-logica.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.71">
+    
+    
+      
+        <title>Evaluación de modelos — matriz de confusión y métricas - IA · CCPG1044</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.e442bf79.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.b60ce83d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-hidden="true"></label>
+    <div data-md-component="skip">
+      <a href="#__skip" class="md-skip">
+        Saltar a contenido
+      </a>
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../index.html" title="IA · CCPG1044" class="md-header__button md-logo" aria-label="IA · CCPG1044" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navegación">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IA · CCPG1044
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Evaluación de modelos — matriz de confusión y métricas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun-moon" viewBox="0 0 24 24"><path d="M12 2v2M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715M16 12a4 4 0 0 0-4-4M19 5l-1.256 1.256M20 12h2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Preferencia del sistema"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Preferencia del sistema" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Buscar">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Buscar">
+  <button type="button" class="md-search__button">
+    Buscar
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../clases/index.html" class="md-tabs__link">
+          
+  
+  Clases y sílabo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../index.html" class="md-tabs__link">
+          
+  
+  Guías de estudio
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../evaluaciones/index.html" class="md-tabs__link">
+          
+  
+  Evaluaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tareas/index.html" class="md-tabs__link">
+          
+  
+  Tareas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../proyecto/index.html" class="md-tabs__link">
+          
+  
+  Proyecto final
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../laboratorios/index.html" class="md-tabs__link">
+          
+  
+  Laboratorios
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../bibliografia/index.html" class="md-tabs__link">
+          
+  
+  Bibliografía
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../fe-de-erratas.html" class="md-tabs__link">
+        
+  
+  Fe de erratas
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="IA · CCPG1044" class="md-nav__button md-logo" aria-label="IA · CCPG1044" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    IA · CCPG1044
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Inicio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Clases y sílabo
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Clases y sílabo
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/c01-presentacion-del-curso/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primer parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Primer parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c02-definiciones-y-estado-del-arte/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  02 · Definiciones y estado del arte
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c03-fundamentos-y-tipos-de-aprendizaje/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  03 · Fundamentos y tipos de aprendizaje
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c04-regresion-lineal/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  04 · Regresión lineal
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c05-descenso-de-gradiente-y-regresion-polinomial/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  05 · Descenso de gradiente y regresión polinomial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c06-regresion-logistica/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  06 · Regresión logística
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c07-perceptron-y-funciones-de-activacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  07 · Perceptrón y funciones de activación
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c08-mlp-como-clasificador/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  08 · MLP como clasificador
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c09-aprendizaje-en-mlp-regla-delta/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  09 · Aprendizaje en MLP
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c10-backpropagation-y-tensores/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  10 · Backpropagation y notación vectorial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c11-mlp-vectorizado-y-regularizacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  11 · Backpropagation, Jacobiano y regularización
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c12-cnn-introduccion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  12 · Introducción a las CNN
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c13-cnn-parametros-y-pooling/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  13 · CNN: parámetros, pooling y aprendizaje
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c14-examen-del-primer-parcial/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  14 · Examen del primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/c15-rnn-y-nlp/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Segundo parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Segundo parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c16-bptt-y-desvanecimiento-del-gradiente/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  16 · BPTT y desvanecimiento del gradiente
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c17-lstm-gru-e-introduccion-a-transformers/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  17 · LSTM, GRU e introducción a los Transformers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c18-transformers-autoatencion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  18 · Transformers: autoatención
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c19-transformers-matrices-y-codificacion-posicional/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  19 · Transformers: matrices, embeddings y posición
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c20-comportamiento-inteligente/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  20 · Comportamiento inteligente y estrategias de búsqueda
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c21-metricas-y-busqueda-no-informada/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  21 · Métricas de evaluación y búsqueda no informada
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c22-busqueda-heuristica/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  22 · Búsqueda heurística
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c23-a-estrella-y-backtracking/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  23 · A*, backtracking y representación del conocimiento
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c24-logica-inferencia-y-unificacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  24 · Lógica, inferencia y unificación
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c25-resolucion-forma-clausal-y-extraccion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  25 · Resolución, forma clausal y extracción de respuestas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/variantes-2024-2/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Diapositivas PAO 2024-II
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/variantes-2026-1/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Diapositivas PAO 2026-I
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guías de estudio
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Guías de estudio
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../1p/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primer parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_3_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Primer parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/leccion-1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #1
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/leccion-2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #2
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/examen-1p.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del examen del 1P
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/tema-guia-general.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía general del primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/tema-apuntes-consolidados.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Apuntes consolidados de clase (1P)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Segundo parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Segundo parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./leccion-3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #3
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./leccion-4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #4
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./examen-2p.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del examen del 2P (examen final)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-rnn-lstm-gru.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Secuencias — RNN, BPTT, LSTM y GRU
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-transformers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Transformers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluación de modelos — matriz de confusión y métricas
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="tema-evaluacion-de-modelos.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluación de modelos — matriz de confusión y métricas
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#30-por-que-este-volumen-es-el-mas-importante-del-parcial" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.0 Por qué este volumen es el más importante del parcial
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-que-es-evaluar-un-modelo-y-que-no-lo-es" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.1 Qué es evaluar un modelo (y qué no lo es)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Qué es evaluar un modelo (y qué no lo es)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-distincion-que-abre-el-tema" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La distinción que abre el tema
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion-no-es-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 Validación NO es prueba
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exactitud-alta-modelo-bueno" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 Exactitud alta ≠ modelo bueno
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-la-matriz-de-confusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.2 La matriz de confusión
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 La matriz de confusión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definicion-del-curso-clase-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Definición del curso (Clase 21)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#las-cuatro-celdas-con-la-definicion-literal" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Las cuatro celdas, con la definición literal
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#errores-tipo-i-y-tipo-ii-memorizacion-obligatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 Errores tipo I y tipo II — memorización obligatoria
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-modelo-perfecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El modelo perfecto
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-comprobacion-de-suma" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔑 La comprobación de suma
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notacion-castellano-vs-ingles" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Notación: castellano vs inglés
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-las-cuatro-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.3 Las cuatro métricas
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Las cuatro métricas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-exactitud-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.3.1 Exactitud (<em>Accuracy</em>)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-precision-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.3.2 Precisión (<em>Precision</em>)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-recuperacion-recall-sensibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.3.3 Recuperación (<em>Recall</em>, sensibilidad)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-puntaje-f1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.3.4 Puntaje F1
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-de-reconstruccion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tabla de reconstrucción rápida
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-ejemplo-completamente-resuelto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.4 EJEMPLO COMPLETAMENTE RESUELTO
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 EJEMPLO COMPLETAMENTE RESUELTO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-extraer-las-cuatro-celdas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Paso 1 — extraer las cuatro celdas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-dibujar-la-matriz-con-la-orientacion-del-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Paso 2 — dibujar la matriz con la orientación del curso
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-las-cuatro-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Paso 3 — las cuatro métricas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-interpretar-esto-es-lo-que-da-los-puntos-de-la-parte-escrita" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Paso 4 — interpretar (esto es lo que da los puntos de la parte escrita)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-las-cuatro-categorias-de-precision-y-recuperacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.5 Las cuatro categorías de precisión y recuperación
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 Las cuatro categorías de precisión y recuperación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-diagrama-y-como-reconstruirlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El diagrama, y cómo reconstruirlo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categoria-1-baja-recuperacion-baja-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Categoría 1 — baja recuperación, baja precisión
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categoria-2-alta-recuperacion-baja-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Categoría 2 — alta recuperación, baja precisión
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categoria-3-baja-recuperacion-alta-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Categoría 3 — baja recuperación, alta precisión
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categoria-4-alta-recuperacion-alta-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Categoría 4 — alta recuperación, alta precisión
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tabla resumen
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-mnemonico-del-profesor-el-mas-util-del-tema" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El mnemónico del profesor — el más útil del tema
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-que-metrica-priorizar-el-ejercicio-que-anuncio-como-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.6 Qué métrica priorizar — el ejercicio que anunció como examen
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 Qué métrica priorizar — el ejercicio que anunció como examen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escenario-a-sistema-de-justicia" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Escenario A — sistema de justicia
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escenario-b-motores-de-avion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Escenario B — motores de avión
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escenario-c-medicina-el-ejemplo-canonico" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Escenario C — medicina (el ejemplo canónico)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-regla-general-que-se-extrae" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔑 La regla general que se extrae
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-parcialmente-resueltos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ejemplos parcialmente resueltos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-sin-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Problema sin resolver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-el-umbral-de-decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.7 El umbral de decisión
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.7 El umbral de decisión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-mecanica" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La mecánica
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-se-puede-sacrificar-una-metrica-a-voluntad" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 No se puede «sacrificar» una métrica a voluntad
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38-patron-de-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.8 Patrón de examen
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.8 Patrón de examen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#familias-esperables" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Familias esperables
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nota-sobre-overfitting-respaldo-del-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Nota sobre <em>overfitting</em> (respaldo del banco)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39-checkpoint-de-recuperacion-volumen-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.9 Checkpoint de recuperación — Volumen 3
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#310-cierre-del-volumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.10 Cierre del volumen
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-metricas-kmeans-busqueda-y-logica.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Métricas, K-means, búsqueda y lógica
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-resolucion-y-forma-clausal.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Resolución, forma clausal y extracción de respuestas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mejoramiento.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del mejoramiento (todo el curso)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../evaluaciones/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Evaluaciones
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/1p/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/2p/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Segundo parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/mejoramiento/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Mejoramiento
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tareas/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tareas
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../proyecto/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Proyecto final
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../laboratorios/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Laboratorios
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../bibliografia/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Bibliografía
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fe-de-erratas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Fe de erratas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#30-por-que-este-volumen-es-el-mas-importante-del-parcial" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.0 Por qué este volumen es el más importante del parcial
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-que-es-evaluar-un-modelo-y-que-no-lo-es" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.1 Qué es evaluar un modelo (y qué no lo es)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Qué es evaluar un modelo (y qué no lo es)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-distincion-que-abre-el-tema" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La distinción que abre el tema
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion-no-es-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 Validación NO es prueba
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exactitud-alta-modelo-bueno" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 Exactitud alta ≠ modelo bueno
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-la-matriz-de-confusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.2 La matriz de confusión
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 La matriz de confusión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definicion-del-curso-clase-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Definición del curso (Clase 21)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#las-cuatro-celdas-con-la-definicion-literal" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Las cuatro celdas, con la definición literal
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#errores-tipo-i-y-tipo-ii-memorizacion-obligatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 Errores tipo I y tipo II — memorización obligatoria
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-modelo-perfecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El modelo perfecto
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-comprobacion-de-suma" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔑 La comprobación de suma
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notacion-castellano-vs-ingles" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Notación: castellano vs inglés
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-las-cuatro-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.3 Las cuatro métricas
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Las cuatro métricas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-exactitud-accuracy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.3.1 Exactitud (<em>Accuracy</em>)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-precision-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.3.2 Precisión (<em>Precision</em>)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-recuperacion-recall-sensibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.3.3 Recuperación (<em>Recall</em>, sensibilidad)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-puntaje-f1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.3.4 Puntaje F1
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-de-reconstruccion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tabla de reconstrucción rápida
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-ejemplo-completamente-resuelto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.4 EJEMPLO COMPLETAMENTE RESUELTO
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 EJEMPLO COMPLETAMENTE RESUELTO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-extraer-las-cuatro-celdas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Paso 1 — extraer las cuatro celdas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-dibujar-la-matriz-con-la-orientacion-del-curso" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Paso 2 — dibujar la matriz con la orientación del curso
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-las-cuatro-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Paso 3 — las cuatro métricas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-interpretar-esto-es-lo-que-da-los-puntos-de-la-parte-escrita" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Paso 4 — interpretar (esto es lo que da los puntos de la parte escrita)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-las-cuatro-categorias-de-precision-y-recuperacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.5 Las cuatro categorías de precisión y recuperación
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 Las cuatro categorías de precisión y recuperación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-diagrama-y-como-reconstruirlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El diagrama, y cómo reconstruirlo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categoria-1-baja-recuperacion-baja-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Categoría 1 — baja recuperación, baja precisión
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categoria-2-alta-recuperacion-baja-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Categoría 2 — alta recuperación, baja precisión
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categoria-3-baja-recuperacion-alta-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Categoría 3 — baja recuperación, alta precisión
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categoria-4-alta-recuperacion-alta-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Categoría 4 — alta recuperación, alta precisión
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tabla resumen
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-mnemonico-del-profesor-el-mas-util-del-tema" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El mnemónico del profesor — el más útil del tema
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-que-metrica-priorizar-el-ejercicio-que-anuncio-como-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.6 Qué métrica priorizar — el ejercicio que anunció como examen
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 Qué métrica priorizar — el ejercicio que anunció como examen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escenario-a-sistema-de-justicia" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Escenario A — sistema de justicia
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escenario-b-motores-de-avion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Escenario B — motores de avión
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escenario-c-medicina-el-ejemplo-canonico" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Escenario C — medicina (el ejemplo canónico)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-regla-general-que-se-extrae" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🔑 La regla general que se extrae
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-parcialmente-resueltos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Ejemplos parcialmente resueltos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-sin-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Problema sin resolver
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-el-umbral-de-decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.7 El umbral de decisión
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.7 El umbral de decisión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-mecanica" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        La mecánica
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-se-puede-sacrificar-una-metrica-a-voluntad" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        🚨 No se puede «sacrificar» una métrica a voluntad
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38-patron-de-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.8 Patrón de examen
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.8 Patrón de examen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#familias-esperables" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Familias esperables
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nota-sobre-overfitting-respaldo-del-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Nota sobre <em>overfitting</em> (respaldo del banco)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39-checkpoint-de-recuperacion-volumen-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.9 Checkpoint de recuperación — Volumen 3
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#310-cierre-del-volumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.10 Cierre del volumen
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../index.html" class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../index.html" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Guías de estudio
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="./index.html" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Segundo parcial
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                <a id="__skip" tabindex="-1"></a>
+                
+                  
+
+
+<h1 id="evaluacion-de-modelos-la-matriz-de-confusion-y-sus-metricas">Evaluación de modelos: la matriz de confusión y sus métricas<a class="headerlink" href="#evaluacion-de-modelos-la-matriz-de-confusion-y-sus-metricas" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Escrita en PAO 2026-I</p>
+<p>Esta guía usa la <strong>numeración de clases de PAO 2026-I</strong>. En 2026-II el segundo parcial va una o dos clases
+antes (la Clase 14 fue el examen del 1P y el 2P termina en la Clase 25): consulta la
+<a href="../../clases/index.html#otras-versiones-de-las-diapositivas">tabla de equivalencias</a>. Lo que dice que «va al examen» o que «el profesor anunció» es de
+2026-I: úsalo como pista, no como garantía. El alcance vigente de cada evaluación está en su guía.</p>
+</div>
+<blockquote>
+<p><strong>Qué cubre este volumen:</strong> Clase 21, sección 2 (Métricas de evaluación de modelos en ML-DL), más el desarrollo oral extenso que el profesor hizo del tema en dos sesiones.
+<strong>Prerrequisitos:</strong> noción de entrenamiento/validación/prueba, clasificación binaria, función de costo.
+<strong>Maestría esperada:</strong> construir e interpretar una matriz de confusión con la orientación del profesor; calcular exactitud, precisión, recuperación y F1 a partir de números de <em>testing</em>; decidir qué métrica priorizar según el problema; y razonar sobre el umbral de decisión.</p>
+</blockquote>
+<hr />
+<h2 id="30-por-que-este-volumen-es-el-mas-importante-del-parcial">3.0 Por qué este volumen es el más importante del parcial<a class="headerlink" href="#30-por-que-este-volumen-es-el-mas-importante-del-parcial" title="Permanent link">&para;</a></h2>
+<p>Es el único tema del corpus sobre el cual el profesor <strong>anunció una pregunta de examen de forma
+literal y sin ambigüedad</strong>, dos veces, en dos clases distintas:</p>
+<blockquote>
+<p>«Eso es la matriz de confusión. Fácil de recordar, ¿cierto? <strong>No te lo vas a olvidar porque HAY
+UNA PREGUNTA SOBRE EL TEMA. O sea, no sobre el concepto per se, pero CÓMO USAR LOS VALORES DEL
+TESTING EN UNA MATRIZ.</strong>»</p>
+<p>«Muy bien, preguntas, preguntas. <strong>Asegúrate de entenderlo porque VA A ESTAR EN EL EXAMEN.</strong>»
+<em>(dicho justo después del ejercicio de precisión-vs-recuperación con el sistema de justicia y los
+motores de avión, y de la discusión del umbral)</em></p>
+</blockquote>
+<p><strong>Traducción:</strong> espera un ítem que te dé números de prueba y te pida colocarlos en la matriz y/o
+calcular métricas, y otro que te pida decidir qué métrica importa en un escenario dado.</p>
+<hr />
+<h2 id="31-que-es-evaluar-un-modelo-y-que-no-lo-es">3.1 Qué es evaluar un modelo (y qué no lo es)<a class="headerlink" href="#31-que-es-evaluar-un-modelo-y-que-no-lo-es" title="Permanent link">&para;</a></h2>
+<h3 id="la-distincion-que-abre-el-tema">La distinción que abre el tema<a class="headerlink" href="#la-distincion-que-abre-el-tema" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«esa función que mide el error, que se conoce como <strong>la función de divergencia, la función de
+costo</strong>, mide cuánto tienes que corregir por cada ejemplo el proceso de entrenamiento.
+<strong>Cuando hablamos de la evaluación de modelos, es cuando ya termina el proceso de entrenamiento.</strong>»</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Función de costo / divergencia</strong></th>
+<th><strong>Evaluación del modelo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cuándo</td>
+<td><strong>durante</strong> el entrenamiento, por ejemplo</td>
+<td><strong>después</strong> de terminado el entrenamiento</td>
+</tr>
+<tr>
+<td>Para qué</td>
+<td>corregir los pesos</td>
+<td>juzgar el modelo</td>
+</tr>
+<tr>
+<td>Con qué datos</td>
+<td>training (y validation)</td>
+<td><strong>testing</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="validacion-no-es-prueba">🚨 Validación NO es prueba<a class="headerlink" href="#validacion-no-es-prueba" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>Miren bien la literatura, puede ser que se utiliza de manera intercambiable validation con
+testing, pero ya usted sabe como ingeniero que VALIDATION SIGNIFICA PARTE DEL TRAINING. NO
+TESTING.</strong>»</p>
+<p>«<strong>Porque la matriz de confusión se construye con el testing. Después de que terminó el training.
+NO EN VALIDACIÓN, EN TESTING.</strong>»</p>
+</blockquote>
+<p>Éste es exactamente el punto que su anuncio de examen señala («cómo usar los valores <strong>del testing</strong>
+en una matriz»). Un distractor que diga «la matriz de confusión se construye con el conjunto de
+validación» es <strong>falso según el curso</strong>.</p>
+<h3 id="exactitud-alta-modelo-bueno">🚨 Exactitud alta ≠ modelo bueno<a class="headerlink" href="#exactitud-alta-modelo-bueno" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>No siempre el accuracy grande significa que es bueno tu modelo. No es así… Un accuracy del 0.9
+no quiere decir que es excelente. Hay que mirar las otras métricas.</strong>»</p>
+<p>«<strong>Y cuando tienes accuracy del 100%, siempre les digo SOSPECHA, porque hay algo que no está bien.
+Eso significa OVERFITTING, no quiere decir que es preciso.</strong>»</p>
+<p>«<strong>El accuracy y el loss NO SON COMPLEMENTOS. No quiere decir que si el accuracy es 90% y el loss
+es 10%, por si acaso, no es así. Son medidas diferentes.</strong>»</p>
+<p>«<strong>La matriz de confusión no te deja mentir.</strong> Tú puedes decir que es excelente tu modelo, pero ok,
+veamos las métricas y probablemente no es lo que tú esperabas.»</p>
+</blockquote>
+<hr />
+<h2 id="32-la-matriz-de-confusion">3.2 La matriz de confusión<a class="headerlink" href="#32-la-matriz-de-confusion" title="Permanent link">&para;</a></h2>
+<h3 id="definicion-del-curso-clase-21">Definición del curso (Clase 21)<a class="headerlink" href="#definicion-del-curso-clase-21" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«Una forma de medir precisión es a través de la <strong>Matriz de Confusión</strong> (Confusion Matrix), que
+luce así:»</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>                             R E A L
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                        P              N
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                ┌──────────────┬──────────────┐
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>             P  │      VP      │      FP      │
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                │              │  Error tipo I│
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>   PREDICHO     ├──────────────┼──────────────┤
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>             N  │      FN      │      VN      │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                │ Error tipo II│              │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                └──────────────┴──────────────┘
+</code></pre></div>
+<blockquote>
+<p>⚠️ <strong>ORIENTACIÓN: filas = predicho, columnas = real.</strong> Es literal de la diapositiva y él lo repite
+oralmente: «<strong>en las filas tengo lo predicho, en las columnas tengo lo que es real</strong>».</p>
+<p><strong>NOTA ESTÁNDAR:</strong> <code>scikit-learn</code> usa la orientación <strong>transpuesta</strong> (filas = real, columnas =
+predicho). Los números son los mismos, la tabla está volteada. <strong>En el examen usa la del profesor.</strong>
+Si dibujas la tabla, <strong>rotula siempre los ejes</strong>: es lo que salva la respuesta si el corrector usa
+la otra convención.</p>
+</blockquote>
+<h3 id="las-cuatro-celdas-con-la-definicion-literal">Las cuatro celdas, con la definición literal<a class="headerlink" href="#las-cuatro-celdas-con-la-definicion-literal" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>• <strong>Positivos verdaderos:</strong> datos etiquetados como positivos que en realidad son positivos
+• <strong>Positivos falsos:</strong> datos etiquetados como positivos que en realidad son negativos
+• <strong>Negativos verdaderos:</strong> datos etiquetados como negativos que en realidad son negativos
+• <strong>Negativos falsos:</strong> datos etiquetados como negativos que en realidad son positivos</p>
+</blockquote>
+<p>Y la caracterización por tipo de error:</p>
+<blockquote>
+<p>«<strong>Un error falso positivo se da cuando el modelo predice la clase 1, pero en realidad pertenece a
+la clase 0.</strong>»
+«<strong>Un error falso negativo se da cuando el modelo predice la clase 0, pero en realidad pertenece a
+la clase 1.</strong>»</p>
+</blockquote>
+<h3 id="errores-tipo-i-y-tipo-ii-memorizacion-obligatoria">🚨 Errores tipo I y tipo II — memorización obligatoria<a class="headerlink" href="#errores-tipo-i-y-tipo-ii-memorizacion-obligatoria" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Nombre del curso</th>
+<th>Qué pasó</th>
+<th>Celda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Error tipo I</strong></td>
+<td>Falso Positivo (FP / PF)</td>
+<td>«predice que es positivo y en realidad era negativo»</td>
+<td>fila P, columna N</td>
+</tr>
+<tr>
+<td><strong>Error tipo II</strong></td>
+<td>Falso Negativo (FN / NF)</td>
+<td>«predice que es negativo y en la realidad era positivo»</td>
+<td>fila N, columna P</td>
+</tr>
+</tbody>
+</table>
+<p>Mnemónico: <strong>tipo I = una</strong> letra de más (dijiste positivo de más). <strong>Tipo II = dos</strong>, te faltó
+detectar (dijiste negativo cuando había algo).</p>
+<h3 id="el-modelo-perfecto">El modelo perfecto<a class="headerlink" href="#el-modelo-perfecto" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>El modelo perfecto clasificaría todas las clases correctamente: todos los 1 (o verdaderas) como
+1 - VP; y todos los 0 (o falsos) como 0 - VN. Entonces tendríamos: FN = FP = 0.</strong>»</p>
+</blockquote>
+<h3 id="la-comprobacion-de-suma">🔑 La comprobación de suma<a class="headerlink" href="#la-comprobacion-de-suma" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>La suma de estos debe darte el tamaño de tu testing.</strong>»</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>   VP + VN + FP + FN  =  número de ejemplos del conjunto de prueba
+</code></pre></div>
+<p><strong>Esta comprobación es tu red de seguridad en el examen.</strong> Si el enunciado dice «se probó con 200
+imágenes» y tus cuatro celdas no suman 200, algo está mal antes de calcular ninguna métrica.</p>
+<h3 id="notacion-castellano-vs-ingles">Notación: castellano vs inglés<a class="headerlink" href="#notacion-castellano-vs-ingles" title="Permanent link">&para;</a></h3>
+<p>El profesor mezcla ambas. Ten claras las dos:</p>
+<table>
+<thead>
+<tr>
+<th>Español (diapositiva)</th>
+<th>Inglés</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VP / PV</td>
+<td>TP</td>
+<td>positivo verdadero</td>
+</tr>
+<tr>
+<td>VN / NV</td>
+<td>TN</td>
+<td>negativo verdadero</td>
+</tr>
+<tr>
+<td>FP / PF</td>
+<td>FP</td>
+<td>positivo falso</td>
+</tr>
+<tr>
+<td>FN / NF</td>
+<td>FN</td>
+<td>negativo falso</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>Cuidado con <code>PV</code> vs <code>VP</code>.</strong> La diapositiva de las fórmulas usa <code>PV</code>, <code>NV</code>, <code>PF</code>, <code>NF</code>
+(positivo verdadero, negativo verdadero, positivo falso, negativo falso), mientras que la
+diapositiva de la matriz usa <code>VP</code>, <code>VN</code>, <code>FP</code>, <code>FN</code>. <strong>Son los mismos cuatro números.</strong></p>
+</blockquote>
+<hr />
+<h2 id="33-las-cuatro-metricas">3.3 Las cuatro métricas<a class="headerlink" href="#33-las-cuatro-metricas" title="Permanent link">&para;</a></h2>
+<h3 id="331-exactitud-accuracy">3.3.1 Exactitud (<em>Accuracy</em>)<a class="headerlink" href="#331-exactitud-accuracy" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>En general, mide la frecuencia con la que el clasificador es correcto.</strong>»</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>                 PV + NV
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>   Exactitud = ─────────────────────
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>               PV + NV + PF + NF
+</code></pre></div>
+<p><em>Por qué esa forma:</em> numerador = la diagonal principal (todos los aciertos); denominador = todo el
+conjunto de prueba. <strong>Es la fracción de aciertos.</strong></p>
+<p><em>Cuándo falla:</em> con clases desbalanceadas. Si el 99 % de los correos no son spam, un modelo que
+siempre dice «no spam» tiene 99 % de exactitud y es inútil. Por eso «hay que mirar las otras
+métricas».</p>
+<h3 id="332-precision-precision">3.3.2 Precisión (<em>Precision</em>)<a class="headerlink" href="#332-precision-precision" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>Cuando predice algo positivo, ¿con qué frecuencia es correcta esa predicción? Se la usa cuando
+el objetivo es limitar el número de positivos falsos (PF).</strong>»</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>                     PV
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>   Precisión =  ───────────
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                 PV + PF
+</code></pre></div>
+<p><em>Cómo leer el denominador:</em> <strong><code>PV + PF</code> es toda la fila «predicho P»</strong>. Es decir, la precisión mira
+<strong>una fila</strong>: de todo lo que dije que era positivo, ¿cuánto acerté?</p>
+<h3 id="333-recuperacion-recall-sensibilidad">3.3.3 Recuperación (<em>Recall</em>, sensibilidad)<a class="headerlink" href="#333-recuperacion-recall-sensibilidad" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>Cuando algo en realidad es positivo, ¿con qué frecuencia lo predice correctamente?</strong>»
+«<code>Recuperación = PV / (PV + NF)</code>, <strong>también conocido como sensibilidad</strong>.»</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>                        PV
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>   Recuperación =  ───────────
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>                     PV + NF
+</code></pre></div>
+<p><em>Cómo leer el denominador:</em> <strong><code>PV + NF</code> es toda la columna «real P»</strong>. La recuperación mira <strong>una
+columna</strong>: de todo lo que realmente era positivo, ¿cuánto encontré?</p>
+<blockquote>
+<p>🚨 <strong>El profesor se equivocó en clase con esta fórmula y un estudiante lo corrigió.</strong> Vale la pena
+conocer el episodio porque muestra dónde está la trampa:</p>
+<blockquote>
+<p>Estudiante: «¿Cuánto es la recuperación? Si bien la diagonal principal, pero que serían los
+negativos verdaderos, no es falso.»
+Profesor: «<strong>Ah, sí, tienes razón. Son los positivos verdaderos y los negativos falsos. Son los
+que están en el error 1 y en el error 2… Esta es la diagonal principal. En mi mente estaba
+esta.</strong>»</p>
+</blockquote>
+<p>La versión ratificada y correcta es <strong><code>PV / (PV + NF)</code></strong>. Si dudas, reconstrúyela desde la
+pregunta que responde («cuando algo <em>realmente es</em> positivo…» → mira lo real → mira la <strong>columna</strong>).</p>
+</blockquote>
+<h3 id="334-puntaje-f1">3.3.4 Puntaje F1<a class="headerlink" href="#334-puntaje-f1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«<strong>Es la media armónica de precisión y recuperación:</strong>»</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>                        precisión × recuperación
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>   f1-score  =  2 × ──────────────────────────────
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>                       precisión + recuperación
+</code></pre></div>
+<p><em>Por qué media armónica y no aritmética:</em> la armónica <strong>castiga el desbalance</strong>. Con precisión 1.0 y
+recuperación 0.0, la media aritmética daría 0.5 (engañosamente decente); la armónica da <strong>0</strong>.</p>
+<blockquote>
+<p>«cuando uno mira esta métrica y es cercana a uno, entonces dice, ah, es muy bueno tu modelo.
+A pesar de que este puede ser bajo, pero tiene un F score bueno, sí que es bueno tu modelo.»</p>
+<p>⚠️ <strong>Trampa de dictado.</strong> En clase dijo «dos veces la precisión por el recall dividido por la
+<strong>suma</strong>», y la diapositiva escribe correctamente <code>(precisión + recuperación)</code> en el denominador.
+Un distractor que ponga <strong>producto</strong> en el denominador es falso.</p>
+</blockquote>
+<h3 id="tabla-de-reconstruccion-rapida">Tabla de reconstrucción rápida<a class="headerlink" href="#tabla-de-reconstruccion-rapida" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Fórmula</th>
+<th>Pregunta que responde</th>
+<th>Qué parte de la matriz mira</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Exactitud</strong></td>
+<td><code>(PV+NV)/(PV+NV+PF+NF)</code></td>
+<td>¿con qué frecuencia acierta en general?</td>
+<td><strong>la diagonal / todo</strong></td>
+</tr>
+<tr>
+<td><strong>Precisión</strong></td>
+<td><code>PV/(PV+PF)</code></td>
+<td>cuando digo positivo, ¿acierto?</td>
+<td><strong>la fila «predicho P»</strong></td>
+</tr>
+<tr>
+<td><strong>Recuperación</strong></td>
+<td><code>PV/(PV+NF)</code></td>
+<td>cuando algo es positivo, ¿lo encuentro?</td>
+<td><strong>la columna «real P»</strong></td>
+</tr>
+<tr>
+<td><strong>F1</strong></td>
+<td><code>2PR/(P+R)</code></td>
+<td>equilibrio entre las dos</td>
+<td>ambas</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="34-ejemplo-completamente-resuelto">3.4 EJEMPLO COMPLETAMENTE RESUELTO<a class="headerlink" href="#34-ejemplo-completamente-resuelto" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Un modelo de detección de neumonía se prueba con <strong>200 radiografías</strong>. De ellas, <strong>80 son
+realmente casos de neumonía</strong>. El modelo señala <strong>90 radiografías</strong> como neumonía, y de esas
+<strong>72 lo son de verdad</strong>. Construye la matriz de confusión y calcula las cuatro métricas.</p>
+</blockquote>
+<h3 id="paso-1-extraer-las-cuatro-celdas">Paso 1 — extraer las cuatro celdas<a class="headerlink" href="#paso-1-extraer-las-cuatro-celdas" title="Permanent link">&para;</a></h3>
+<p>Trabaja siempre en este orden: primero lo que te dan directo, luego lo que se deduce.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>   Total de prueba          = 200
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>   Realmente positivos      = 80          → columna «Real P» suma 80
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>   Predichos positivos      = 90          → fila «Predicho P» suma 90
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>   Predichos P y realmente P = 72         →  PV = 72
+</code></pre></div>
+<p>De ahí:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>   PF = (predichos positivos) − PV = 90 − 72 = 18
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>   NF = (realmente positivos) − PV = 80 − 72 =  8
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>   NV = 200 − PV − PF − NF = 200 − 72 − 18 − 8 = 102
+</code></pre></div>
+<h3 id="paso-2-dibujar-la-matriz-con-la-orientacion-del-curso">Paso 2 — dibujar la matriz con la orientación del curso<a class="headerlink" href="#paso-2-dibujar-la-matriz-con-la-orientacion-del-curso" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>                              R E A L
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>                         P              N              (suma fila)
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                 ┌───────────────┬───────────────┐
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>              P  │   VP = 72     │   FP = 18     │        90
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>                 │               │  Error tipo I │
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>   PREDICHO      ├───────────────┼───────────────┤
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>              N  │   FN =  8     │   VN = 102    │       110
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>                 │ Error tipo II │               │
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>                 └───────────────┴───────────────┘
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>   (suma columna)       80              120              200
+</code></pre></div>
+<p><strong>Comprobación:</strong> <code>72 + 18 + 8 + 102 = 200</code> ✓ — coincide con el tamaño del conjunto de prueba.</p>
+<h3 id="paso-3-las-cuatro-metricas">Paso 3 — las cuatro métricas<a class="headerlink" href="#paso-3-las-cuatro-metricas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>   Exactitud     = (72 + 102) / 200          = 174/200 = 0.870   →  87.0 %
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>   Precisión     = 72 / (72 + 18)            =  72/90  = 0.800   →  80.0 %
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>   Recuperación  = 72 / (72 + 8)             =  72/80  = 0.900   →  90.0 %
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>   F1  = 2 × (0.800 × 0.900) / (0.800 + 0.900)
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>       = 2 × 0.720 / 1.700
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>       = 1.440 / 1.700                       = 0.8471 →  84.7 %
+</code></pre></div>
+<h3 id="paso-4-interpretar-esto-es-lo-que-da-los-puntos-de-la-parte-escrita">Paso 4 — interpretar (esto es lo que da los puntos de la parte escrita)<a class="headerlink" href="#paso-4-interpretar-esto-es-lo-que-da-los-puntos-de-la-parte-escrita" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Recuperación (0.90) &gt; Precisión (0.80).</strong> El modelo <strong>encuentra casi todos</strong> los enfermos, pero
+  entre los que señala hay 18 sanos. Está en la <strong>Categoría 2</strong> de §3.5: alta recuperación, baja
+  precisión.</li>
+<li><strong>Para diagnóstico médico, esto es lo correcto.</strong> El profesor lo dice explícitamente:
+  «<strong>En salud usamos mucho el recall. Porque queremos que no deje fuera ninguna sospecha.</strong>»
+  «Si te dicen que tienes cáncer y no lo tienes, <strong>no hay tanto daño como si tienes cáncer y no te
+  dicen</strong>.»</li>
+<li><strong>La exactitud (87 %) sola engañaría:</strong> oculta que 8 enfermos quedaron sin detectar. Ése es
+  precisamente el punto de «la matriz de confusión no te deja mentir».</li>
+</ul>
+<hr />
+<h2 id="35-las-cuatro-categorias-de-precision-y-recuperacion">3.5 Las cuatro categorías de precisión y recuperación<a class="headerlink" href="#35-las-cuatro-categorias-de-precision-y-recuperacion" title="Permanent link">&para;</a></h2>
+<p>La Clase 21 dedica cinco diapositivas a esto, cada una con un diagrama de círculos. <strong>El profesor
+señaló este bloque como examinable.</strong></p>
+<h3 id="el-diagrama-y-como-reconstruirlo">El diagrama, y cómo reconstruirlo<a class="headerlink" href="#el-diagrama-y-como-reconstruirlo" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>   ┌──────────────────────────── NEGATIVOS ────────────────────────────┐
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>   │   (todo lo que en realidad NO tiene la característica)            │
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>   │                                                                   │
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>   │      ╭──── círculo VERDE ────╮      ← lo que REALMENTE es positivo│
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>   │      │                       │                                    │
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>   │      │   ╭─── superposición ─┼──╮   ← Positivos Verdaderos        │
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>   │      │   │                   │  │                                 │
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>   │      ╰───┼───────────────────╯  │                                 │
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>   │          ╰─── círculo ROJO ─────╯   ← lo que el MODELO predijo    │
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>   │                                                                   │
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>   └───────────────────────────────────────────────────────────────────┘
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>   superposición verde-rojo grande  →  buena RECUPERACIÓN
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>   parte roja fuera del verde chica →  buena PRECISIÓN
+</code></pre></div>
+<p><strong>Regla de lectura, en dos líneas:</strong></p>
+<ul>
+<li><strong>Verde = la verdad. Rojo = lo que el modelo dice.</strong></li>
+<li><strong>Recuperación = cuánto del verde cubrí. Precisión = cuánto de mi rojo era verde.</strong></li>
+</ul>
+<h3 id="categoria-1-baja-recuperacion-baja-precision">Categoría 1 — baja recuperación, baja precisión<a class="headerlink" href="#categoria-1-baja-recuperacion-baja-precision" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«Si tenemos una precisión y recuperación baja, el modelo probablemente tiene <strong>underfitting</strong> en
+los datos o <strong>el modelo es incorrecto para esta tarea</strong>.»
+«El modelo no es bueno para encontrar a las personas que están enfermas, una pequeña superposición
+verde-roja (mala recuperación), y entre los casos que encontró… seleccionó bastantes personas que
+no están enfermas (mala precisión).»</p>
+<p>Rótulo de la diapositiva: <strong>«Ni exacto ni preciso»</strong></p>
+</blockquote>
+<p>Analogía de la diana que él usa en clase: «está <em>spread</em> alrededor sin ninguna precisión, están por
+todo lado… <strong>una varianza muy alta</strong>».</p>
+<blockquote>
+<p>⚠️ Un estudiante propuso «es una señal de <strong>overfitting</strong>» y él respondió: «<strong>Puede ser
+overfitting, underfitting</strong>, ya entran otras de las variables… No están en específico.»
+<strong>La diapositiva dice underfitting.</strong> Si el ítem cita la diapositiva, la respuesta es <em>underfitting
+o modelo incorrecto para la tarea</em>.</p>
+</blockquote>
+<h3 id="categoria-2-alta-recuperacion-baja-precision">Categoría 2 — alta recuperación, baja precisión<a class="headerlink" href="#categoria-2-alta-recuperacion-baja-precision" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«el modelo encuentra un conjunto amplio (de ahí el <strong>círculo rojo más grande</strong>) y obtiene la
+mayoría de los casos que está buscando, una gran superposición verde-roja (buena recuperación),
+pero probablemente está tomando muchos casos que no se supone que deben estar… (mala precisión).»</p>
+<p>Rótulo: <strong>«Exacto, sin precisión»</strong></p>
+</blockquote>
+<h3 id="categoria-3-baja-recuperacion-alta-precision">Categoría 3 — baja recuperación, alta precisión<a class="headerlink" href="#categoria-3-baja-recuperacion-alta-precision" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«Al modelo <strong>se le escapan la mayoría de los casos</strong> que está buscando, pero entre los casos que ha
+seleccionado, <strong>la mayoría de ellos son correctos</strong>. La superposición verde-rojo es pequeña (mala
+recuperación). La superposición rojo-blanco también es pequeña (buena precisión).»</p>
+<p>Rótulo: <strong>«Preciso, sin exactitud»</strong></p>
+</blockquote>
+<h3 id="categoria-4-alta-recuperacion-alta-precision">Categoría 4 — alta recuperación, alta precisión<a class="headerlink" href="#categoria-4-alta-recuperacion-alta-precision" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«Las predicciones del modelo y el número real de personas enfermas tienen una superposición alta…
+También tenemos pocas personas que no están enfermas que el modelo dijo que estaban enfermas.
+<strong>Este es el modelo ideal</strong>, un modelo que puede encontrar a todas las personas enfermas sin
+incluir a muchas personas sanas.»</p>
+<p>Rótulo: <strong>«Preciso y exacto»</strong></p>
+</blockquote>
+<h3 id="tabla-resumen">Tabla resumen<a class="headerlink" href="#tabla-resumen" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Cat.</th>
+<th>Recuperación</th>
+<th>Precisión</th>
+<th>Rótulo de la diapositiva</th>
+<th>Diagnóstico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>baja</td>
+<td>baja</td>
+<td>Ni exacto ni preciso</td>
+<td>underfitting o modelo inadecuado</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>alta</strong></td>
+<td>baja</td>
+<td>Exacto, sin precisión</td>
+<td>red demasiado amplia: muchos falsos positivos</td>
+</tr>
+<tr>
+<td>3</td>
+<td>baja</td>
+<td><strong>alta</strong></td>
+<td>Preciso, sin exactitud</td>
+<td>red demasiado estrecha: muchos falsos negativos</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>alta</strong></td>
+<td><strong>alta</strong></td>
+<td>Preciso y exacto</td>
+<td>ideal</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>Cuidado con los rótulos.</strong> El curso usa «exacto» para <em>recuperación alta</em> y «preciso» para
+<em>precisión alta</em> en estos cuatro rótulos, lo cual <strong>no coincide</strong> con la definición de <em>exactitud</em>
+como <code>(PV+NV)/total</code> de §3.3.1. Son dos usos distintos de la palabra en el mismo material.
+Al responder, <strong>usa las fórmulas, no los rótulos</strong>.</p>
+</blockquote>
+<h3 id="el-mnemonico-del-profesor-el-mas-util-del-tema">El mnemónico del profesor — el más útil del tema<a class="headerlink" href="#el-mnemonico-del-profesor-el-mas-util-del-tema" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«cuando hablamos de <strong>recall</strong>, básicamente lo que mide es <strong>qué tan bueno es tu modelo para
+encontrar TODOS los datos</strong> que tienen una característica particular… En cambio, la <strong>precisión</strong>
+es <strong>qué tan bueno es para tener SOLO los datos que son de interés</strong>.
+<strong>Esto es TODOS, esto es ALGUNOS.</strong>»</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>   RECUPERACIÓN  →  ¿los encontré a TODOS?
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>   PRECISIÓN     →  ¿son SÓLO los correctos?
+</code></pre></div>
+<p>La diapositiva lo dice igual:</p>
+<blockquote>
+<p>«<strong>Recall</strong> se refiere a qué tan bueno es un modelo para <strong>encontrar todos</strong> los datos con una
+característica particular. <strong>Precisión</strong> es qué tan bueno es un modelo para obtener <strong>solo los
+datos correctos</strong>.»</p>
+</blockquote>
+<hr />
+<h2 id="36-que-metrica-priorizar-el-ejercicio-que-anuncio-como-examen">3.6 Qué métrica priorizar — el ejercicio que anunció como examen<a class="headerlink" href="#36-que-metrica-priorizar-el-ejercicio-que-anuncio-como-examen" title="Permanent link">&para;</a></h2>
+<p>Este bloque cerró con «asegúrate de entenderlo porque va a estar en el examen». Son dos escenarios
+que él planteó y las respuestas que aceptó.</p>
+<h3 id="escenario-a-sistema-de-justicia">Escenario A — sistema de justicia<a class="headerlink" href="#escenario-a-sistema-de-justicia" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«Si el sistema de justicia de un país quiere asegurarse de que las personas a las que encarcela
+sean <strong>realmente las culpables</strong>, ¿qué relación buscaría entre precisión y recuperación?»</p>
+</blockquote>
+<p><strong>Respuesta aceptada: ALTA PRECISIÓN</strong> (se tolera recuperación baja).</p>
+<blockquote>
+<p>«Todos los que encuentre deberían ser verdes… <strong>Son inocentes hasta que pruebas lo contrario. No
+quieres incriminar a alguien inocente en la cárcel.</strong>»</p>
+</blockquote>
+<p><em>Lógica:</em> el error caro es el <strong>falso positivo</strong> (condenar a un inocente) → minimizar FP → precisión.</p>
+<h3 id="escenario-b-motores-de-avion">Escenario B — motores de avión<a class="headerlink" href="#escenario-b-motores-de-avion" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«¿qué pasaría con los motores de un avión? ¿Cuál debería ser la relación entre precisión y recall?»</p>
+</blockquote>
+<p><strong>Respuesta aceptada: ALTA RECUPERACIÓN.</strong></p>
+<blockquote>
+<p>«Ahí quieres que <strong>tu rojo sea grande</strong>. Así tengo que parar todos los aviones que estén bien.
+<strong>Por mínima sospecha que haya… ponlo en revisión al motor</strong>, porque si es preciso, probablemente
+dejas alguno que sí tenía algo que hacer y <strong>se cae el avión</strong>.»</p>
+</blockquote>
+<p><em>Lógica:</em> el error caro es el <strong>falso negativo</strong> (dejar volar un motor defectuoso) → minimizar FN →
+recuperación.</p>
+<h3 id="escenario-c-medicina-el-ejemplo-canonico">Escenario C — medicina (el ejemplo canónico)<a class="headerlink" href="#escenario-c-medicina-el-ejemplo-canonico" title="Permanent link">&para;</a></h3>
+<p><strong>Alta recuperación.</strong></p>
+<blockquote>
+<p>«<strong>En salud usamos mucho el recall. Porque queremos que no deje fuera ninguna sospecha.</strong>»
+«Si te dicen que tienes cáncer y no lo tienes, <strong>no hay tanto daño como si tienes cáncer y no te
+dicen</strong>.»</p>
+</blockquote>
+<h3 id="la-regla-general-que-se-extrae">🔑 La regla general que se extrae<a class="headerlink" href="#la-regla-general-que-se-extrae" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>   ¿Cuál error duele más?
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>        FALSO POSITIVO duele más   →  prioriza PRECISIÓN
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        FALSO NEGATIVO duele más   →  prioriza RECUPERACIÓN
+</code></pre></div>
+<h3 id="ejemplos-parcialmente-resueltos">Ejemplos parcialmente resueltos<a class="headerlink" href="#ejemplos-parcialmente-resueltos" title="Permanent link">&para;</a></h3>
+<p>Completa el razonamiento (respuesta y error caro):</p>
+<table>
+<thead>
+<tr>
+<th>Escenario</th>
+<th>Métrica prioritaria</th>
+<th>¿Qué error duele más?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filtro de spam que manda correos a la carpeta de basura</td>
+<td>______</td>
+<td>______</td>
+</tr>
+<tr>
+<td>Detección de fraude bancario para bloquear transacciones</td>
+<td>______</td>
+<td>______</td>
+</tr>
+<tr>
+<td>Sistema de recomendación de películas</td>
+<td>______</td>
+<td>______</td>
+</tr>
+</tbody>
+</table>
+<p><em>(Pista para el primero: si el filtro manda a spam un correo importante, ese es un falso positivo, y
+duele mucho. Para el segundo, piensa qué prefiere el banco: molestar a un cliente o perder dinero.)</em></p>
+<h3 id="problema-sin-resolver">Problema sin resolver<a class="headerlink" href="#problema-sin-resolver" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>P3.6.</strong> Un sistema de control de acceso biométrico debe decidir si una huella pertenece a un
+empleado autorizado. (a) ¿Qué es un falso positivo aquí y qué consecuencia tiene? (b) ¿Qué es un
+falso negativo? (c) ¿Qué métrica priorizarías y por qué? (d) Si el sistema fuera para desbloquear
+un teléfono personal en vez de una bóveda bancaria, ¿cambiaría tu respuesta? Justifica.</p>
+</blockquote>
+<hr />
+<h2 id="37-el-umbral-de-decision">3.7 El umbral de decisión<a class="headerlink" href="#37-el-umbral-de-decision" title="Permanent link">&para;</a></h2>
+<h3 id="la-mecanica">La mecánica<a class="headerlink" href="#la-mecanica" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>«es <strong>0.5, ese es el default</strong>. Pero si tú lo quieres más preciso, <strong>sube el umbral. Si lo subes a
+0.7, lo vas a hacer más preciso</strong> al modelo… En cambio, <strong>si lo bajo, hago más flexible el modelo,
+va a dejar pasar muchísimos</strong>, inclusive de los negativos.»</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>   umbral ↑  (0.5 → 0.7)   el modelo exige más evidencia para decir "positivo"
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>                           →  menos FP  →  PRECISIÓN ↑
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>                           →  más  FN  →  RECUPERACIÓN ↓
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>   umbral ↓  (0.5 → 0.3)   el modelo se conforma con poca evidencia
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>                           →  más  FP  →  PRECISIÓN ↓
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>                           →  menos FN  →  RECUPERACIÓN ↑
+</code></pre></div>
+<p>Y el caso de uso que él da: en tamizaje de cáncer <strong>bajas</strong> el umbral, porque prefieres revisar de
+más a dejar pasar un caso.</p>
+<h3 id="no-se-puede-sacrificar-una-metrica-a-voluntad">🚨 No se puede «sacrificar» una métrica a voluntad<a class="headerlink" href="#no-se-puede-sacrificar-una-metrica-a-voluntad" title="Permanent link">&para;</a></h3>
+<p>Un estudiante preguntó si a veces se busca deliberadamente bajar una para subir la otra. La
+respuesta fue tajante y es material de examen:</p>
+<blockquote>
+<p>«<strong>no buscas deliberadamente bajar una para ampliar la otra</strong>, sino no lo haces eso… <strong>Siempre
+procura mejorar tu modelo.</strong> Pero dependiendo del problema que tienes en la mano, preocúpate de
+que <strong>no baje la métrica apropiada</strong>.»</p>
+<p>«<strong>Además que no puedes hacer eso. No hay una forma explícita de cómo lograr eso. Porque cuando tú
+calibras, calibras TODO el modelo y tiene un efecto sobre TODAS las métricas… No es que dices: voy
+a solamente la fila o la columna voy a mejorar. NO FUNCIONA ESO.</strong>»</p>
+</blockquote>
+<p><strong>El matiz correcto:</strong> el <strong>umbral</strong> sí desplaza el equilibrio precisión↔recuperación (es un
+post-proceso, no un reentrenamiento). Lo que no se puede es <em>entrenar</em> para mover una métrica
+dejando las demás intactas.</p>
+<hr />
+<h2 id="38-patron-de-examen">3.8 Patrón de examen<a class="headerlink" href="#38-patron-de-examen" title="Permanent link">&para;</a></h2>
+<p>Evidencia: dos anuncios explícitos del profesor (§3.0); MEGA #86 y #148 (overfitting); MEGA #149
+(regresión logística con umbral y p-value); la exigencia de proyecto («todos tienen que calcular la
+matriz de confusión… el accuracy <strong>de ley</strong> lo tienes que calcular»).</p>
+<blockquote>
+<p>⚠️ <strong>Nota sobre la evidencia.</strong> Este tema <strong>no aparece</strong> en el examen final 2021 ni en la hoja de
+<em>Preguntas de exámenes anteriores</em>. Su prioridad no viene de precedentes de examen sino de los dos
+anuncios directos del profesor, que son la evidencia más fuerte que existe en todo el corpus.</p>
+</blockquote>
+<h3 id="familias-esperables">Familias esperables<a class="headerlink" href="#familias-esperables" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Numérica</strong> (la anunciada): te dan resultados de prueba y debes ubicarlos en la matriz y/o
+   calcular métricas. <strong>Método:</strong> identifica el total, la columna «real P» y la fila «predicho P»;
+   deduce las cuatro celdas; comprueba que suman el total; recién entonces calcula.</li>
+<li><strong>Elección de métrica según escenario</strong> (§3.6).</li>
+<li><strong>Selección múltiple sobre definiciones</strong>, con los distractores previsibles:<ul>
+<li>intercambiar precisión ↔ recuperación en la fórmula (la trampa clásica: <code>PV/(PV+PF)</code> vs <code>PV/(PV+NF)</code>)</li>
+<li>intercambiar error tipo I ↔ tipo II</li>
+<li>decir que la matriz se construye con validación en vez de testing</li>
+<li>poner producto en el denominador del F1</li>
+<li>afirmar que accuracy y loss son complementarios</li>
+</ul>
+</li>
+<li><strong>Interpretación de las cuatro categorías</strong> a partir del diagrama de círculos.</li>
+</ol>
+<h3 id="nota-sobre-overfitting-respaldo-del-banco">Nota sobre <em>overfitting</em> (respaldo del banco)<a class="headerlink" href="#nota-sobre-overfitting-respaldo-del-banco" title="Permanent link">&para;</a></h3>
+<p>Dos ítems de MEGA tocan el tema y encajan con su discurso:</p>
+<blockquote>
+<p><strong>MEGA #86:</strong> «Es más probable que un número grande de características (features) produzca
+overfitting.» → <strong>Verdadero.</strong></p>
+<p><strong>MEGA #148 (texto para completar):</strong> «El overfitting es una <strong>mala</strong> característica de los modelos
+de entrenamiento, ya que se producen regularmente por tener <strong>pocos</strong> ejemplos. Además, el modelo
+<strong>copia</strong> el ruido de los datos. Se puede reducir si <strong>incrementa</strong> las dimensiones del dataset.
+También… regularizadores dentro de la función de costo. Uno de ellos es el L1 o también llamado
+<strong>Lasso</strong>, el cual usa un coeficiente lambda que se multiplica por la sumatoria del valor absoluto
+de los pesos.»</p>
+</blockquote>
+<p>Y su criterio de diagnóstico, dicho en las presentaciones de proyecto:</p>
+<blockquote>
+<p>El overfitting <strong>no</strong> se diagnostica por un puntaje de prueba bajo; se diagnostica <strong>visualizando
+el error</strong>: cuando la curva de <em>training</em> sigue bajando y la de <em>validation</em> se separa y sube.
+«¿Y <strong>visualizaron el error</strong>?… ¿y qué pasó?» — y aceptó: «la validación hacía picos más bajos y el
+training era mucho más alto… estaba memorizando las imágenes del training».</p>
+</blockquote>
+<hr />
+<h2 id="39-checkpoint-de-recuperacion-volumen-3">3.9 Checkpoint de recuperación — Volumen 3<a class="headerlink" href="#39-checkpoint-de-recuperacion-volumen-3" title="Permanent link">&para;</a></h2>
+<p>A libro cerrado. Verifica tus respuestas con las secciones de esta guía.</p>
+<ol>
+<li>¿Con qué conjunto de datos se construye la matriz de confusión? ¿Por qué <strong>no</strong> con validación?</li>
+<li>Dibuja la matriz de confusión con la orientación del profesor, rotulando ejes y las cuatro celdas.</li>
+<li>¿Qué celda es el error tipo I? ¿Y el tipo II? Da la definición de cada uno en términos de «predice
+   la clase X pero en realidad pertenece a la clase Y».</li>
+<li>Escribe las cuatro fórmulas de memoria.</li>
+<li>¿Qué parte de la matriz mira la precisión: una fila o una columna? ¿Y la recuperación?</li>
+<li>Un modelo se prueba con 500 casos, de los cuales 150 son positivos reales. El modelo predice 120
+   positivos, de los cuales 105 son correctos. Construye la matriz completa y calcula las cuatro
+   métricas. Comprueba la suma.</li>
+<li>¿Por qué el F1 usa media armónica y no aritmética? Da un par (P, R) donde la diferencia importe.</li>
+<li>Nombra las cuatro categorías precisión/recuperación con su rótulo de la diapositiva y su
+   diagnóstico.</li>
+<li>Traduce a una frase: «esto es todos, esto es algunos».</li>
+<li>Un banco quiere bloquear transacciones fraudulentas sin molestar a clientes legítimos.
+    ¿Qué métrica prioriza y por qué? ¿Y si el costo del fraude fuera altísimo?</li>
+<li>Si subo el umbral de 0.5 a 0.8, ¿qué le pasa a la precisión y qué a la recuperación? ¿Por qué?</li>
+<li>Marca V o F y corrige las falsas:<ul>
+<li>a) «Un accuracy del 100 % indica un modelo excelente.»</li>
+<li>b) «Accuracy y loss son complementarios: si uno es 90 % el otro es 10 %.»</li>
+<li>c) «Precisión = PV / (PV + NF).»</li>
+<li>d) «La matriz de confusión se construye con el conjunto de validación.»</li>
+<li>e) «Se puede calibrar el modelo para mejorar sólo la recuperación sin afectar las demás
+  métricas.»</li>
+<li>f) «Baja precisión y baja recuperación indican, según la diapositiva, underfitting o un modelo
+  incorrecto para la tarea.»</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="310-cierre-del-volumen">3.10 Cierre del volumen<a class="headerlink" href="#310-cierre-del-volumen" title="Permanent link">&para;</a></h2>
+<p><strong>Cubierto del ledger:</strong> Clase 21 pp. 2–11.</p>
+<p><strong>Diferido:</strong> Clase 21 pp. 12–15 («Otras técnicas para resolver problemas de IA», comportamiento
+inteligente, tres en raya, las tres características) → <strong>Volumen 4</strong>, donde encabezan el bloque de
+búsqueda.</p>
+<p><strong>Ambigüedades de fuente registradas:</strong></p>
+<ol>
+<li>La palabra «exacto» se usa con dos sentidos: como <em>exactitud</em> = <code>(PV+NV)/total</code> en las fórmulas, y
+   como sinónimo de <em>recuperación alta</em> en los rótulos de las cuatro categorías. Documentado en §3.5.</li>
+<li>La notación alterna entre <code>VP/VN/FP/FN</code> (diapositiva de la matriz) y <code>PV/NV/PF/NF</code> (diapositiva de
+   las fórmulas) para los mismos cuatro números.</li>
+<li>La orientación de la matriz del curso es la transpuesta de la de <code>scikit-learn</code>. Se enseña la del
+   curso y se advierte la diferencia.</li>
+<li>La fórmula oral de recuperación fue enunciada mal y corregida en clase por un estudiante; se
+   registra la versión ratificada.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="./tema-transformers.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Transformers">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Transformers
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="./tema-metricas-kmeans-busqueda-y-logica.html" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Métricas, K-means, búsqueda y lógica">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Métricas, K-means, búsqueda y lógica
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Diapositivas, enunciados y evaluaciones © Enrique Peláez, publicados con su autorización. Guías y organización: ayudantía de CCPG1044.
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog" role="status" aria-atomic="true">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["content.code.copy","content.tooltips","navigation.footer","navigation.indexes","navigation.path","navigation.sections","navigation.tabs","navigation.top","navigation.tracking","search.highlight","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.c47bb847.min.js","tags":null,"translations":{"clipboard.copied":"Copiado al portapapeles","clipboard.copy":"Copiar al portapapeles","clipboard.error":"Could not copy to clipboard","search.result.more.one":"1 más en esta página","search.result.more.other":"# más en esta página","search.result.none":"No se encontraron documentos","search.result.one":"1 documento encontrado","search.result.other":"# documentos encontrados","search.result.placeholder":"Teclee para comenzar búsqueda","search.result.term.missing":"Falta","select.version":"Seleccionar versión"},"version":null}</script>
+    
+    
+  
+      <script src="../../assets/javascripts/bundle.a2388154.min.js"></script>
+      
+    
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+    (function () {
+      function render(root) {
+        if (!window.renderMathInElement) return;
+        renderMathInElement(root, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\[", right: "\\]", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false }
+          ],
+          throwOnError: false
+        });
+      }
+      function alListo() {
+        if (window.document$ && window.document$.subscribe) {
+          window.document$.subscribe(function () { render(document.body); });
+        } else {
+          render(document.body);
+        }
+      }
+      window.addEventListener("load", alListo);
+    })();
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,4071 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de estudio de Inteligencia Artificial (CCPG1044, ESPOL · FIEC): clases, guías por evaluación, tareas y evaluaciones anteriores.">
+      
+      
+        <meta name="author" content="Ayudantía de Inteligencia Artificial">
+      
+      
+        <link rel="canonical" href="https://jfcofer.github.io/ia-ccpg1044/guias/2p/examen-2p.html">
+      
+      
+      
+        <link rel="prev" href="./leccion-4.html">
+      
+      
+        <link rel="next" href="./tema-rnn-lstm-gru.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.71">
+    
+    
+      
+        <title>Guía del examen del 2P (examen final) - IA · CCPG1044</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.e442bf79.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.b60ce83d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-hidden="true"></label>
+    <div data-md-component="skip">
+      <a href="#__skip" class="md-skip">
+        Saltar a contenido
+      </a>
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../index.html" title="IA · CCPG1044" class="md-header__button md-logo" aria-label="IA · CCPG1044" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navegación">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IA · CCPG1044
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía del examen del 2P (examen final)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun-moon" viewBox="0 0 24 24"><path d="M12 2v2M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715M16 12a4 4 0 0 0-4-4M19 5l-1.256 1.256M20 12h2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Preferencia del sistema"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Preferencia del sistema" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Buscar">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Buscar">
+  <button type="button" class="md-search__button">
+    Buscar
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../clases/index.html" class="md-tabs__link">
+          
+  
+  Clases y sílabo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../index.html" class="md-tabs__link">
+          
+  
+  Guías de estudio
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../evaluaciones/index.html" class="md-tabs__link">
+          
+  
+  Evaluaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tareas/index.html" class="md-tabs__link">
+          
+  
+  Tareas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../proyecto/index.html" class="md-tabs__link">
+          
+  
+  Proyecto final
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../laboratorios/index.html" class="md-tabs__link">
+          
+  
+  Laboratorios
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../bibliografia/index.html" class="md-tabs__link">
+          
+  
+  Bibliografía
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../fe-de-erratas.html" class="md-tabs__link">
+        
+  
+  Fe de erratas
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="IA · CCPG1044" class="md-nav__button md-logo" aria-label="IA · CCPG1044" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    IA · CCPG1044
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Inicio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Clases y sílabo
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Clases y sílabo
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/c01-presentacion-del-curso/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primer parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Primer parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c02-definiciones-y-estado-del-arte/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  02 · Definiciones y estado del arte
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c03-fundamentos-y-tipos-de-aprendizaje/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  03 · Fundamentos y tipos de aprendizaje
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c04-regresion-lineal/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  04 · Regresión lineal
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c05-descenso-de-gradiente-y-regresion-polinomial/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  05 · Descenso de gradiente y regresión polinomial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c06-regresion-logistica/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  06 · Regresión logística
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c07-perceptron-y-funciones-de-activacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  07 · Perceptrón y funciones de activación
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c08-mlp-como-clasificador/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  08 · MLP como clasificador
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c09-aprendizaje-en-mlp-regla-delta/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  09 · Aprendizaje en MLP
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c10-backpropagation-y-tensores/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  10 · Backpropagation y notación vectorial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c11-mlp-vectorizado-y-regularizacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  11 · Backpropagation, Jacobiano y regularización
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c12-cnn-introduccion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  12 · Introducción a las CNN
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c13-cnn-parametros-y-pooling/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  13 · CNN: parámetros, pooling y aprendizaje
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c14-examen-del-primer-parcial/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  14 · Examen del primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/c15-rnn-y-nlp/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Segundo parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Segundo parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c16-bptt-y-desvanecimiento-del-gradiente/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  16 · BPTT y desvanecimiento del gradiente
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c17-lstm-gru-e-introduccion-a-transformers/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  17 · LSTM, GRU e introducción a los Transformers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c18-transformers-autoatencion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  18 · Transformers: autoatención
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c19-transformers-matrices-y-codificacion-posicional/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  19 · Transformers: matrices, embeddings y posición
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c20-comportamiento-inteligente/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  20 · Comportamiento inteligente y estrategias de búsqueda
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c21-metricas-y-busqueda-no-informada/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  21 · Métricas de evaluación y búsqueda no informada
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c22-busqueda-heuristica/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  22 · Búsqueda heurística
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c23-a-estrella-y-backtracking/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  23 · A*, backtracking y representación del conocimiento
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c24-logica-inferencia-y-unificacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  24 · Lógica, inferencia y unificación
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c25-resolucion-forma-clausal-y-extraccion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  25 · Resolución, forma clausal y extracción de respuestas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/variantes-2024-2/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Diapositivas PAO 2024-II
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/variantes-2026-1/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Diapositivas PAO 2026-I
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guías de estudio
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Guías de estudio
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../1p/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primer parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_3_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Primer parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/leccion-1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #1
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/leccion-2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #2
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/examen-1p.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del examen del 1P
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/tema-guia-general.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía general del primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1p/tema-apuntes-consolidados.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Apuntes consolidados de clase (1P)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Segundo parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Segundo parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./leccion-3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #3
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./leccion-4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #4
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del examen del 2P (examen final)
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="examen-2p.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del examen del 2P (examen final)
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#que-entra-y-cuando" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Qué entra y cuándo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Qué entra y cuándo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clases-que-entran" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clases que entran
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marcado-por-el-profesor" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Marcado por el profesor
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluaciones-anteriores-para-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Evaluaciones anteriores para practicar
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-por-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Resumen por clase
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resumen por clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clases-1519-secuencias-y-transformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clases 15–19 · Secuencias y Transformers
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clases-1923-metricas-busqueda-a-y-representacion-del-conocimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clases 19–23 · Métricas, búsqueda, A* y representación del conocimiento
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clase-24-logica-inferencia-y-unificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 24 · Lógica, inferencia y unificación
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clase-25-resolucion-forma-clausal-y-extraccion-de-respuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 25 · Resolución, forma clausal y extracción de respuestas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formulas-y-definiciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fórmulas y definiciones
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-pregunta-y-como-resolverlos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipos de pregunta y cómo resolverlos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de pregunta y cómo resolverlos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipo-1-unifica-o-no-2019-y-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 1 · ¿Unifica o no? (2019 y 2021)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-2-unificar-con-composicion-clase-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 2 · Unificar con composición (Clase 24)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-3-convertir-a-forma-clausal-tercer-examen-de-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 3 · Convertir a forma clausal (tercer examen de 2019)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-4-resolucion-por-refutacion-examen-de-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 4 · Resolución por refutación (examen de 2019)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-5-encadenar-reglas-de-inferencia-clase-25-y-tercer-examen-de-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 5 · Encadenar reglas de inferencia (Clase 25 y tercer examen de 2019)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-6-extraer-la-respuesta-clase-25-marcado-como-examen-en-pao-2026-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 6 · Extraer la respuesta (Clase 25; marcado como examen en PAO 2026-I)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-7-por-que-es-importante-examen-de-2021-y-take-home-de-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 7 · «¿Por qué es importante…?» (examen de 2021 y take-home de 2020)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-8-diseno-de-busqueda-best-first-a-y-bloques-2021-y-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 8 · Diseño de búsqueda: best-first, A* y bloques (2021 y 2020)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-9-rnn-lstm-y-transformers-en-el-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 9 · RNN, LSTM y Transformers en el examen
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trampas-frecuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Trampas frecuentes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simulacro" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Simulacro
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-autoevaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Lista de autoevaluación
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Para profundizar
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fuentes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-rnn-lstm-gru.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Secuencias — RNN, BPTT, LSTM y GRU
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-transformers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Transformers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-evaluacion-de-modelos.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluación de modelos — matriz de confusión y métricas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-metricas-kmeans-busqueda-y-logica.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Métricas, K-means, búsqueda y lógica
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-resolucion-y-forma-clausal.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Resolución, forma clausal y extracción de respuestas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mejoramiento.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del mejoramiento (todo el curso)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../evaluaciones/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Evaluaciones
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/1p/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/2p/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Segundo parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/mejoramiento/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Mejoramiento
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tareas/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tareas
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../proyecto/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Proyecto final
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../laboratorios/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Laboratorios
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../bibliografia/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Bibliografía
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fe-de-erratas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Fe de erratas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#que-entra-y-cuando" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Qué entra y cuándo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Qué entra y cuándo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clases-que-entran" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clases que entran
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marcado-por-el-profesor" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Marcado por el profesor
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluaciones-anteriores-para-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Evaluaciones anteriores para practicar
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-por-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Resumen por clase
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resumen por clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clases-1519-secuencias-y-transformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clases 15–19 · Secuencias y Transformers
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clases-1923-metricas-busqueda-a-y-representacion-del-conocimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clases 19–23 · Métricas, búsqueda, A* y representación del conocimiento
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clase-24-logica-inferencia-y-unificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 24 · Lógica, inferencia y unificación
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clase-25-resolucion-forma-clausal-y-extraccion-de-respuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 25 · Resolución, forma clausal y extracción de respuestas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formulas-y-definiciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fórmulas y definiciones
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-pregunta-y-como-resolverlos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipos de pregunta y cómo resolverlos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de pregunta y cómo resolverlos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipo-1-unifica-o-no-2019-y-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 1 · ¿Unifica o no? (2019 y 2021)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-2-unificar-con-composicion-clase-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 2 · Unificar con composición (Clase 24)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-3-convertir-a-forma-clausal-tercer-examen-de-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 3 · Convertir a forma clausal (tercer examen de 2019)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-4-resolucion-por-refutacion-examen-de-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 4 · Resolución por refutación (examen de 2019)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-5-encadenar-reglas-de-inferencia-clase-25-y-tercer-examen-de-2019" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 5 · Encadenar reglas de inferencia (Clase 25 y tercer examen de 2019)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-6-extraer-la-respuesta-clase-25-marcado-como-examen-en-pao-2026-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 6 · Extraer la respuesta (Clase 25; marcado como examen en PAO 2026-I)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-7-por-que-es-importante-examen-de-2021-y-take-home-de-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 7 · «¿Por qué es importante…?» (examen de 2021 y take-home de 2020)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-8-diseno-de-busqueda-best-first-a-y-bloques-2021-y-2020" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 8 · Diseño de búsqueda: best-first, A* y bloques (2021 y 2020)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-9-rnn-lstm-y-transformers-en-el-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 9 · RNN, LSTM y Transformers en el examen
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trampas-frecuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Trampas frecuentes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simulacro" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Simulacro
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-autoevaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Lista de autoevaluación
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Para profundizar
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fuentes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../index.html" class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../index.html" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Guías de estudio
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="./index.html" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Segundo parcial
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                <a id="__skip" tabindex="-1"></a>
+                
+                  
+
+
+<h1 id="guia-del-examen-del-2p-examen-final">Guía del examen del 2P (examen final)<a class="headerlink" href="#guia-del-examen-del-2p-examen-final" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">En una línea</p>
+<p>El <strong>examen del 2P es el examen final</strong>. Es presencial y obligatorio, y en PAO 2026-II se toma el 14 de enero
+de 2027. Entra <strong>todo el segundo parcial (Clases 15–25)</strong>. Lo nuevo respecto a las lecciones es <strong>A* y
+backtracking</strong> y el bloque de <strong>lógica</strong>: reglas de inferencia, unificación, forma clausal, <strong>resolución</strong> y
+<strong>extracción de respuestas</strong>.</p>
+<p>En 2021 fueron 11 preguntas, y los ejercicios de unificación y resolución fueron los más largos. En PAO 2026-I
+el profesor también incluyó <strong>preguntas sobre las exposiciones de los proyectos</strong>; confirma si en 2026-II se
+repite.</p>
+</div>
+<h2 id="que-entra-y-cuando">Qué entra y cuándo<a class="headerlink" href="#que-entra-y-cuando" title="Permanent link">&para;</a></h2>
+<!-- generado:alcance:examen-2p — no editar; usar `uv run ia indice` -->
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parcial</strong></td>
+<td>2P</td>
+</tr>
+<tr>
+<td><strong>Cubre</strong></td>
+<td>Clases 15–25</td>
+</tr>
+<tr>
+<td><strong>Se toma</strong></td>
+<td>En la semana de exámenes</td>
+</tr>
+<tr>
+<td><strong>Fecha (PAO 2026-II)</strong></td>
+<td>14/01/2027</td>
+</tr>
+<tr>
+<td><strong>Formato</strong></td>
+<td>Presencial y obligatorio. Confirma el formato en Aula Virtual</td>
+</tr>
+</tbody>
+</table>
+<h3 id="clases-que-entran">Clases que entran<a class="headerlink" href="#clases-que-entran" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>Tema</th>
+<th>Temas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>15</td>
+<td><a href="../../clases/c15-rnn-y-nlp/index.html">RNN e introducción al NLP</a></td>
+<td>Redes neuronales recurrentes: qué son y cómo funcionan; Modelo estado a estado y arquitecturas de RNN; Introducción al NLP: tokenizador, TF-IDF y embeddings</td>
+</tr>
+<tr>
+<td>16</td>
+<td><a href="../../clases/c16-bptt-y-desvanecimiento-del-gradiente/index.html">BPTT y desvanecimiento del gradiente</a></td>
+<td>Ejemplo de RNN que predice caracteres; Backpropagation a través del tiempo (BPTT); Desvanecimiento del gradiente; Introducción a LSTM</td>
+</tr>
+<tr>
+<td>17</td>
+<td><a href="../../clases/c17-lstm-gru-e-introduccion-a-transformers/index.html">LSTM, GRU e introducción a los Transformers</a></td>
+<td>RNN frente a LSTM; tanh y compuertas sigmoidales; Estado de la celda frente a estado de la red; GRU; Introducción a los Transformers</td>
+</tr>
+<tr>
+<td>18</td>
+<td><a href="../../clases/c18-transformers-autoatencion/index.html">Transformers: autoatención</a></td>
+<td>Qué son los Transformers; Encoder–decoder; Autoatención y las matrices K, Q y V; Atención multicabeza</td>
+</tr>
+<tr>
+<td>19</td>
+<td><a href="../../clases/c19-transformers-matrices-y-codificacion-posicional/index.html">Transformers: matrices, embeddings y posición</a></td>
+<td>Matrices W_K, W_Q y W_V; Multicabeza: Z y W_O; Embeddings de palabras y codificación posicional; Decoder; Métricas de evaluación: matriz de confusión</td>
+</tr>
+<tr>
+<td>20</td>
+<td><a href="../../clases/c20-comportamiento-inteligente/index.html">Comportamiento inteligente y estrategias de búsqueda</a></td>
+<td>Comportamiento inteligente; Características de las soluciones inteligentes; Búsqueda en el espacio de estados; Estrategias de control: guiada por los datos y guiada por los objetivos</td>
+</tr>
+<tr>
+<td>21</td>
+<td><a href="../../clases/c21-metricas-y-busqueda-no-informada/index.html">Métricas de evaluación y búsqueda no informada</a></td>
+<td>Matriz de confusión, precisión y recuperación; Búsqueda a ciegas: generar y probar, en anchura (BFS) y en profundidad (DFS); Completitud, tiempo y memoria de cada estrategia</td>
+</tr>
+<tr>
+<td>22</td>
+<td><a href="../../clases/c22-busqueda-heuristica/index.html">Búsqueda heurística</a></td>
+<td>Hill climbing y sus retos; Simulated annealing; Best-first search, con el ejemplo del 8-puzzle</td>
+</tr>
+<tr>
+<td>23</td>
+<td><a href="../../clases/c23-a-estrella-y-backtracking/index.html">A*, backtracking y representación del conocimiento</a></td>
+<td>Admisibilidad y A*; Backtracking; Representación del conocimiento basada en la lógica</td>
+</tr>
+<tr>
+<td>24</td>
+<td><a href="../../clases/c24-logica-inferencia-y-unificacion/index.html">Lógica, inferencia y unificación</a></td>
+<td>Cálculo proposicional y lógica de predicados; Reglas de inferencia; Unificación</td>
+</tr>
+<tr>
+<td>25</td>
+<td><a href="../../clases/c25-resolucion-forma-clausal-y-extraccion/index.html">Resolución, forma clausal y extracción de respuestas</a></td>
+<td>Reglas de inferencia: MP, MT, AE, EI y UI; Principio de resolución; Conversión a forma clausal; Extracción de la respuesta</td>
+</tr>
+</tbody>
+</table>
+<h3 id="marcado-por-el-profesor">Marcado por el profesor<a class="headerlink" href="#marcado-por-el-profesor" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">En PAO 2026-I el profesor dijo que iba al examen</p>
+<p>Es una pista de otro semestre, no una garantía: confirma en clase.</p>
+<ul>
+<li><strong>Clase 15:</strong> Recurrencia: h(t−1) entra en cada paso; RNN con más de una capa recurrente</li>
+<li><strong>Clase 19:</strong> Cómo usar los valores de prueba en una matriz de confusión</li>
+<li><strong>Clase 20:</strong> Las dos direcciones de búsqueda: guiada por los datos y guiada por los objetivos</li>
+<li><strong>Clase 21:</strong> Matriz de confusión con la orientación del profesor (filas = predicción, columnas = real)</li>
+<li><strong>Clase 21:</strong> Precisión vs. recuperación: cuándo conviene una recuperación alta (p. ej. diagnóstico de cáncer)</li>
+<li><strong>Clase 24:</strong> Equivalencias lógicas con negaciones y cuantificadores (el error más común en lecciones y exámenes)</li>
+<li><strong>Clase 25:</strong> Conversión a forma clausal y resolución (anunció que uno de los dos ejemplos de clase va al examen)</li>
+<li><strong>Clase 25:</strong> Resolución con extracción de respuesta (p. ej. el problema del objeto verde)</li>
+</ul>
+</div>
+<h3 id="evaluaciones-anteriores-para-practicar">Evaluaciones anteriores para practicar<a class="headerlink" href="#evaluaciones-anteriores-para-practicar" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../../evaluaciones/2p/examen-2p-2021-2.pdf">Examen del 2P / final (II PAO 2021)</a> — PAO 2021-II · En Aula Virtual se llamó «Examen final». Best-first, A*, unificación, RNN, mundo de bloques, cláusulas; respuestas correctas marcadas</li>
+<li><a href="../../evaluaciones/2p/examen-2p-take-home-2020-1.pdf">Segundo examen take-home (I PAO 2020) — enunciado</a> — PAO 2020-I · A*, simulated annealing, unificación, resolución y mundo de bloques</li>
+<li><a href="../../evaluaciones/2p/banco-2p-por-tema.pdf">Banco del 2P por tema (capturas con respuestas resaltadas)</a> — RNN, BFS/DFS, heurística, estrategias de control, lógica, unificación, resolución. Sin Transformers, métricas ni K-means</li>
+<li><a href="../../evaluaciones/index.html">Bancos y compilados de todo el curso</a></li>
+</ul>
+<!-- /generado:alcance:examen-2p -->
+
+<h2 id="resumen-por-clase">Resumen por clase<a class="headerlink" href="#resumen-por-clase" title="Permanent link">&para;</a></h2>
+<h3 id="clases-1519-secuencias-y-transformers">Clases 15–19 · Secuencias y Transformers<a class="headerlink" href="#clases-1519-secuencias-y-transformers" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>NLP:</strong> n-gramas y <em>sparsity</em>, TF-IDF, embeddings estáticos (Word2Vec, GloVe) y contextuales (ELMo, BERT).</li>
+<li><strong>RNN:</strong><ul>
+<li><span class="arithmatex">\(h_t=f(W_{xh}x_t+W_{hh}h_{t-1}+b)\)</span> con tanh y salida softmax.</li>
+<li>Se entrena con <strong>BPTT</strong>: los pesos son iguales en todos los pasos y los gradientes se acumulan.</li>
+</ul>
+</li>
+<li><strong>Desvanecimiento del gradiente:</strong> viene de la multiplicación de derivadas pequeñas.<ul>
+<li><strong>LSTM:</strong> 3 puertas sigmoides; <span class="arithmatex">\(C_t=f_tC_{t-1}+i_t\tilde C_t\)</span> y <span class="arithmatex">\(h_t=o_t\tanh C_t\)</span>.</li>
+<li><strong>GRU:</strong> 2 puertas.</li>
+</ul>
+</li>
+<li><strong>Transformer:</strong><ul>
+<li>Es <em>encoder-decoder</em> y paralelo. Atención = <span class="arithmatex">\(\text{softmax}(QK^T/\sqrt{d_k})V\)</span>, con multi-head.</li>
+<li>Hay 6 encoders que no comparten pesos.</li>
+</ul>
+</li>
+<li>Detalle y ejercicios: guías de la <a href="leccion-3.html">Lección #3</a> (RNN, LSTM y GRU) y de la
+  <a href="leccion-4.html">Lección #4</a> (Transformers).</li>
+</ul>
+<h3 id="clases-1923-metricas-busqueda-a-y-representacion-del-conocimiento">Clases 19–23 · Métricas, búsqueda, A* y representación del conocimiento<a class="headerlink" href="#clases-1923-metricas-busqueda-a-y-representacion-del-conocimiento" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Métricas:</strong> la matriz de confusión con filas = predicción y columnas = real.<ul>
+<li>Precisión <span class="arithmatex">\(=VP/(VP+FP)\)</span>, recuperación <span class="arithmatex">\(=VP/(VP+FN)\)</span> y F1.</li>
+<li>Las 4 categorías de precisión y recuperación.</li>
+</ul>
+</li>
+<li><strong>K-means:</strong> <span class="arithmatex">\(K\)</span> es un hiperparámetro y se elige con el codo o la silueta.</li>
+<li><strong>Estrategias de control:</strong> <strong>guiada por datos</strong> o <strong>guiada por objetivos</strong>.</li>
+<li><strong>Búsqueda a ciegas:</strong> BFS (cola) y DFS (pila), con open y closed.</li>
+<li><strong>Búsqueda heurística:</strong> hill climbing (máximo local, meseta, acantilado), recocido simulado y best-first con
+  <span class="arithmatex">\(f=g+h\)</span>.</li>
+<li><strong>A*:</strong> admisible si <span class="arithmatex">\(h\le h^*\)</span>. Con <span class="arithmatex">\(h=0\)</span> es primero a lo ancho.</li>
+<li><strong>Backtracking:</strong> listas SL, NSL, DE y CS.</li>
+<li><strong>Representación del conocimiento:</strong> cuatro esquemas.</li>
+<li>Detalle y ejercicios de métricas y búsqueda: <a href="leccion-4.html">guía de la Lección #4</a>. A*, backtracking y
+  representación del conocimiento (Clase 23) no entran en ninguna lección: se estudian aquí y en la
+  <a href="tema-metricas-kmeans-busqueda-y-logica.html">guía de métricas, búsqueda y lógica</a>.</li>
+</ul>
+<h3 id="clase-24-logica-inferencia-y-unificacion">Clase 24 · Lógica, inferencia y unificación<a class="headerlink" href="#clase-24-logica-inferencia-y-unificacion" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Semántica:</strong> la verdad de las conclusiones depende solo de la verdad del conocimiento inicial. <em>Los
+  procedimientos de inferencia no introducen errores lógicos.</em></li>
+<li><strong>Proposiciones y predicados:</strong> de <span class="arithmatex">\(P\)</span> = «hoy está nublado» se pasa a clima(hoy, nublado) y se generaliza a
+  clima(X, Y).</li>
+<li><strong>Una regla de inferencia produce nuevas aserciones:</strong><ul>
+<li>Es <strong>sólida y correcta</strong> si todo lo que produce se sigue lógicamente de <span class="arithmatex">\(S\)</span>.</li>
+<li>Es <strong>completa</strong> si puede producir <strong>todo</strong> lo que se sigue de <span class="arithmatex">\(S\)</span>. La <strong>resolución</strong> es sólida y completa.</li>
+</ul>
+</li>
+<li><strong>Unificación:</strong><ul>
+<li>Es el algoritmo que halla las <strong>sustituciones</strong> que hacen <strong>sintácticamente iguales</strong> dos expresiones.</li>
+<li>Exige variables cuantificadas <strong>universalmente</strong>.</li>
+</ul>
+</li>
+<li><strong>Skolemización:</strong> reemplaza cada <span class="arithmatex">\(\exists\)</span> por una <strong>función</strong> de las variables <span class="arithmatex">\(\forall\)</span> que lo rodean, o por
+  una <strong>constante</strong> si no hay ninguna.<ul>
+<li>Ejemplo: <span class="arithmatex">\(\forall X\,\exists Y\,\text{mama}(Y,X)\)</span> se convierte en <span class="arithmatex">\(\forall X\,\text{mama}(f(X),X)\)</span>.</li>
+</ul>
+</li>
+<li><strong>Composición de sustituciones:</strong> si <span class="arithmatex">\(X_1/X_2\)</span> y luego <span class="arithmatex">\(X_2/Y_1\)</span>, entonces <span class="arithmatex">\(X_1\)</span> también pasa a <span class="arithmatex">\(Y_1\)</span>.</li>
+<li><strong>En PAO 2026-I el profesor dio en el examen las expresiones lógicas ya traducidas.</strong> Lo que evaluó fue el
+  procedimiento.</li>
+</ul>
+<h3 id="clase-25-resolucion-forma-clausal-y-extraccion-de-respuestas">Clase 25 · Resolución, forma clausal y extracción de respuestas<a class="headerlink" href="#clase-25-resolucion-forma-clausal-y-extraccion-de-respuestas" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Reglas de inferencia:</strong><ul>
+<li>MP: de <span class="arithmatex">\(p\Rightarrow q\)</span> y <span class="arithmatex">\(p\)</span> se infiere <span class="arithmatex">\(q\)</span>.</li>
+<li><strong>MT:</strong> de <span class="arithmatex">\(p\Rightarrow q\)</span> y <span class="arithmatex">\(\neg q\)</span> se infiere <span class="arithmatex">\(\neg p\)</span>. La diapositiva dice «<span class="arithmatex">\(p\)</span> es verdadero», y es una
+  errata.</li>
+<li>AE: de <span class="arithmatex">\(p\land q\)</span> se infieren <span class="arithmatex">\(p\)</span> y <span class="arithmatex">\(q\)</span>.</li>
+<li>AI: de <span class="arithmatex">\(p\)</span> y <span class="arithmatex">\(q\)</span> se infiere <span class="arithmatex">\(p\land q\)</span>.</li>
+<li>UI: se instancia un <span class="arithmatex">\(\forall\)</span> con cualquier término.</li>
+<li>EI: se instancia un <span class="arithmatex">\(\exists\)</span> con un término apropiado.</li>
+</ul>
+</li>
+<li><strong>Ejemplo de clase:</strong> <em>Harry es más rápido que Ralph</em>, en 19 pasos con EI, AE, UI, MP y AI. Ver el Tipo 5.</li>
+<li><strong>Resolución</strong> (Robinson, 1965) es sólida, correcta y completa, y busca <strong>contradicciones</strong>:<ol>
+<li>Convertir a cláusulas.</li>
+<li>Agregar la <strong>negación</strong> de la hipótesis.</li>
+<li>Resolver.</li>
+<li>Llegar a la <strong>cláusula vacía</strong> <span class="arithmatex">\(\square\)</span>.</li>
+<li><strong>Extraer</strong> la respuesta de las sustituciones.</li>
+</ol>
+</li>
+<li><strong>Forma clausal en 9 pasos:</strong><ol>
+<li>Eliminar <span class="arithmatex">\(\Rightarrow\)</span>.</li>
+<li>Reducir el alcance de <span class="arithmatex">\(\neg\)</span>.</li>
+<li>Estandarizar las variables.</li>
+<li>Mover los cuantificadores a la izquierda (prenex).</li>
+<li><strong>Skolemizar.</strong></li>
+<li>Quitar los <span class="arithmatex">\(\forall\)</span>.</li>
+<li>Formar una conjunción de disyunciones (distributiva).</li>
+<li>Separar las cláusulas.</li>
+<li>Estandarizar las variables otra vez.</li>
+</ol>
+</li>
+<li><strong>Marcado como examen en PAO 2026-I:</strong> la conversión a forma clausal y la resolución. El profesor dio dos ejemplos
+  y anunció que uno iba al examen.</li>
+<li><strong>Dos métodos para extraer la respuesta:</strong><ol>
+<li>Conservar la hipótesis original y aplicarle todas las sustituciones del proceso.</li>
+<li>Agregar a la hipótesis negada un predicado nuevo con sus mismas variables, por ejemplo
+   <span class="arithmatex">\(\neg\text{feliz}(juan)\lor\text{quien\_es\_feliz}(Z)\)</span>, y seguir sus sustituciones hasta que sea lo único que
+   queda.</li>
+</ol>
+</li>
+<li><strong>Ejemplos de clase:</strong><ul>
+<li><em>¿Dónde está Sultán?</em> La respuesta es la biblioteca.</li>
+<li><em>¿Es feliz Juan?</em> Sí: queda quien_es_feliz(juan).</li>
+<li><strong>El objeto verde.</strong> En PAO 2026-I el profesor lo marcó como examen.</li>
+</ul>
+</li>
+</ul>
+<h2 id="formulas-y-definiciones">Fórmulas y definiciones<a class="headerlink" href="#formulas-y-definiciones" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Fórmula o definición</th>
+<th>Ojo con</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Implicación</td>
+<td><span class="arithmatex">\(p\Rightarrow q\equiv\neg p\lor q\)</span></td>
+<td>Es el paso 1 de la forma clausal</td>
+</tr>
+<tr>
+<td>De Morgan</td>
+<td><span class="arithmatex">\(\neg(p\land q)\equiv\neg p\lor\neg q\)</span> ; <span class="arithmatex">\(\neg(p\lor q)\equiv\neg p\land\neg q\)</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Cuantificadores</td>
+<td><span class="arithmatex">\(\neg\forall x\,P\equiv\exists x\,\neg P\)</span> ; <span class="arithmatex">\(\neg\exists x\,P\equiv\forall x\,\neg P\)</span></td>
+<td>Es <em>el error más común</em></td>
+</tr>
+<tr>
+<td>Distributiva</td>
+<td><span class="arithmatex">\(p\lor(q\land r)\equiv(p\lor q)\land(p\lor r)\)</span></td>
+<td>Es el paso 7</td>
+</tr>
+<tr>
+<td>Skolem</td>
+<td>Un <span class="arithmatex">\(\exists y\)</span> dentro de <span class="arithmatex">\(\forall x\)</span> se vuelve <span class="arithmatex">\(f(x)\)</span>; sin <span class="arithmatex">\(\forall\)</span> alrededor, una constante</td>
+<td>La función depende solo de los <span class="arithmatex">\(\forall\)</span> que lo <strong>rodean</strong></td>
+</tr>
+<tr>
+<td>Unificación (MGU)</td>
+<td>La sustitución más general que iguala las expresiones</td>
+<td><strong>Occurs check</strong>: <span class="arithmatex">\(x/f(x)\)</span> no se puede</td>
+</tr>
+<tr>
+<td>Resolución</td>
+<td><span class="arithmatex">\((A\lor B),(\neg B'\lor C)\)</span> con <span class="arithmatex">\(B\sigma=B'\sigma\)</span> da <span class="arithmatex">\((A\lor C)\sigma\)</span></td>
+<td>Solo se sustituyen <strong>variables</strong>, nunca constantes</td>
+</tr>
+<tr>
+<td>MT</td>
+<td><span class="arithmatex">\(\{p\Rightarrow q,\ \neg q\}\vdash\neg p\)</span></td>
+<td>La diapositiva tiene una errata</td>
+</tr>
+<tr>
+<td>A*</td>
+<td><span class="arithmatex">\(f=g+h\)</span>, admisible si <span class="arithmatex">\(h\le h^*\)</span></td>
+<td>La diapositiva invierte la desigualdad</td>
+</tr>
+<tr>
+<td>Greedy best-first</td>
+<td><span class="arithmatex">\(f(n)=h(n)\)</span></td>
+<td>Con <span class="arithmatex">\(h=-g\)</span> emula <strong>DFS</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="tipos-de-pregunta-y-como-resolverlos">Tipos de pregunta y cómo resolverlos<a class="headerlink" href="#tipos-de-pregunta-y-como-resolverlos" title="Permanent link">&para;</a></h2>
+<h3 id="tipo-1-unifica-o-no-2019-y-2021">Tipo 1 · ¿Unifica o no? (2019 y 2021)<a class="headerlink" href="#tipo-1-unifica-o-no-2019-y-2021" title="Permanent link">&para;</a></h3>
+<p>Pregunta de 2019: «El algoritmo de unificación <strong>no</strong> fallará con uno de estos pares. ¿Cuál?»</p>
+<ul>
+<li>a) Sibling(Father(x), y) y Sibling(x, Father(y)).</li>
+<li>b) Sibling(Father(x), Father(y)) y Sibling(x, y).</li>
+<li>c) Sibling(Father(x), Mother(y)) y Sibling(x, Mother(y)).</li>
+<li>d) Sibling(Father(x), y) y Sibling(v, z).</li>
+</ul>
+<details class="success">
+<summary>Solución</summary>
+<p><strong>d)</strong>, con <span class="arithmatex">\(\{v/\text{Father}(x),\ z/y\}\)</span>.</p>
+<p>En a), b) y c) el primer argumento obliga a <span class="arithmatex">\(x/\text{Father}(x)\)</span>: una variable no puede sustituirse por un
+término que <strong>la contiene</strong>. Eso es el <strong>occurs check</strong>, y la unificación falla.</p>
+<p>En 2021 salió el mismo patrón con «Pariente/Padre/Madre», pero preguntando <strong>cuáles fallan</strong>: eran las tres con
+<span class="arithmatex">\(x/\text{Padre}(x)\)</span>.</p>
+</details>
+<h3 id="tipo-2-unificar-con-composicion-clase-24">Tipo 2 · Unificar con composición (Clase 24)<a class="headerlink" href="#tipo-2-unificar-con-composicion-clase-24" title="Permanent link">&para;</a></h3>
+<p>Unifica <span class="arithmatex">\(p(X, f(Y), Z)\)</span> con <span class="arithmatex">\(p(a, W, g(W))\)</span> y da el MGU.</p>
+<details class="success">
+<summary>Solución</summary>
+<ol>
+<li><span class="arithmatex">\(X/a\)</span>.</li>
+<li><span class="arithmatex">\(W/f(Y)\)</span>.</li>
+<li><span class="arithmatex">\(Z/g(W)\)</span>, y al componer, <span class="arithmatex">\(Z/g(f(Y))\)</span>.</li>
+<li>MGU: <span class="arithmatex">\(\{X/a,\ W/f(Y),\ Z/g(f(Y))\}\)</span>.</li>
+<li>Comprobación: las dos expresiones quedan como <span class="arithmatex">\(p(a,f(Y),g(f(Y)))\)</span>.</li>
+</ol>
+<p>El profesor pidió escribir el MGU <strong>con llaves</strong>: «así va a estar en las preguntas y respuestas».</p>
+</details>
+<h3 id="tipo-3-convertir-a-forma-clausal-tercer-examen-de-2019">Tipo 3 · Convertir a forma clausal (tercer examen de 2019)<a class="headerlink" href="#tipo-3-convertir-a-forma-clausal-tercer-examen-de-2019" title="Permanent link">&para;</a></h3>
+<p>Convierte a cláusulas mostrando <strong>todos</strong> los pasos:
+<span class="arithmatex">\(\forall X\,\{p(X)\Rightarrow\{\forall Y\,[p(Y)\Rightarrow p(f(X,Y))]\land\neg\forall Y\,[q(X,Y)\Rightarrow p(Y)]\}\}\)</span>.</p>
+<details class="success">
+<summary>Solución</summary>
+<ol>
+<li><strong>Eliminar <span class="arithmatex">\(\Rightarrow\)</span>:</strong>
+   <span class="arithmatex">\(\forall X\{\neg p(X)\lor\{\forall Y[\neg p(Y)\lor p(f(X,Y))]\land\neg\forall Y[\neg q(X,Y)\lor p(Y)]\}\}\)</span>.</li>
+<li><strong>Reducir <span class="arithmatex">\(\neg\)</span>:</strong> <span class="arithmatex">\(\neg\forall Y[\neg q\lor p]\equiv\exists Y[q(X,Y)\land\neg p(Y)]\)</span>.</li>
+<li><strong>Estandarizar:</strong> la segunda <span class="arithmatex">\(Y\)</span> pasa a ser <span class="arithmatex">\(Z\)</span>:
+   <span class="arithmatex">\(\forall X\{\neg p(X)\lor\{\forall Y[\neg p(Y)\lor p(f(X,Y))]\land\exists Z[q(X,Z)\land\neg p(Z)]\}\}\)</span>.</li>
+<li><strong>Prenex:</strong> <span class="arithmatex">\(\forall X\,\exists Z\,\forall Y\{\dots\}\)</span>. El <span class="arithmatex">\(\exists Z\)</span> solo está dentro del alcance de
+   <span class="arithmatex">\(\forall X\)</span>.</li>
+<li><strong>Skolem:</strong> <span class="arithmatex">\(Z\)</span> pasa a ser <span class="arithmatex">\(g(X)\)</span>:
+   <span class="arithmatex">\(\forall X\forall Y\{\neg p(X)\lor\{[\neg p(Y)\lor p(f(X,Y))]\land q(X,g(X))\land\neg p(g(X))\}\}\)</span>.</li>
+<li><strong>Quitar <span class="arithmatex">\(\forall\)</span>.</strong></li>
+<li><strong>Distribuir:</strong>
+   <span class="arithmatex">\([\neg p(X)\lor\neg p(Y)\lor p(f(X,Y))]\land[\neg p(X)\lor q(X,g(X))]\land[\neg p(X)\lor\neg p(g(X))]\)</span>.</li>
+<li><strong>Separar</strong> en tres cláusulas.</li>
+<li><strong>Estandarizar</strong> de nuevo, y quedan:<ul>
+<li><span class="arithmatex">\(\neg p(X_1)\lor\neg p(Y)\lor p(f(X_1,Y))\)</span></li>
+<li><span class="arithmatex">\(\neg p(X_2)\lor q(X_2,g(X_2))\)</span></li>
+<li><span class="arithmatex">\(\neg p(X_3)\lor\neg p(g(X_3))\)</span></li>
+</ul>
+</li>
+</ol>
+<p>En esa corrección se anotó: <em>«need to follow all steps in order»</em>.</p>
+</details>
+<h3 id="tipo-4-resolucion-por-refutacion-examen-de-2019">Tipo 4 · Resolución por refutación (examen de 2019)<a class="headerlink" href="#tipo-4-resolucion-por-refutacion-examen-de-2019" title="Permanent link">&para;</a></h3>
+<p>Premisas, ya traducidas:</p>
+<ol>
+<li><span class="arithmatex">\(A(x)\lor H(x)\)</span>: todo miembro del universo Marvel es alien o humano.</li>
+<li><span class="arithmatex">\(\neg H(x)\lor\neg L(x,O)\)</span>: ningún humano gusta de los Outriders.</li>
+<li><span class="arithmatex">\(\neg A(x)\lor L(x,F)\)</span>: a todos los aliens les gusta pelear.</li>
+<li><span class="arithmatex">\(\neg L(I,y)\lor\neg L(T,y)\)</span>: a Ironman le disgusta lo que le gusta a Thor.</li>
+<li><span class="arithmatex">\(L(I,y)\lor L(T,y)\)</span>: a Ironman le gusta lo que a Thor le disgusta.</li>
+<li><span class="arithmatex">\(L(T,O)\)</span>.</li>
+<li><span class="arithmatex">\(L(T,F)\)</span>.</li>
+</ol>
+<p>Demuestra que Ironman es humano y no alien: <span class="arithmatex">\(H(I)\land\neg A(I)\)</span>.</p>
+<details class="success">
+<summary>Solución</summary>
+<p>La negación de la hipótesis es <span class="arithmatex">\(\neg H(I)\lor A(I)\)</span>.</p>
+<ol>
+<li>Con la cláusula 1 y <span class="arithmatex">\(\{x/I\}\)</span>: <span class="arithmatex">\(A(I)\lor A(I)\)</span>, que se factoriza a <span class="arithmatex">\(A(I)\)</span>.</li>
+<li>Con la cláusula 3 y <span class="arithmatex">\(\{x/I\}\)</span>: <span class="arithmatex">\(L(I,F)\)</span>.</li>
+<li>Con la cláusula 4 y <span class="arithmatex">\(\{y/F\}\)</span>: <span class="arithmatex">\(\neg L(T,F)\)</span>.</li>
+<li>Con la cláusula 7: <span class="arithmatex">\(\square\)</span>. La contradicción prueba la hipótesis.</li>
+</ol>
+<p>Dibuja el <strong>árbol</strong> de resolución: cada nodo con sus dos padres y la sustitución en llaves.</p>
+</details>
+<h3 id="tipo-5-encadenar-reglas-de-inferencia-clase-25-y-tercer-examen-de-2019">Tipo 5 · Encadenar reglas de inferencia (Clase 25 y tercer examen de 2019)<a class="headerlink" href="#tipo-5-encadenar-reglas-de-inferencia-clase-25-y-tercer-examen-de-2019" title="Permanent link">&para;</a></h3>
+<p>Ejemplo del tercer examen de 2019: elige la técnica de razonamiento y demuestra que a Eva no le gusta
+ML. Premisas:</p>
+<ol>
+<li><span class="arithmatex">\(\forall x\,\text{Curso}(x)\land(\text{Bueno}(x)\lor\text{Gusta}(Est,x))\Rightarrow\text{Premio}(x)\)</span></li>
+<li><span class="arithmatex">\(\text{UGC}(ML)\land\text{PGC}(ML)\)</span></li>
+<li><span class="arithmatex">\(\forall x\,\text{UGC}(x)\land\text{PGC}(x)\Rightarrow\text{Largo}(x)\)</span></li>
+<li><span class="arithmatex">\(\forall x\,\text{UGC}(x)\land\text{Largo}(x)\Rightarrow\neg\text{Gusta}(Eva,x)\)</span></li>
+<li><span class="arithmatex">\(\forall x\,\text{Gusta}(Eva,x)\Rightarrow\neg\text{Gusta}(Est,x)\)</span></li>
+<li><span class="arithmatex">\(\forall x\,\neg\text{Gusta}(Eva,x)\Rightarrow\text{Gusta}(Est,x)\)</span></li>
+</ol>
+<details class="success">
+<summary>Solución</summary>
+<p>Con <strong>reglas de inferencia</strong>, porque es más corto que la resolución:</p>
+<ol>
+<li>UGC(ML), de 2 por AE.</li>
+<li>PGC(ML), de 2 por AE.</li>
+<li>UGC(ML) ∧ PGC(ML) ⇒ Largo(ML), de 3 por UI con <span class="arithmatex">\(x/ML\)</span>.</li>
+<li>Largo(ML), de los pasos 1, 2 y 3 por AI y MP.</li>
+<li>UGC(ML) ∧ Largo(ML) ⇒ ¬Gusta(Eva, ML), de 4 por UI.</li>
+<li><strong>¬Gusta(Eva, ML)</strong>, de los pasos 1, 4 y 5 por AI y MP.</li>
+</ol>
+<p>El profesor avisó que a veces la resolución exige mucho preprocesamiento y <em>no alcanza el tiempo</em>: hay que
+elegir la técnica. Cita <strong>cada paso</strong> con su regla y los números de los que sale. El ejemplo de clase
+<em>Harry es más rápido que Ralph</em> sigue este mismo formato en 19 pasos.</p>
+</details>
+<h3 id="tipo-6-extraer-la-respuesta-clase-25-marcado-como-examen-en-pao-2026-i">Tipo 6 · Extraer la respuesta (Clase 25; marcado como examen en PAO 2026-I)<a class="headerlink" href="#tipo-6-extraer-la-respuesta-clase-25-marcado-como-examen-en-pao-2026-i" title="Permanent link">&para;</a></h3>
+<ol>
+<li><em>Sultán va a donde va Juan; Juan está en la biblioteca. ¿Dónde está Sultán?</em></li>
+<li>
+<p><em>El objeto verde.</em> Las cláusulas son:</p>
+<ul>
+<li>i: <span class="arithmatex">\(\text{movil}(A)\lor\text{movil}(w)\lor\text{verde}(w)\)</span></li>
+<li>ii: <span class="arithmatex">\(\neg\text{azul}(A)\lor\text{movil}(y)\lor\text{verde}(y)\)</span></li>
+<li>iii: <span class="arithmatex">\(\text{movil}(s)\lor\neg\text{movil}(t)\lor\text{azul}(t)\)</span></li>
+<li>iv: <span class="arithmatex">\(\neg\text{movil}(D)\)</span></li>
+</ul>
+<p>Demuestra que existe un objeto verde y extrae cuál es.</p>
+</li>
+</ol>
+<details class="success">
+<summary>Solución</summary>
+<ol>
+<li><strong>Sultán.</strong> Las cláusulas son <span class="arithmatex">\(\neg\text{esta\_en}(juan,X)\lor\text{esta\_en}(sultan,X)\)</span> y
+   <span class="arithmatex">\(\text{esta\_en}(juan,biblioteca)\)</span>, y la hipótesis negada es <span class="arithmatex">\(\neg\text{esta\_en}(sultan,Z)\)</span>.<ul>
+<li>Con <span class="arithmatex">\(\{Z/X\}\)</span> queda <span class="arithmatex">\(\neg\text{esta\_en}(juan,X)\)</span>.</li>
+<li>Con <span class="arithmatex">\(\{X/biblioteca\}\)</span> queda <span class="arithmatex">\(\square\)</span>.</li>
+<li>Con el método 1, la hipótesis queda <span class="arithmatex">\(\text{esta\_en}(sultan,\textbf{biblioteca})\)</span>.</li>
+</ul>
+</li>
+<li>
+<ol>
+<li>iii con iv, con <span class="arithmatex">\(\{s/D\}\)</span>, da <span class="arithmatex">\(\neg\text{movil}(t)\lor\text{azul}(t)\)</span>.</li>
+<li>Con ii y <span class="arithmatex">\(\{t/A\}\)</span> da <span class="arithmatex">\(\neg\text{movil}(A)\lor\text{movil}(y)\lor\text{verde}(y)\)</span>.</li>
+<li>Con i, factorizando, da <span class="arithmatex">\(\text{movil}(y)\lor\text{verde}(y)\)</span>.</li>
+<li>Con iv y <span class="arithmatex">\(\{y/D\}\)</span> da <span class="arithmatex">\(\text{verde}(D)\)</span>.</li>
+<li>Con <span class="arithmatex">\(\neg\text{verde}(x)\)</span> y <span class="arithmatex">\(\{x/D\}\)</span> da <span class="arithmatex">\(\square\)</span>.</li>
+</ol>
+<p><strong>Objeto verde.</strong> La hipótesis negada es <span class="arithmatex">\(\neg\text{verde}(x)\)</span>.</p>
+<p>La respuesta es <strong><span class="arithmatex">\(x=D\)</span></strong>.</p>
+<ul>
+<li>Con el método 2 se agrega <span class="arithmatex">\(\lor\,\text{respuesta}(x)\)</span> a la hipótesis negada y al final queda
+  <span class="arithmatex">\(\text{respuesta}(D)\)</span>.</li>
+<li><strong>No</strong> se puede usar <span class="arithmatex">\(\{A/D\}\)</span>: <span class="arithmatex">\(A\)</span> y <span class="arithmatex">\(D\)</span> son constantes, y solo se sustituyen variables.</li>
+</ul>
+</li>
+</ol>
+</details>
+<h3 id="tipo-7-por-que-es-importante-examen-de-2021-y-take-home-de-2020">Tipo 7 · «¿Por qué es importante…?» (examen de 2021 y take-home de 2020)<a class="headerlink" href="#tipo-7-por-que-es-importante-examen-de-2021-y-take-home-de-2020" title="Permanent link">&para;</a></h3>
+<p>Son preguntas de selección múltiple sobre A*, recocido simulado, unificación, resolución y cláusulas. Verdaderas
+según la clave de 2021:</p>
+<ul>
+<li><strong>A*:</strong> a veces hay que hacer un movimiento peor para garantizar la mejor ruta.</li>
+<li><strong>Recocido simulado:</strong> guarda el estado actual y el mejor del pasado, y puede volver a él.</li>
+<li><strong>Unificación:</strong> la inferencia manipula símbolos, que deben ser <strong>sintácticamente equivalentes</strong> para reducirse.</li>
+<li><strong>Resolución:</strong> permite <strong>inferir</strong> nuevas expresiones y reglas a partir de otras y de las leyes de la lógica.</li>
+<li><strong>Cláusulas:</strong> simplifican las expresiones antes de probar teoremas, son computacionalmente más fáciles y
+  <strong>mantienen la veracidad</strong> tras la transformación.</li>
+</ul>
+<details class="success">
+<summary>Distractores típicos (falsos)</summary>
+<ul>
+<li>«A* garantiza la menor memoria, del orden de <span class="arithmatex">\(O(b\cdot d)\)</span>» o «el menor tiempo».</li>
+<li>«El recocido garantiza que el error converja a cero».</li>
+<li>«La unificación encuentra la función que relaciona la entrada y la salida».</li>
+<li>«La resolución encuentra la ruta más corta».</li>
+</ul>
+</details>
+<h3 id="tipo-8-diseno-de-busqueda-best-first-a-y-bloques-2021-y-2020">Tipo 8 · Diseño de búsqueda: best-first, A* y bloques (2021 y 2020)<a class="headerlink" href="#tipo-8-diseno-de-busqueda-best-first-a-y-bloques-2021-y-2020" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Best-first usa closed para detectar lazos. Si se elimina closed y se usa <span class="arithmatex">\(g(n)\)</span> en su lugar, ¿qué pasa?</li>
+<li>Si el test de meta se hace al <strong>generar</strong> los hijos y no al sacarlos de open, ¿qué pasa con el tiempo y la
+   memoria? (Esa es la respuesta según la clave de 2021.)</li>
+<li>Mundo de bloques con A*: <span class="arithmatex">\(h\)</span> es el número de bloques que no están en la pila más alta. Expande los primeros
+   nodos dibujando el árbol, con el estado y <span class="arithmatex">\(f\)</span> en cada nodo.</li>
+<li>Greedy con <span class="arithmatex">\(h(n)=-g(n)\)</span>: ¿qué búsqueda emula?</li>
+</ol>
+<details class="success">
+<summary>Solución</summary>
+<ol>
+<li>Se pierde información: si el nodo se alcanzó por un camino más corto, el historial y hasta el camino a la
+   solución. Además, el algoritmo no podría regresar a un nodo mejor. Las cuatro opciones de 2021 eran
+   verdaderas.</li>
+<li>Según la clave de 2021, <strong>aumentan el tiempo y la memoria</strong>.</li>
+<li>El procedimiento:<ul>
+<li>Genera <strong>todos</strong> los movimientos legales: el bloque de arriba va a la mesa o sobre otra pila.</li>
+<li>Calcula <span class="arithmatex">\(f=g+h\)</span> con <span class="arithmatex">\(g\)</span> = número de movimientos.</li>
+<li>Expande el menor <span class="arithmatex">\(f\)</span>, con desempate por el nodo izquierdo, y evita los estados repetidos.</li>
+<li>Se califica el árbol: el orden de expansión, el estado y <span class="arithmatex">\(f\)</span> en cada nodo.</li>
+</ul>
+</li>
+<li><strong>DFS</strong>, búsqueda en profundidad: con <span class="arithmatex">\(f=-g\)</span> siempre prefiere el nodo más profundo.</li>
+</ol>
+</details>
+<h3 id="tipo-9-rnn-lstm-y-transformers-en-el-examen">Tipo 9 · RNN, LSTM y Transformers en el examen<a class="headerlink" href="#tipo-9-rnn-lstm-y-transformers-en-el-examen" title="Permanent link">&para;</a></h3>
+<p>En semestres anteriores el examen repitió los tipos de la <a href="leccion-3.html#tipos-de-pregunta-y-como-resolverlos">Lección #3</a>
+y de la <a href="leccion-4.html#tipos-de-pregunta-y-como-resolverlos">Lección #4</a>: verdadero o falso sobre BPTT, la LSTM y
+la atención, y el forward numérico de una RNN.</p>
+<p>Un distractor clásico: «La arquitectura que resuelve el desvanecimiento <strong>de la derivada</strong> del sigmoidal es la
+LSTM». Se marcó falso, porque lo que se desvanece es el <strong>gradiente</strong>.</p>
+<h2 id="trampas-frecuentes">Trampas frecuentes<a class="headerlink" href="#trampas-frecuentes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Sustituir una constante:</strong> solo las <strong>variables</strong> se sustituyen; <span class="arithmatex">\(\{A/D\}\)</span> entre constantes no existe.</li>
+<li><strong>Olvidar el occurs check:</strong> <span class="arithmatex">\(x/f(x)\)</span> es inválido.</li>
+<li><strong>Saltarse pasos de la forma clausal o hacerlos en otro orden:</strong> el profesor lo penalizó en semestres anteriores.</li>
+<li><strong>Skolemizar con variables de más o de menos:</strong> la función depende solo de los <span class="arithmatex">\(\forall\)</span> que <strong>rodean</strong> al
+  <span class="arithmatex">\(\exists\)</span>.</li>
+<li><strong>Negar mal la hipótesis:</strong> <span class="arithmatex">\(\neg(H\land\neg A)=\neg H\lor A\)</span>.</li>
+<li><strong>Usar reglas de inferencia sin citar el paso y la regla</strong> (MP, MT, AE, AI, UI, EI).</li>
+<li><strong>Modus tollens:</strong> se infiere <span class="arithmatex">\(\neg p\)</span>; la diapositiva tiene una errata.</li>
+<li><strong>A*:</strong> <span class="arithmatex">\(h\le h^*\)</span>; la diapositiva invierte la desigualdad.</li>
+</ul>
+<h2 id="simulacro">Simulacro<a class="headerlink" href="#simulacro" title="Permanent link">&para;</a></h2>
+<p>Cronométrate y no uses apuntes. Usa una calculadora.</p>
+<ol>
+<li>¿Cuáles unifican? Da el MGU o explica el fallo.<ul>
+<li>a) <span class="arithmatex">\(q(x,f(y))\)</span> y <span class="arithmatex">\(q(g(z),z)\)</span>.</li>
+<li>b) <span class="arithmatex">\(r(a,x,h(x))\)</span> y <span class="arithmatex">\(r(y,b,z)\)</span>.</li>
+<li>c) <span class="arithmatex">\(s(x,x)\)</span> y <span class="arithmatex">\(s(f(y),y)\)</span>.</li>
+</ul>
+</li>
+<li>Convierte a cláusulas: <span class="arithmatex">\(\forall x\,[\text{persona}(x)\Rightarrow\exists y\,\text{madre}(y,x)]\)</span>.</li>
+<li>Por resolución:<ul>
+<li>Premisas: (1) <span class="arithmatex">\(\forall x\,(\text{perro}(x)\Rightarrow\text{animal}(x))\)</span>, (2) <span class="arithmatex">\(\forall x\,(\text{animal}(x)\Rightarrow\text{duerme}(x))\)</span>
+  y (3) <span class="arithmatex">\(\text{perro}(terry)\)</span>.</li>
+<li>Demuestra que <strong>algo duerme</strong> y extrae <strong>quién</strong>, con los dos métodos.</li>
+</ul>
+</li>
+<li>Encadena con reglas de inferencia (citando cada paso) para concluir <span class="arithmatex">\(\text{duerme}(terry)\)</span> con las
+   mismas premisas.</li>
+<li>Explica la diferencia entre una regla de inferencia <strong>sólida</strong> y una <strong>completa</strong>. ¿Qué es la
+   resolución?</li>
+<li>A* con <span class="arithmatex">\(h=0\)</span>, ¿qué búsqueda es? Greedy con <span class="arithmatex">\(h=-g\)</span>, ¿qué búsqueda emula?</li>
+<li>Con VP = 30, FP = 20, FN = 10 y VN = 40, calcula la precisión y la recuperación y clasifica el
+   modelo en una de las 4 categorías.</li>
+<li>¿Cuántas puertas tiene una LSTM, qué activación usan y qué hace la de olvido?</li>
+</ol>
+<details class="success">
+<summary>Respuestas del simulacro</summary>
+<ol>
+<li>Unificación:<ul>
+<li><strong>a) Unifica.</strong> <span class="arithmatex">\(x/g(z)\)</span> y luego <span class="arithmatex">\(f(y)\)</span> contra <span class="arithmatex">\(z\)</span> da <span class="arithmatex">\(z/f(y)\)</span>. Al componer, el MGU es
+  <span class="arithmatex">\(\{x/g(f(y)),\ z/f(y)\}\)</span>. No hay problema de occurs check: <span class="arithmatex">\(z\)</span> no aparece en <span class="arithmatex">\(f(y)\)</span>.</li>
+<li><strong>b) Unifica</strong> con <span class="arithmatex">\(\{y/a,\ x/b,\ z/h(b)\}\)</span>.</li>
+<li><strong>c) Falla.</strong> <span class="arithmatex">\(x/f(y)\)</span> y luego <span class="arithmatex">\(f(y)\)</span> contra <span class="arithmatex">\(y\)</span> exige <span class="arithmatex">\(y/f(y)\)</span>, que es el occurs check.</li>
+</ul>
+</li>
+<li>Forma clausal:<ul>
+<li>Sin la implicación: <span class="arithmatex">\(\forall x\,[\neg\text{persona}(x)\lor\exists y\,\text{madre}(y,x)]\)</span>.</li>
+<li>Skolem <span class="arithmatex">\(y/m(x)\)</span>: <span class="arithmatex">\(\neg\text{persona}(x)\lor\text{madre}(m(x),x)\)</span>.</li>
+</ul>
+</li>
+<li>Resolución:<ul>
+<li>Cláusulas: <span class="arithmatex">\(\neg\text{perro}(x)\lor\text{animal}(x)\)</span>, <span class="arithmatex">\(\neg\text{animal}(y)\lor\text{duerme}(y)\)</span> y
+  <span class="arithmatex">\(\text{perro}(terry)\)</span>. La hipótesis negada es <span class="arithmatex">\(\neg\text{duerme}(z)\)</span>.</li>
+<li>Con <span class="arithmatex">\(\{y/z\}\)</span> queda <span class="arithmatex">\(\neg\text{animal}(z)\)</span>; con <span class="arithmatex">\(\{x/z\}\)</span>, <span class="arithmatex">\(\neg\text{perro}(z)\)</span>; con <span class="arithmatex">\(\{z/terry\}\)</span>,
+  <span class="arithmatex">\(\square\)</span>.</li>
+<li>Método 1: <span class="arithmatex">\(\text{duerme}(terry)\)</span>.</li>
+<li>Método 2: con <span class="arithmatex">\(\neg\text{duerme}(z)\lor\text{resp}(z)\)</span>, al final queda <span class="arithmatex">\(\text{resp}(terry)\)</span>.</li>
+</ul>
+</li>
+<li>Reglas de inferencia:<ol>
+<li>perro(terry) ⇒ animal(terry), de (1) por UI.</li>
+<li>animal(terry), de (3) y el paso 1 por MP.</li>
+<li>animal(terry) ⇒ duerme(terry), de (2) por UI.</li>
+<li>duerme(terry), de los pasos 2 y 3 por MP.</li>
+</ol>
+</li>
+<li>Una regla es <strong>sólida</strong> si todo lo que produce se sigue lógicamente de las premisas, y <strong>completa</strong> si
+   puede producir todo lo que se sigue de ellas. La resolución es <strong>sólida, correcta y completa</strong>.</li>
+<li>A* con <span class="arithmatex">\(h=0\)</span> es <strong>primero a lo ancho</strong>, de costo uniforme. Greedy con <span class="arithmatex">\(h=-g\)</span> emula la <strong>búsqueda en
+   profundidad</strong>.</li>
+<li>Precisión <span class="arithmatex">\(=30/50=0.60\)</span> y recuperación <span class="arithmatex">\(=30/40=0.75\)</span>. Es de <strong>recuperación alta y precisión baja</strong>,
+   relativamente.</li>
+<li><strong>Tres</strong> (olvido, entrada y salida), todas <strong>sigmoides</strong>. La de olvido decide qué parte de <span class="arithmatex">\(C_{t-1}\)</span> se
+   conserva: 0 olvida y 1 mantiene.</li>
+</ol>
+</details>
+<h2 id="lista-de-autoevaluacion">Lista de autoevaluación<a class="headerlink" href="#lista-de-autoevaluacion" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Resuelvo sin errores los simulacros de la <a href="leccion-3.html#simulacro">Lección #3</a> y la
+  <a href="leccion-4.html#simulacro">Lección #4</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Distingo una regla de inferencia sólida de una completa y nombro MP, MT, AE, AI, UI y EI con un ejemplo.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Unifico expresiones, compongo sustituciones y aplico el occurs check.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Skolemizo con la cantidad correcta de argumentos.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Convierto a forma clausal en los 9 pasos, en orden y sin saltármelos.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Hago una refutación por resolución y dibujo su árbol con las sustituciones.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Extraigo la respuesta con los dos métodos (Sultán, Juan feliz, objeto verde).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Decido cuándo conviene encadenar reglas de inferencia y cuándo usar resolución.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Expando A* en el mundo de bloques con <span class="arithmatex">\(f=g+h\)</span> y sin estados repetidos.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Respondo con seguridad las preguntas de «¿por qué es importante…?».</li>
+</ul>
+<h2 id="para-profundizar">Para profundizar<a class="headerlink" href="#para-profundizar" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="tema-resolucion-y-forma-clausal.html">Resolución, forma clausal y extracción de respuestas</a>, con los 9 pasos
+  detallados, unificación y el ejercicio del objeto verde</li>
+<li><a href="tema-metricas-kmeans-busqueda-y-logica.html">Métricas, K-means, búsqueda y lógica</a>, con la búsqueda, A* y la
+  lógica de predicados</li>
+<li><a href="../../evaluaciones/2p/banco-2p-por-tema.pdf">Banco del 2P por tema</a> y
+  <a href="../../evaluaciones/preguntas-examenes-anteriores.png">hoja oficial de preguntas anteriores</a></li>
+<li><a href="../../evaluaciones/2p/examen-2p-2021-2.pdf">Examen del 2P de 2021</a> y
+  <a href="../../evaluaciones/2p/examen-2p-take-home-2020-1.pdf">take-home de 2020</a></li>
+</ul>
+<h2 id="fuentes">Fuentes<a class="headerlink" href="#fuentes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Diapositivas de las Clases # 15 a # 25 de PAO 2026-II y # 14 a # 27 de PAO 2026-I (Enrique Peláez).</li>
+<li>Transcripciones de la ayudantía de PAO 2026-I (Clases 20–27), con las marcas «va al examen» y la revisión de la
+  Lección #4.</li>
+<li>Examen del 2P de 2021, take-home de 2020 y examen final de julio de 2019 (transcrito sin datos personales).</li>
+<li>Tercer examen de septiembre de 2019 (transcrito sin datos personales).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="./leccion-4.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Guía de la Lección #4">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Guía de la Lección #4
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="./tema-rnn-lstm-gru.html" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Secuencias — RNN, BPTT, LSTM y GRU">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Secuencias — RNN, BPTT, LSTM y GRU
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Diapositivas, enunciados y evaluaciones © Enrique Peláez, publicados con su autorización. Guías y organización: ayudantía de CCPG1044.
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog" role="status" aria-atomic="true">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["content.code.copy","content.tooltips","navigation.footer","navigation.indexes","navigation.path","navigation.sections","navigation.tabs","navigation.top","navigation.tracking","search.highlight","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.c47bb847.min.js","tags":null,"translations":{"clipboard.copied":"Copiado al portapapeles","clipboard.copy":"Copiar al portapapeles","clipboard.error":"Could not copy to clipboard","search.result.more.one":"1 más en esta página","search.result.more.other":"# más en esta página","search.result.none":"No se encontraron documentos","search.result.one":"1 documento encontrado","search.result.other":"# documentos encontrados","search.result.placeholder":"Teclee para comenzar búsqueda","search.result.term.missing":"Falta","select.version":"Seleccionar versión"},"version":null}</script>
+    
+    
+  
+      <script src="../../assets/javascripts/bundle.a2388154.min.js"></script>
+      
+    
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+    (function () {
+      function render(root) {
+        if (!window.renderMathInElement) return;
+        renderMathInElement(root, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\[", right: "\\]", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false }
+          ],
+          throwOnError: false
+        });
+      }
+      function alListo() {
+        if (window.document$ && window.document$.subscribe) {
+          window.document$.subscribe(function () { render(document.body); });
+        } else {
+          render(document.body);
+        }
+      }
+      window.addEventListener("load", alListo);
+    })();
+  </script>
+
+  </body>
+</html>

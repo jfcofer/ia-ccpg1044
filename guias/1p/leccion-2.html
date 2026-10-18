@@ -1,0 +1,3994 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Material de estudio de Inteligencia Artificial (CCPG1044, ESPOL · FIEC): clases, guías por evaluación, tareas y evaluaciones anteriores.">
+      
+      
+        <meta name="author" content="Ayudantía de Inteligencia Artificial">
+      
+      
+        <link rel="canonical" href="https://jfcofer.github.io/ia-ccpg1044/guias/1p/leccion-2.html">
+      
+      
+      
+        <link rel="prev" href="./leccion-1.html">
+      
+      
+        <link rel="next" href="./examen-1p.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.71">
+    
+    
+      
+        <title>Guía de la Lección #2 - IA · CCPG1044</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.e442bf79.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.b60ce83d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" crossorigin="anonymous">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-hidden="true"></label>
+    <div data-md-component="skip">
+      <a href="#__skip" class="md-skip">
+        Saltar a contenido
+      </a>
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../index.html" title="IA · CCPG1044" class="md-header__button md-logo" aria-label="IA · CCPG1044" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navegación">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IA · CCPG1044
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía de la Lección #2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun-moon" viewBox="0 0 24 24"><path d="M12 2v2M14.837 16.385a6 6 0 1 1-7.223-7.222c.624-.147.97.66.715 1.248a4 4 0 0 0 5.26 5.259c.589-.255 1.396.09 1.248.715M16 12a4 4 0 0 0-4-4M19 5l-1.256 1.256M20 12h2"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Preferencia del sistema"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Preferencia del sistema" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Buscar">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Buscar">
+  <button type="button" class="md-search__button">
+    Buscar
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../index.html" class="md-tabs__link">
+        
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../clases/index.html" class="md-tabs__link">
+          
+  
+  Clases y sílabo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../index.html" class="md-tabs__link">
+          
+  
+  Guías de estudio
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../evaluaciones/index.html" class="md-tabs__link">
+          
+  
+  Evaluaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tareas/index.html" class="md-tabs__link">
+          
+  
+  Tareas
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../proyecto/index.html" class="md-tabs__link">
+          
+  
+  Proyecto final
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../laboratorios/index.html" class="md-tabs__link">
+          
+  
+  Laboratorios
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../bibliografia/index.html" class="md-tabs__link">
+          
+  
+  Bibliografía
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../fe-de-erratas.html" class="md-tabs__link">
+        
+  
+  Fe de erratas
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="IA · CCPG1044" class="md-nav__button md-logo" aria-label="IA · CCPG1044" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    IA · CCPG1044
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Inicio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Clases y sílabo
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Clases y sílabo
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/c01-presentacion-del-curso/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primer parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Primer parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c02-definiciones-y-estado-del-arte/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  02 · Definiciones y estado del arte
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c03-fundamentos-y-tipos-de-aprendizaje/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  03 · Fundamentos y tipos de aprendizaje
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c04-regresion-lineal/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  04 · Regresión lineal
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c05-descenso-de-gradiente-y-regresion-polinomial/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  05 · Descenso de gradiente y regresión polinomial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c06-regresion-logistica/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  06 · Regresión logística
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c07-perceptron-y-funciones-de-activacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  07 · Perceptrón y funciones de activación
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c08-mlp-como-clasificador/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  08 · MLP como clasificador
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c09-aprendizaje-en-mlp-regla-delta/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  09 · Aprendizaje en MLP
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c10-backpropagation-y-tensores/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  10 · Backpropagation y notación vectorial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c11-mlp-vectorizado-y-regularizacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  11 · Backpropagation, Jacobiano y regularización
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c12-cnn-introduccion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  12 · Introducción a las CNN
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c13-cnn-parametros-y-pooling/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  13 · CNN: parámetros, pooling y aprendizaje
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c14-examen-del-primer-parcial/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  14 · Examen del primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clases/c15-rnn-y-nlp/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Segundo parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Segundo parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c16-bptt-y-desvanecimiento-del-gradiente/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  16 · BPTT y desvanecimiento del gradiente
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c17-lstm-gru-e-introduccion-a-transformers/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  17 · LSTM, GRU e introducción a los Transformers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c18-transformers-autoatencion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  18 · Transformers: autoatención
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c19-transformers-matrices-y-codificacion-posicional/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  19 · Transformers: matrices, embeddings y posición
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c20-comportamiento-inteligente/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  20 · Comportamiento inteligente y estrategias de búsqueda
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c21-metricas-y-busqueda-no-informada/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  21 · Métricas de evaluación y búsqueda no informada
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c22-busqueda-heuristica/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  22 · Búsqueda heurística
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c23-a-estrella-y-backtracking/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  23 · A*, backtracking y representación del conocimiento
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c24-logica-inferencia-y-unificacion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  24 · Lógica, inferencia y unificación
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/c25-resolucion-forma-clausal-y-extraccion/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  25 · Resolución, forma clausal y extracción de respuestas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/variantes-2024-2/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Diapositivas PAO 2024-II
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clases/variantes-2026-1/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Diapositivas PAO 2026-I
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guías de estudio
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Guías de estudio
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primer parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_3_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Primer parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./leccion-1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #1
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #2
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="leccion-2.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #2
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#que-entra-y-cuando" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Qué entra y cuándo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Qué entra y cuándo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clases-que-entran" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clases que entran
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marcado-por-el-profesor" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Marcado por el profesor
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluaciones-anteriores-para-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Evaluaciones anteriores para practicar
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-por-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Resumen por clase
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resumen por clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clase-07-perceptron-y-funciones-de-activacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 07 · Perceptrón y funciones de activación
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clase-08-mlp-como-clasificador" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 08 · MLP como clasificador
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clase-09-aprendizaje-en-mlp-y-regla-delta" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 09 · Aprendizaje en MLP y regla delta
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clase-10-backpropagation-notacion-vectorial-y-jacobiano" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 10 · Backpropagation, notación vectorial y jacobiano
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formulas-y-definiciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fórmulas y definiciones
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-pregunta-y-como-resolverlos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipos de pregunta y cómo resolverlos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de pregunta y cómo resolverlos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipo-1-frontera-de-decision-revision-de-la-leccion-2-pao-2026-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 1 · Frontera de decisión (revisión de la Lección #2, PAO 2026-I)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-2-sensibilidad-y-regla-de-la-cadena-revision-de-la-leccion-2-pao-2026-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 2 · Sensibilidad y regla de la cadena (revisión de la Lección #2, PAO 2026-I)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-3-entrenar-un-perceptron-a-mano-regla-delta" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 3 · Entrenar un perceptrón a mano (regla delta)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-4-disenar-una-mlp-booleana-xnor-xor-regiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 4 · Diseñar una MLP booleana (XNOR, XOR, regiones)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-5-dimensiones-y-numero-de-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 5 · Dimensiones y número de parámetros
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-6-neuronas-ocultas-reordenadas-leccion-2-de-2021-y-de-2026-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 6 · Neuronas ocultas reordenadas (Lección #2 de 2021 y de 2026-I)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-7-regularizacion-y-salidas-multiclase-leccion-2-de-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 7 · Regularización y salidas multiclase (Lección #2 de 2021)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-8-funcion-de-costo-con-predicciones-revision-de-la-leccion-2-pao-2026-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 8 · Función de costo con predicciones (revisión de la Lección #2, PAO 2026-I)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-9-softmax-one-hot-e-inicializacion-del-gradiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 9 · Softmax, one-hot e inicialización del gradiente
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trampas-frecuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Trampas frecuentes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simulacro" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Simulacro
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-autoevaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Lista de autoevaluación
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Para profundizar
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fuentes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./examen-1p.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del examen del 1P
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-guia-general.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía general del primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./tema-apuntes-consolidados.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Apuntes consolidados de clase (1P)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../2p/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Segundo parcial
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_3_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Segundo parcial
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2p/leccion-3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #3
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2p/leccion-4.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía de la Lección #4
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2p/examen-2p.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del examen del 2P (examen final)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2p/tema-rnn-lstm-gru.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Secuencias — RNN, BPTT, LSTM y GRU
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2p/tema-transformers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Transformers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2p/tema-evaluacion-de-modelos.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluación de modelos — matriz de confusión y métricas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2p/tema-metricas-kmeans-busqueda-y-logica.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Métricas, K-means, búsqueda y lógica
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2p/tema-resolucion-y-forma-clausal.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Resolución, forma clausal y extracción de respuestas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mejoramiento.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Guía del mejoramiento (todo el curso)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../evaluaciones/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_4">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  Evaluaciones
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/1p/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Primer parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/2p/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Segundo parcial
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evaluaciones/mejoramiento/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Evaluaciones — Mejoramiento
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tareas/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tareas
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../proyecto/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Proyecto final
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../laboratorios/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Laboratorios
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../bibliografia/index.html" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Bibliografía
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fe-de-erratas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Fe de erratas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#que-entra-y-cuando" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Qué entra y cuándo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Qué entra y cuándo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clases-que-entran" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clases que entran
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marcado-por-el-profesor" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Marcado por el profesor
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluaciones-anteriores-para-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Evaluaciones anteriores para practicar
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-por-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Resumen por clase
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resumen por clase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clase-07-perceptron-y-funciones-de-activacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 07 · Perceptrón y funciones de activación
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clase-08-mlp-como-clasificador" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 08 · MLP como clasificador
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clase-09-aprendizaje-en-mlp-y-regla-delta" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 09 · Aprendizaje en MLP y regla delta
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clase-10-backpropagation-notacion-vectorial-y-jacobiano" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Clase 10 · Backpropagation, notación vectorial y jacobiano
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formulas-y-definiciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fórmulas y definiciones
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-pregunta-y-como-resolverlos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipos de pregunta y cómo resolverlos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de pregunta y cómo resolverlos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipo-1-frontera-de-decision-revision-de-la-leccion-2-pao-2026-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 1 · Frontera de decisión (revisión de la Lección #2, PAO 2026-I)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-2-sensibilidad-y-regla-de-la-cadena-revision-de-la-leccion-2-pao-2026-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 2 · Sensibilidad y regla de la cadena (revisión de la Lección #2, PAO 2026-I)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-3-entrenar-un-perceptron-a-mano-regla-delta" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 3 · Entrenar un perceptrón a mano (regla delta)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-4-disenar-una-mlp-booleana-xnor-xor-regiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 4 · Diseñar una MLP booleana (XNOR, XOR, regiones)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-5-dimensiones-y-numero-de-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 5 · Dimensiones y número de parámetros
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-6-neuronas-ocultas-reordenadas-leccion-2-de-2021-y-de-2026-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 6 · Neuronas ocultas reordenadas (Lección #2 de 2021 y de 2026-I)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-7-regularizacion-y-salidas-multiclase-leccion-2-de-2021" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 7 · Regularización y salidas multiclase (Lección #2 de 2021)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-8-funcion-de-costo-con-predicciones-revision-de-la-leccion-2-pao-2026-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 8 · Función de costo con predicciones (revisión de la Lección #2, PAO 2026-I)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipo-9-softmax-one-hot-e-inicializacion-del-gradiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tipo 9 · Softmax, one-hot e inicialización del gradiente
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trampas-frecuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Trampas frecuentes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simulacro" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Simulacro
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lista-de-autoevaluacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Lista de autoevaluación
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#para-profundizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Para profundizar
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Fuentes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../index.html" class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../index.html" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Guías de estudio
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="./index.html" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Primer parcial
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                <a id="__skip" tabindex="-1"></a>
+                
+                  
+
+
+<h1 id="guia-de-la-leccion-2">Guía de la Lección #2<a class="headerlink" href="#guia-de-la-leccion-2" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">En una línea</p>
+<p>Se toma al inicio de la Clase 11. Entran las <strong>Clases 07 a 10</strong>: el <strong>perceptrón y las funciones de
+activación</strong>, las <strong>MLP</strong> (compuertas booleanas, XNOR, matrices de pesos), la <strong>regla delta</strong>,
+<strong>forward/backpropagation</strong>, <strong>softmax, one-hot y funciones de error</strong>, la <strong>notación vectorial</strong> y el
+<strong>jacobiano</strong>. La regularización y el dropout de la Clase 11 no entran aquí: van al examen del 1P. En PAO 2026-I
+también volvieron preguntas de la Clase 06: frontera de decisión y costo logístico.</p>
+</div>
+<h2 id="que-entra-y-cuando">Qué entra y cuándo<a class="headerlink" href="#que-entra-y-cuando" title="Permanent link">&para;</a></h2>
+<!-- generado:alcance:leccion-2 — no editar; usar `uv run ia indice` -->
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Parcial</strong></td>
+<td>1P</td>
+</tr>
+<tr>
+<td><strong>Cubre</strong></td>
+<td>Clases 07–10</td>
+</tr>
+<tr>
+<td><strong>Se toma</strong></td>
+<td>Al inicio de la <a href="../../clases/c11-mlp-vectorizado-y-regularizacion/index.html">Clase 11</a></td>
+</tr>
+<tr>
+<td><strong>Fecha (PAO 2026-II)</strong></td>
+<td>semana del 02/11/2026</td>
+</tr>
+<tr>
+<td><strong>Formato</strong></td>
+<td>Individual y supervisada, al inicio de la clase. Confirma el formato en Aula Virtual</td>
+</tr>
+</tbody>
+</table>
+<h3 id="clases-que-entran">Clases que entran<a class="headerlink" href="#clases-que-entran" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>Tema</th>
+<th>Temas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>07</td>
+<td><a href="../../clases/c07-perceptron-y-funciones-de-activacion/index.html">Perceptrón y funciones de activación</a></td>
+<td>Perceptrón; Funciones de transferencia, umbral o activación; Ejemplo con una neurona; Introducción a las redes MLP</td>
+</tr>
+<tr>
+<td>08</td>
+<td><a href="../../clases/c08-mlp-como-clasificador/index.html">MLP como clasificador</a></td>
+<td>Redes MLP; MLP como clasificadores lineales y no lineales; Pesos</td>
+</tr>
+<tr>
+<td>09</td>
+<td><a href="../../clases/c09-aprendizaje-en-mlp-regla-delta/index.html">Aprendizaje en MLP</a></td>
+<td>Entrenamiento de una red MLP; Propagación hacia adelante; Backpropagation en MLP; Entradas, salidas, funciones de umbral y de error</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="../../clases/c10-backpropagation-y-tensores/index.html">Backpropagation y notación vectorial</a></td>
+<td>Formas de entrada, salida, umbral y error; Notación vectorial en MLP; Entrenamiento con gradiente descendente: forward y backpropagation; Jacobiano; Introducción a las CNN</td>
+</tr>
+</tbody>
+</table>
+<h3 id="marcado-por-el-profesor">Marcado por el profesor<a class="headerlink" href="#marcado-por-el-profesor" title="Permanent link">&para;</a></h3>
+<p>No hay marcas registradas para estas clases.</p>
+<h3 id="evaluaciones-anteriores-para-practicar">Evaluaciones anteriores para practicar<a class="headerlink" href="#evaluaciones-anteriores-para-practicar" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../../evaluaciones/1p/leccion-2-2021-2.pdf">Lección #2 (II PAO 2021) — regularización en MLP, pesos, CNN</a> — PAO 2021-II · Impresión de Aula Virtual con respuestas correctas marcadas</li>
+<li><a href="../../evaluaciones/index.html">Bancos y compilados de todo el curso</a></li>
+</ul>
+<!-- /generado:alcance:leccion-2 -->
+
+<h2 id="resumen-por-clase">Resumen por clase<a class="headerlink" href="#resumen-por-clase" title="Permanent link">&para;</a></h2>
+<h3 id="clase-07-perceptron-y-funciones-de-activacion">Clase 07 · Perceptrón y funciones de activación<a class="headerlink" href="#clase-07-perceptron-y-funciones-de-activacion" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Regresión logística multiclase, «una contra todas»:</strong><ul>
+<li>Con <span class="arithmatex">\(y\in\{0,\dots,n\}\)</span> se entrenan <span class="arithmatex">\(n+1\)</span> clasificadores binarios <span class="arithmatex">\(h^{(i)}_w(x)=P(y=i\mid x;w)\)</span>.</li>
+<li>Se predice la clase con <strong>mayor</strong> <span class="arithmatex">\(h^{(i)}_w(x)\)</span>.</li>
+</ul>
+</li>
+<li><strong>Neurona biológica → perceptrón:</strong><ul>
+<li>Las dendritas son las entradas, la sinapsis es el <strong>peso</strong>, el soma es la <strong>unidad de activación</strong> y el axón
+  es la <strong>salida</strong>.</li>
+<li>Modelo: <span class="arithmatex">\(y=1\)</span> si <span class="arithmatex">\(\sum_i w_ix_i\ge T\)</span>, y <span class="arithmatex">\(0\)</span> si no. Es el perceptrón de McCulloch y Pitts (1943).</li>
+</ul>
+</li>
+<li><strong>Funciones de transferencia</strong> (tabla de Hagan):<ul>
+<li>hardlim (escalón 0/1) y hardlims (−1/1).</li>
+<li>purelin (lineal), satlin y satlins.</li>
+<li>logsig (sigmoide), tansig (tanh), poslin (= ReLU) y compet.</li>
+</ul>
+</li>
+<li><strong>Lo que dijo el profesor sobre las activaciones:</strong><ul>
+<li><em>La función de activación es un hiperparámetro.</em></li>
+<li>La sigmoide se usa para clasificación.</li>
+<li>La <strong>tanh</strong> va de −1 a 1, reescala la entrada y se usa mucho en NLP y Transformers.</li>
+<li>La <strong>ReLU</strong> se usa en visión porque no hay píxeles negativos. No tiene derivada en 0, de ahí sus variantes.</li>
+</ul>
+</li>
+<li><strong>Ejemplo:</strong> con <span class="arithmatex">\(w_1=w_2=1\)</span> y <span class="arithmatex">\(\theta=1.5\)</span>, la neurona se comporta como una compuerta <strong>AND</strong>.</li>
+</ul>
+<h3 id="clase-08-mlp-como-clasificador">Clase 08 · MLP como clasificador<a class="headerlink" href="#clase-08-mlp-como-clasificador" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Compuertas con un perceptrón:</strong><ul>
+<li>AND: pesos 1 y 1 con umbral <span class="arithmatex">\(\ge2\)</span>.</li>
+<li>OR: pesos 1 y 1 con umbral <span class="arithmatex">\(\ge1\)</span>.</li>
+<li>NOT: peso −1 con umbral <span class="arithmatex">\(\ge0\)</span>.</li>
+</ul>
+</li>
+<li><strong>Un perceptrón no basta para XOR:</strong> <em>las neuronas solo reconocen líneas</em>, y XOR necesita dos.</li>
+<li><strong>Capas:</strong><ul>
+<li>La de <strong>entrada no tiene neuronas</strong> y no procesa nada.</li>
+<li>Las <strong>ocultas</strong> no tienen contacto con el exterior y definen la topología.</li>
+<li>La de <strong>salida</strong> entrega el resultado.</li>
+</ul>
+</li>
+<li><strong>MLP = feedforward, fully connected, dense:</strong> todas las neuronas de una capa se conectan con todas las de la
+  siguiente.</li>
+<li><strong>Composición de funciones:</strong> <span class="arithmatex">\(a_3=f_3\big(W_3\,f_2(W_2\,f_1(W_1x+b_1)+b_2)+b_3\big)\)</span>, con una función por
+  capa.</li>
+<li><strong>XNOR con sigmoides:</strong> XNOR = (NOT <span class="arithmatex">\(x_1\)</span> AND NOT <span class="arithmatex">\(x_2\)</span>) OR (<span class="arithmatex">\(x_1\)</span> AND <span class="arithmatex">\(x_2\)</span>). Pesos (bias primero):<ul>
+<li>AND: <span class="arithmatex">\((-30, 20, 20)\)</span>.</li>
+<li>NOT <span class="arithmatex">\(x_1\)</span> AND NOT <span class="arithmatex">\(x_2\)</span>: <span class="arithmatex">\((10, -20, -20)\)</span>.</li>
+<li>OR: <span class="arithmatex">\((-10, 20, 20)\)</span>.</li>
+</ul>
+</li>
+<li><strong>Profundidad:</strong> la longitud del camino más largo de la entrada a la salida.</li>
+</ul>
+<h3 id="clase-09-aprendizaje-en-mlp-y-regla-delta">Clase 09 · Aprendizaje en MLP y regla delta<a class="headerlink" href="#clase-09-aprendizaje-en-mlp-y-regla-delta" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Las MLP son funciones booleanas universales.</strong> Componen bordes:<ul>
+<li>1 capa da un <strong>semiplano</strong>.</li>
+<li>2 capas dan <strong>regiones convexas</strong>.</li>
+<li>3 capas dan regiones <strong>arbitrarias</strong>, como el OR de dos polígonos.</li>
+</ul>
+</li>
+<li>Las redes neuronales son <strong>aproximadores universales</strong>: modelan cualquier función booleana, cualquier borde
+  de clasificación y cualquier función continua.</li>
+<li><strong>Pesos:</strong><ul>
+<li>El peso es la intensidad de la conexión.</li>
+<li>Hay pesos <strong>fijos</strong> y <strong>adaptables</strong>; los adaptables definen la función que buscamos.</li>
+<li>Forman una matriz: <span class="arithmatex">\(W^{(k)}\)</span> es de <span class="arithmatex">\(L_{k+1}\times(L_k+1)\)</span>. El <span class="arithmatex">\(+1\)</span> es el bias.</li>
+</ul>
+</li>
+<li><strong>Regla delta:</strong> <span class="arithmatex">\(\Delta W_{ij}=\alpha\,(T_j-Y_j)\,Y_i\)</span>, con <span class="arithmatex">\(0&lt;\alpha\le1\)</span>.<ul>
+<li>Algoritmo: inicializar al azar y, mientras haya ejemplos mal clasificados,
+  <span class="arithmatex">\(W^{nuevo}=W^{anterior}+\alpha(t-y)x\)</span>.</li>
+</ul>
+</li>
+<li><strong>Ejemplo de clase (AND):</strong> con <span class="arithmatex">\(\alpha=0.3\)</span>, <span class="arithmatex">\(\theta=1.5\)</span> y <span class="arithmatex">\(W=(0,\,0.25)\)</span>, se termina en
+  <span class="arithmatex">\(W=(0.9,\,1.15)\)</span>. Ver el Tipo 3.</li>
+</ul>
+<h3 id="clase-10-backpropagation-notacion-vectorial-y-jacobiano">Clase 10 · Backpropagation, notación vectorial y jacobiano<a class="headerlink" href="#clase-10-backpropagation-notacion-vectorial-y-jacobiano" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Forward con pesos aleatorios:</strong> la red da 0.79 cuando se esperaba 0, en un ejemplo XOR. Hay que medir el
+  error y corregir los pesos.</li>
+<li><strong>El bias siempre está:</strong> si no se menciona, igual existe. Es un peso con entrada fija <span class="arithmatex">\(x_0=1\)</span>.</li>
+<li><strong>Activación derivable:</strong> permite medir la sensibilidad con la <strong>regla de la cadena</strong>,
+  <span class="arithmatex">\(\dfrac{dy}{dw_i}=\dfrac{dy}{dz}\dfrac{dz}{dw_i}\)</span>.</li>
+<li><strong>Backprop:</strong> calcula <span class="arithmatex">\(\partial\,\text{Error}/\partial w\)</span> para <strong>cada</strong> peso, y el GD los ajusta.</li>
+<li><strong>Entrada:</strong> siempre un vector de números (píxeles, voz, texto, sensores).</li>
+<li><strong>Tensores:</strong><ul>
+<li>El escalar es 0D.</li>
+<li>El vector es 1D.</li>
+<li>La matriz es 2D.</li>
+<li>Lo de 3D o más es lo que normalmente llamamos tensor.</li>
+</ul>
+</li>
+<li><strong>Salida multiclase:</strong><ul>
+<li>Se codifica en <strong>one-hot</strong>: <span class="arithmatex">\(L\)</span> clases dan un vector de <span class="arithmatex">\(L\)</span> componentes con un solo 1.</li>
+<li>Se usa <strong>softmax</strong> <span class="arithmatex">\(y_i=\dfrac{e^{z_i}}{\sum_j e^{z_j}}\)</span>, que se interpreta como <span class="arithmatex">\(P(\text{clase}=i\mid X)\)</span>.
+  Sus salidas suman 1.</li>
+</ul>
+</li>
+<li><strong>Unidades ocultas:</strong> ReLU y sus variantes (Leaky ReLU, ELU, etc.).</li>
+<li><strong>Divergencias (funciones de error):</strong><ul>
+<li><span class="arithmatex">\(L_2\)</span>: <span class="arithmatex">\(\tfrac12\lVert Y-d\rVert^2\)</span>.</li>
+<li>Entropía cruzada binaria: <span class="arithmatex">\(-d\log Y-(1-d)\log(1-Y)\)</span>.</li>
+<li>Entropía cruzada multiclase: <span class="arithmatex">\(-\sum_i d_i\log y_i\)</span>.</li>
+</ul>
+</li>
+<li><strong>Entrenamiento con backprop:</strong><ul>
+<li>Error total: <span class="arithmatex">\(\frac1M\sum_m \text{Div}(Y_m,d_m)\)</span>.</li>
+<li>Forward capa por capa y luego backward, de la última a la primera.</li>
+<li>El backward empieza con el <strong>gradiente respecto a la salida de la red</strong>. El profesor lo llamó <em>inicialización
+  del gradiente</em>; en PAO 2026-I lo marcó como <strong>tema de examen</strong>.</li>
+</ul>
+</li>
+<li><strong>Forma vectorial:</strong> <span class="arithmatex">\(Z_k=W_ky_{k-1}\)</span> y <span class="arithmatex">\(y_k=f_k(Z_k)\)</span>.</li>
+<li><strong>Jacobiano:</strong> la derivada de una función vectorial respecto a un vector, <span class="arithmatex">\(\Delta y=J_y(z)\,\Delta z\)</span>. Si la
+  activación se aplica elemento a elemento, es <strong>diagonal</strong>.</li>
+<li>La misma clase introduce las CNN: en una CNN <strong>no todas las neuronas se conectan con todas</strong>, solo las del campo
+  receptivo.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Clase 11: no entra en esta lección</p>
+<p>La Clase 11 (backpropagation, jacobiano y <strong>regularización en MLP</strong>, con el <strong>dropout</strong>) se da justo después de
+la Lección #2. Estúdiala para el <a href="examen-1p.html">examen del 1P</a>.</p>
+</div>
+<h2 id="formulas-y-definiciones">Fórmulas y definiciones<a class="headerlink" href="#formulas-y-definiciones" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Fórmula o definición</th>
+<th>Ojo con</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Perceptrón</td>
+<td><span class="arithmatex">\(y=1\)</span> si <span class="arithmatex">\(\sum_i w_ix_i\ge\theta\)</span>, si no <span class="arithmatex">\(0\)</span></td>
+<td>Si el problema da <span class="arithmatex">\(\theta\)</span>, no se aprende: es fijo</td>
+</tr>
+<tr>
+<td>Regla delta</td>
+<td><span class="arithmatex">\(W^{nuevo}=W+\alpha\,(t-y)\,x\)</span></td>
+<td>Solo cambia cuando <span class="arithmatex">\(t\ne y\)</span>, y solo en las entradas con <span class="arithmatex">\(x_i\ne0\)</span></td>
+</tr>
+<tr>
+<td>Dimensiones</td>
+<td><span class="arithmatex">\(W^{(k)}\)</span>: <span class="arithmatex">\(L_{k+1}\times(L_k+1)\)</span></td>
+<td>Filas = neuronas destino; el <span class="arithmatex">\(+1\)</span> es el bias</td>
+</tr>
+<tr>
+<td>Parámetros de una capa densa</td>
+<td><span class="arithmatex">\(n_{in}\cdot n_{out}+n_{out}\)</span></td>
+<td>Un bias por neurona destino</td>
+</tr>
+<tr>
+<td>Composición</td>
+<td><span class="arithmatex">\(a_k=f_k(W_ka_{k-1}+b_k)\)</span></td>
+<td>Una función por <strong>capa</strong></td>
+</tr>
+<tr>
+<td>Softmax</td>
+<td><span class="arithmatex">\(y_i=e^{z_i}/\sum_j e^{z_j}\)</span></td>
+<td>Suma 1. Varias sigmoides independientes no suman 1</td>
+</tr>
+<tr>
+<td>Entropía cruzada</td>
+<td><span class="arithmatex">\(-\sum_i d_i\log y_i\)</span> (con one-hot: <span class="arithmatex">\(-\log y_c\)</span>)</td>
+<td>Penaliza mucho una predicción segura y errada</td>
+</tr>
+<tr>
+<td>Error total</td>
+<td><span class="arithmatex">\(\frac1M\sum_m\text{Div}(Y_m,d_m)\)</span></td>
+<td>Promedio sobre los ejemplos</td>
+</tr>
+<tr>
+<td>Regla de la cadena</td>
+<td><span class="arithmatex">\(\dfrac{\partial E}{\partial w}=\dfrac{\partial E}{\partial y}\dfrac{\partial y}{\partial z}\dfrac{\partial z}{\partial w}\)</span></td>
+<td>Exige activaciones <strong>derivables</strong></td>
+</tr>
+<tr>
+<td>Inicialización del gradiente</td>
+<td><span class="arithmatex">\(\partial\,\text{Div}/\partial y\)</span> en la salida; con softmax y entropía cruzada, <span class="arithmatex">\(\partial\,\text{Div}/\partial z=y-d\)</span></td>
+<td>Primer paso del backward</td>
+</tr>
+<tr>
+<td>Jacobiano</td>
+<td><span class="arithmatex">\(J_y(z)=[\partial y_i/\partial z_j]\)</span></td>
+<td>Diagonal si la activación es elemento a elemento</td>
+</tr>
+<tr>
+<td>Dropout</td>
+<td>Se apaga <span class="arithmatex">\(p\)</span>; quedan <span class="arithmatex">\(1-p\)</span></td>
+<td>Solo en entrenamiento</td>
+</tr>
+<tr>
+<td>Batch, SGD y mini-batch</td>
+<td>Todos los ejemplos, uno solo, o un grupo por actualización</td>
+<td>En <strong>secuencias</strong> no se baraja todo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tipos-de-pregunta-y-como-resolverlos">Tipos de pregunta y cómo resolverlos<a class="headerlink" href="#tipos-de-pregunta-y-como-resolverlos" title="Permanent link">&para;</a></h2>
+<h3 id="tipo-1-frontera-de-decision-revision-de-la-leccion-2-pao-2026-i">Tipo 1 · Frontera de decisión (revisión de la Lección #2, PAO 2026-I)<a class="headerlink" href="#tipo-1-frontera-de-decision-revision-de-la-leccion-2-pao-2026-i" title="Permanent link">&para;</a></h3>
+<p>Ejemplo: «Dada la frontera <span class="arithmatex">\(3-x_1-x_2=0\)</span> y la regla de decisión <span class="arithmatex">\(h(x)&gt;0.5\)</span>, ¿qué es cierto?»</p>
+<details class="success">
+<summary>Solución</summary>
+<p>Las respuestas correctas, según la revisión en clase:</p>
+<ul>
+<li>La frontera se puede escribir como <span class="arithmatex">\(x_1+x_2=3\)</span>.</li>
+<li>Si <span class="arithmatex">\(x_1+x_2&lt;3\)</span>, entonces <span class="arithmatex">\(y=1\)</span>, porque <span class="arithmatex">\(3-x_1-x_2&gt;0\)</span> implica <span class="arithmatex">\(h&gt;0.5\)</span>.</li>
+<li>Separa el plano en dos regiones.</li>
+</ul>
+<p>Variante de la misma lección, que el profesor pidió <em>estudiar más</em>: con <span class="arithmatex">\(h=g(-4+2x_1+0x_2)\)</span>, la frontera es
+<span class="arithmatex">\(-4+2x_1=0\)</span>, o sea <span class="arithmatex">\(x_1=2\)</span>. Es una recta vertical que <strong>no depende de <span class="arithmatex">\(x_2\)</span></strong>.</p>
+</details>
+<h3 id="tipo-2-sensibilidad-y-regla-de-la-cadena-revision-de-la-leccion-2-pao-2026-i">Tipo 2 · Sensibilidad y regla de la cadena (revisión de la Lección #2, PAO 2026-I)<a class="headerlink" href="#tipo-2-sensibilidad-y-regla-de-la-cadena-revision-de-la-leccion-2-pao-2026-i" title="Permanent link">&para;</a></h3>
+<p>Ejemplo: «Una red neuronal recibe una entrada y produce una salida. ¿Qué es cierto sobre medir cómo una pequeña
+variación de la entrada afecta la salida?»</p>
+<details class="success">
+<summary>Solución</summary>
+<p>Las tres afirmaciones correctas:</p>
+<ol>
+<li>Hay que seguir la variación <strong>capa por capa hasta la salida</strong>.</li>
+<li>Esos cambios se estudian con la <strong>regla de la cadena</strong>.</li>
+<li>La regla de la cadena se puede aplicar <strong>si las funciones de activación son diferenciables</strong>. Por eso
+   hardlim no sirve para backprop.</li>
+</ol>
+</details>
+<h3 id="tipo-3-entrenar-un-perceptron-a-mano-regla-delta">Tipo 3 · Entrenar un perceptrón a mano (regla delta)<a class="headerlink" href="#tipo-3-entrenar-un-perceptron-a-mano-regla-delta" title="Permanent link">&para;</a></h3>
+<p>Ejemplo de la Clase 09: AND con <span class="arithmatex">\(\alpha=0.3\)</span>, <span class="arithmatex">\(\theta=1.5\)</span> (fijo), <span class="arithmatex">\(W=(0,\,0.25)\)</span> y los ejemplos en el orden
+(0,0), (0,1), (1,0), (1,1).</p>
+<details class="success">
+<summary>Solución</summary>
+<ul>
+<li>
+<p><strong>Épocas 1 a 3:</strong> (0,0), (0,1) y (1,0) dan <span class="arithmatex">\(z&lt;1.5\)</span>, así que <span class="arithmatex">\(y=0\)</span> y está bien. En cada época solo falla
+  (1,1), con <span class="arithmatex">\(t=1\)</span> e <span class="arithmatex">\(y=0\)</span>, y se suma <span class="arithmatex">\(0.3\cdot1\)</span> a cada peso:</p>
+<table>
+<thead>
+<tr>
+<th>Época</th>
+<th><span class="arithmatex">\(z\)</span> en (1,1)</th>
+<th><span class="arithmatex">\(W\)</span> después</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.25</td>
+<td>(0.3, 0.55)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.85</td>
+<td>(0.6, 0.85)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1.45</td>
+<td>(0.9, 1.15)</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Época 4:</strong></p>
+<ul>
+<li>(1,1): <span class="arithmatex">\(z=2.05\ge1.5\)</span>, así que <span class="arithmatex">\(y=1\)</span>. ✓</li>
+<li>(1,0): <span class="arithmatex">\(z=0.9\)</span>, así que <span class="arithmatex">\(y=0\)</span>. ✓</li>
+<li>(0,1): <span class="arithmatex">\(z=1.15\)</span>, así que <span class="arithmatex">\(y=0\)</span>. ✓</li>
+</ul>
+</li>
+<li><strong>Resultado:</strong> <span class="arithmatex">\(W=(0.9,\,1.15)\)</span>, igual que en la diapositiva.</li>
+</ul>
+</details>
+<h3 id="tipo-4-disenar-una-mlp-booleana-xnor-xor-regiones">Tipo 4 · Diseñar una MLP booleana (XNOR, XOR, regiones)<a class="headerlink" href="#tipo-4-disenar-una-mlp-booleana-xnor-xor-regiones" title="Permanent link">&para;</a></h3>
+<p>Procedimiento:</p>
+<ol>
+<li>Escribe la función en forma de suma de productos.</li>
+<li>Usa una neurona oculta por término AND y una de salida OR.</li>
+<li>Con sigmoides, usa pesos de ±20 y elige el bias para que solo se active el caso deseado.</li>
+</ol>
+<p>Ejemplo: construye XOR = (<span class="arithmatex">\(x_1\)</span> AND NOT <span class="arithmatex">\(x_2\)</span>) OR (NOT <span class="arithmatex">\(x_1\)</span> AND <span class="arithmatex">\(x_2\)</span>).</p>
+<details class="success">
+<summary>Solución</summary>
+<ul>
+<li>Oculta 1 (<span class="arithmatex">\(x_1\)</span> AND NOT <span class="arithmatex">\(x_2\)</span>): <span class="arithmatex">\(g(-10+20x_1-20x_2)\)</span>. Es ≈1 solo en (1,0).</li>
+<li>Oculta 2 (NOT <span class="arithmatex">\(x_1\)</span> AND <span class="arithmatex">\(x_2\)</span>): <span class="arithmatex">\(g(-10-20x_1+20x_2)\)</span>. Es ≈1 solo en (0,1).</li>
+<li>Salida OR: <span class="arithmatex">\(g(-10+20a_1+20a_2)\)</span>.</li>
+<li>Comprobación: (0,0) da 0, (1,0) da 1, (0,1) da 1 y (1,1) da 0, porque ambas ocultas valen <span class="arithmatex">\(g(-10)\approx0\)</span>.</li>
+</ul>
+<p>Para regiones en el plano, como «1 dentro de un cuadrado», la respuesta es la misma idea:</p>
+<ul>
+<li>Cada <strong>lado</strong> del cuadrado es una neurona de la primera capa oculta (un semiplano).</li>
+<li>Un <strong>AND</strong> de esos cuatro lados da la región convexa.</li>
+<li>Ver la Lección #3 de 2020 en <a href="../../evaluaciones/1p/index.html">evaluaciones del 1P</a>.</li>
+</ul>
+</details>
+<h3 id="tipo-5-dimensiones-y-numero-de-parametros">Tipo 5 · Dimensiones y número de parámetros<a class="headerlink" href="#tipo-5-dimensiones-y-numero-de-parametros" title="Permanent link">&para;</a></h3>
+<p>Ejemplos:</p>
+<ol>
+<li>Una red con 3 entradas, 4 ocultas y 2 salidas. ¿Cuáles son las dimensiones de <span class="arithmatex">\(W^{(1)}\)</span> y <span class="arithmatex">\(W^{(2)}\)</span>, y cuántos
+   parámetros tiene?</li>
+<li>Pregunta de una lección de 2020: una imagen a color de <span class="arithmatex">\(300\times300\)</span> entra a una MLP cuya primera capa oculta
+   tiene 100 neuronas. ¿Cuántos parámetros tiene esa capa?</li>
+</ol>
+<details class="success">
+<summary>Solución</summary>
+<ol>
+<li>Red de 3, 4 y 2:<ul>
+<li><span class="arithmatex">\(W^{(1)}\)</span> es de <span class="arithmatex">\(4\times(3+1)=4\times4\)</span> y <span class="arithmatex">\(W^{(2)}\)</span> de <span class="arithmatex">\(2\times(4+1)=2\times5\)</span>.</li>
+<li>Total: <span class="arithmatex">\(16+10=26\)</span>.</li>
+</ul>
+</li>
+<li>Imagen a color:<ul>
+<li>Entradas: <span class="arithmatex">\(300\cdot300\cdot3=270\,000\)</span>.</li>
+<li>Parámetros: <span class="arithmatex">\(270\,000\cdot100+100=\mathbf{27\,000\,100}\)</span>.</li>
+<li>La trampa es olvidar los 3 canales, que da 9 000 100, o los 100 bias.</li>
+</ul>
+</li>
+</ol>
+</details>
+<h3 id="tipo-6-neuronas-ocultas-reordenadas-leccion-2-de-2021-y-de-2026-i">Tipo 6 · Neuronas ocultas reordenadas (Lección #2 de 2021 y de 2026-I)<a class="headerlink" href="#tipo-6-neuronas-ocultas-reordenadas-leccion-2-de-2021-y-de-2026-i" title="Permanent link">&para;</a></h3>
+<p>Ejemplo: «Dos estudiantes obtienen modelos con igual desempeño, pero algunas neuronas ocultas aparecen
+reordenadas. Si se intercambian dos neuronas ocultas y también sus pesos de salida, ¿cómo cambia la salida?»</p>
+<details class="success">
+<summary>Solución</summary>
+<p><strong>Se mantiene igual.</strong> Intercambiar filas de <span class="arithmatex">\(W^{(1)}\)</span> y las columnas correspondientes de <span class="arithmatex">\(W^{(2)}\)</span> deja el
+producto igual.</p>
+<p>Conclusiones que se aceptaron en la revisión:</p>
+<ul>
+<li>El orden de las neuronas de una capa oculta es intercambiable si sus conexiones se reorganizan igual.</li>
+<li>Los parámetros de una red <strong>no tienen una interpretación única</strong>.</li>
+</ul>
+<p>El profesor añadió que hay que fijar la <strong>semilla</strong> para poder replicar experimentos.</p>
+</details>
+<h3 id="tipo-7-regularizacion-y-salidas-multiclase-leccion-2-de-2021">Tipo 7 · Regularización y salidas multiclase (Lección #2 de 2021)<a class="headerlink" href="#tipo-7-regularizacion-y-salidas-multiclase-leccion-2-de-2021" title="Permanent link">&para;</a></h3>
+<p>Ejemplo: «¿Cuál es verdadera?»</p>
+<ul>
+<li>a) Si una red tiene overfitting, una solución es <strong>disminuir</strong> el término de regularización.</li>
+<li>b) Las activaciones de las neuronas ocultas siempre están en <span class="arithmatex">\((0,1)\)</span>.</li>
+<li>c) Si hay overfitting, una solución es <strong>aumentar</strong> el parámetro de regularización.</li>
+<li>d) En una red de 3 clases, <span class="arithmatex">\(a_1+a_2+a_3=1\)</span> para cualquier entrada.</li>
+</ul>
+<details class="success">
+<summary>Solución</summary>
+<p><strong>Solo c).</strong></p>
+<ul>
+<li><strong>a) es falsa:</strong> es al revés; disminuir la regularización empeora el overfitting.</li>
+<li><strong>b) es falsa:</strong> depende de la activación. tanh da <span class="arithmatex">\((-1,1)\)</span> y ReLU da <span class="arithmatex">\([0,\infty)\)</span>.</li>
+<li><strong>d) es falsa:</strong> solo se cumple con <strong>softmax</strong>. Con sigmoides independientes en la salida no suman 1.</li>
+</ul>
+</details>
+<h3 id="tipo-8-funcion-de-costo-con-predicciones-revision-de-la-leccion-2-pao-2026-i">Tipo 8 · Función de costo con predicciones (revisión de la Lección #2, PAO 2026-I)<a class="headerlink" href="#tipo-8-funcion-de-costo-con-predicciones-revision-de-la-leccion-2-pao-2026-i" title="Permanent link">&para;</a></h3>
+<p>Ejemplo: con entropía cruzada y tres ejemplos (<span class="arithmatex">\(y=1\)</span>, <span class="arithmatex">\(h=0.59\)</span>), (<span class="arithmatex">\(y=1\)</span>, <span class="arithmatex">\(h=0.01\)</span>) y (<span class="arithmatex">\(y=0\)</span>, <span class="arithmatex">\(h=0.49\)</span>), ¿cuál
+aporta más al costo y por qué?</p>
+<details class="success">
+<summary>Solución</summary>
+<p>El costo por ejemplo es <span class="arithmatex">\(-\ln h\)</span> si <span class="arithmatex">\(y=1\)</span>, y <span class="arithmatex">\(-\ln(1-h)\)</span> si <span class="arithmatex">\(y=0\)</span>:</p>
+<ul>
+<li>1: <span class="arithmatex">\(-\ln0.59=0.53\)</span>.</li>
+<li>2: <span class="arithmatex">\(-\ln0.01=\mathbf{4.61}\)</span>.</li>
+<li>3: <span class="arithmatex">\(-\ln0.51=0.67\)</span>.</li>
+</ul>
+<p>El segundo domina: la entropía cruzada <strong>castiga fuerte una predicción segura y equivocada</strong>. Esa es la razón
+para no usar MSE en clasificación.</p>
+</details>
+<h3 id="tipo-9-softmax-one-hot-e-inicializacion-del-gradiente">Tipo 9 · Softmax, one-hot e inicialización del gradiente<a class="headerlink" href="#tipo-9-softmax-one-hot-e-inicializacion-del-gradiente" title="Permanent link">&para;</a></h3>
+<p>Ejemplo: la salida tiene <span class="arithmatex">\(z=(2,1,0)\)</span> y la clase correcta es la primera. Calcula softmax, la entropía cruzada y el
+gradiente inicial <span class="arithmatex">\(\partial\,\text{Div}/\partial z\)</span>.</p>
+<details class="success">
+<summary>Solución</summary>
+<ol>
+<li>Exponenciales: <span class="arithmatex">\(e^2=7.389\)</span>, <span class="arithmatex">\(e^1=2.718\)</span>, <span class="arithmatex">\(e^0=1\)</span>, y la suma es 11.107.</li>
+<li>Softmax: <span class="arithmatex">\(y\approx(0.665,\,0.245,\,0.090)\)</span>.</li>
+<li>One-hot: <span class="arithmatex">\(d=(1,0,0)\)</span>, así que <span class="arithmatex">\(\text{Div}=-\ln0.665=0.408\)</span>.</li>
+<li>Inicialización del gradiente: con softmax y entropía cruzada,
+   <span class="arithmatex">\(\partial\,\text{Div}/\partial z=y-d=(-0.335,\,0.245,\,0.090)\)</span>. Es el primer paso del backward.</li>
+</ol>
+</details>
+<h2 id="trampas-frecuentes">Trampas frecuentes<a class="headerlink" href="#trampas-frecuentes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>«La capa de entrada tiene neuronas».</strong> No: solo contiene el vector de entrada.</li>
+<li><strong>«Una red con muchas capas es una MLP».</strong> Una MLP es feedforward y <strong>totalmente conectada</strong>. Las redes con
+  <em>skipping</em> o las CNN no son MLP.</li>
+<li><strong>Olvidar el bias</strong> en las dimensiones (<span class="arithmatex">\(+1\)</span>) o al contar parámetros.</li>
+<li><strong>Sumar las sigmoides de salida y esperar 1.</strong> Solo softmax suma 1.</li>
+<li><strong>Usar hardlim con backprop.</strong> Sin derivada no hay regla de la cadena.</li>
+<li><strong>Creer que una CNN es «una MLP para imágenes».</strong> En una CNN las conexiones son <strong>locales</strong>.</li>
+<li><strong>«Error = 100 − accuracy».</strong> El profesor insiste en que no son complementos.</li>
+</ul>
+<h2 id="simulacro">Simulacro<a class="headerlink" href="#simulacro" title="Permanent link">&para;</a></h2>
+<p>Cronométrate y no uses apuntes. Usa una calculadora.</p>
+<ol>
+<li><strong>(Regla delta)</strong> Entrena un perceptrón para OR con <span class="arithmatex">\(\theta=0.5\)</span> (fijo), <span class="arithmatex">\(\alpha=0.2\)</span>, <span class="arithmatex">\(W=(0,0)\)</span> y los
+   ejemplos en el orden (0,0), (0,1), (1,0), (1,1). Usa <span class="arithmatex">\(y=1\)</span> si <span class="arithmatex">\(z\ge\theta\)</span>. ¿Cuál es el <span class="arithmatex">\(W\)</span> final?</li>
+<li><strong>(Dimensiones)</strong> Una red tiene 5 entradas, 3 ocultas y 2 salidas. Da las dimensiones de <span class="arithmatex">\(W^{(1)}\)</span> y <span class="arithmatex">\(W^{(2)}\)</span>
+   y el total de parámetros.</li>
+<li><strong>(Parámetros)</strong> Una imagen en escala de grises de <span class="arithmatex">\(28\times28\)</span> entra a una capa densa de 50 neuronas.
+   ¿Cuántos parámetros tiene la capa?</li>
+<li><strong>(Softmax)</strong> Para <span class="arithmatex">\(z=(1,2,3)\)</span>, calcula softmax e indica la clase predicha.</li>
+<li><strong>(V/F)</strong> En una red de 3 clases con sigmoide en cada neurona de salida, <span class="arithmatex">\(a_1+a_2+a_3=1\)</span>.</li>
+<li><strong>(Jacobiano)</strong> Si <span class="arithmatex">\(y=\sigma(z)\)</span> se aplica elemento a elemento a <span class="arithmatex">\(z\in\mathbb{R}^3\)</span>, ¿qué forma tiene <span class="arithmatex">\(J_y(z)\)</span>?</li>
+<li><strong>(Selección)</strong> ¿Qué región puede formar cada red?<ul>
+<li>Una capa.</li>
+<li>Dos capas.</li>
+<li>Tres capas.</li>
+</ul>
+</li>
+<li><strong>(Concepto)</strong> ¿Por qué hace falta una activación derivable para entrenar con backpropagation?</li>
+</ol>
+<details class="success">
+<summary>Respuestas del simulacro</summary>
+<ol>
+<li><strong><span class="arithmatex">\(W=(0.6,\,0.6)\)</span>.</strong><ul>
+<li>Época 1: falla (0,1), y <span class="arithmatex">\(w_2\)</span> pasa a 0.2. Falla (1,0), y <span class="arithmatex">\(w_1\)</span> pasa a 0.2. Falla (1,1) con
+  <span class="arithmatex">\(z=0.4&lt;0.5\)</span>, y <span class="arithmatex">\(W\)</span> queda en (0.4, 0.4).</li>
+<li>Época 2: falla (0,1) con <span class="arithmatex">\(z=0.4\)</span>, y <span class="arithmatex">\(w_2\)</span> pasa a 0.6. Falla (1,0), y <span class="arithmatex">\(w_1\)</span> pasa a 0.6. (1,1) ya está
+  bien.</li>
+<li>Época 3: todo correcto.</li>
+</ul>
+</li>
+<li><strong>26 parámetros.</strong> <span class="arithmatex">\(W^{(1)}\)</span> es de <span class="arithmatex">\(3\times6\)</span> y <span class="arithmatex">\(W^{(2)}\)</span> de <span class="arithmatex">\(2\times4\)</span>, así que <span class="arithmatex">\(18+8=26\)</span>.</li>
+<li><strong>39 250 parámetros:</strong> <span class="arithmatex">\(784\cdot50+50\)</span>.</li>
+<li><strong>Clase 3.</strong> Las exponenciales son 2.718, 7.389 y 20.086, que suman 30.193, y la softmax da
+   <span class="arithmatex">\(\approx(0.090,\,0.245,\,0.665)\)</span>.</li>
+<li><strong>Falso.</strong> Solo softmax garantiza que las salidas sumen 1.</li>
+<li><strong>Diagonal de <span class="arithmatex">\(3\times3\)</span></strong>, con <span class="arithmatex">\(\sigma'(z_i)=\sigma(z_i)\,(1-\sigma(z_i))\)</span> en la diagonal: cada salida depende
+   solo de su propia entrada.</li>
+<li>Una capa forma un semiplano; dos capas, regiones convexas; tres capas, regiones arbitrarias.</li>
+<li>Backprop usa la <strong>regla de la cadena</strong>, que necesita las derivadas de cada activación. Sin derivada (por
+   ejemplo, hardlim) no hay gradiente que propagar.</li>
+</ol>
+</details>
+<h2 id="lista-de-autoevaluacion">Lista de autoevaluación<a class="headerlink" href="#lista-de-autoevaluacion" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explico «una contra todas» y cómo se elige la clase final.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Dibujo el perceptrón y nombro sus partes con la analogía biológica.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Conozco hardlim, sigmoide, tanh y ReLU: rango, uso típico y si tienen derivada.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Construyo AND, OR y NOT con un perceptrón y XOR o XNOR con una MLP.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explico por qué un perceptrón no resuelve XOR.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Doy las dimensiones de cada <span class="arithmatex">\(W^{(k)}\)</span> y cuento los parámetros con bias.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Entreno a mano un perceptrón con la regla delta.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Escribo una MLP como composición de funciones.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Calculo softmax y entropía cruzada para un vector one-hot.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Explico qué es la inicialización del gradiente y dónde empieza el backward.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Sé qué es el jacobiano y cuándo es diagonal.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Resuelvo preguntas de frontera de decisión logística (repaso de la Clase 06).</li>
+</ul>
+<h2 id="para-profundizar">Para profundizar<a class="headerlink" href="#para-profundizar" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="tema-guia-general.html#12-el-perceptron">Guía general del 1P · §12 El perceptrón</a> y
+  <a href="tema-guia-general.html#13-el-perceptron-como-puerta-booleana-y-su-limite">§13 Puertas booleanas</a></li>
+<li><a href="tema-guia-general.html#14-redes-neuronales-mlp">§14 Redes neuronales MLP</a></li>
+<li><a href="tema-guia-general.html#16-aprendizaje-en-las-redes-mlp">§16 Aprendizaje en las redes MLP</a>, con regla delta,
+  backpropagation y jacobiano</li>
+<li><a href="tema-redes-neuronales-mlp.pdf">Guía a fondo de redes neuronales y MLP (PDF)</a>, con problemas resueltos</li>
+<li><a href="../../laboratorios/index.html">Laboratorio 01 · MLP con MNIST</a></li>
+</ul>
+<h2 id="fuentes">Fuentes<a class="headerlink" href="#fuentes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Diapositivas de las Clases # 7 a # 10 de PAO 2026-II y # 7 a # 11 de PAO 2026-I (Enrique Peláez).</li>
+<li>Notas de clase de la ayudantía, sesiones 06–10 y 12. La sesión 12 incluye la revisión de la Lección #2 de PAO
+  2026-I con sus respuestas correctas.</li>
+<li><a href="../../evaluaciones/1p/leccion-2-2021-2.pdf">Lección #2 de II PAO 2021</a> y
+  <a href="../../evaluaciones/1p/leccion-3-2020-1.pdf">Lección #3 de I PAO 2020</a>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="./leccion-1.html" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Guía de la Lección #1">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Guía de la Lección #1
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="./examen-1p.html" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Guía del examen del 1P">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Guía del examen del 1P
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Diapositivas, enunciados y evaluaciones © Enrique Peláez, publicados con su autorización. Guías y organización: ayudantía de CCPG1044.
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog" role="status" aria-atomic="true">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["content.code.copy","content.tooltips","navigation.footer","navigation.indexes","navigation.path","navigation.sections","navigation.tabs","navigation.top","navigation.tracking","search.highlight","toc.follow"],"redirect":null,"search":"../../assets/javascripts/workers/search.c47bb847.min.js","tags":null,"translations":{"clipboard.copied":"Copiado al portapapeles","clipboard.copy":"Copiar al portapapeles","clipboard.error":"Could not copy to clipboard","search.result.more.one":"1 más en esta página","search.result.more.other":"# más en esta página","search.result.none":"No se encontraron documentos","search.result.one":"1 documento encontrado","search.result.other":"# documentos encontrados","search.result.placeholder":"Teclee para comenzar búsqueda","search.result.term.missing":"Falta","select.version":"Seleccionar versión"},"version":null}</script>
+    
+    
+  
+      <script src="../../assets/javascripts/bundle.a2388154.min.js"></script>
+      
+    
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script>
+    (function () {
+      function render(root) {
+        if (!window.renderMathInElement) return;
+        renderMathInElement(root, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\[", right: "\\]", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false }
+          ],
+          throwOnError: false
+        });
+      }
+      function alListo() {
+        if (window.document$ && window.document$.subscribe) {
+          window.document$.subscribe(function () { render(document.body); });
+        } else {
+          render(document.body);
+        }
+      }
+      window.addEventListener("load", alListo);
+    })();
+  </script>
+
+  </body>
+</html>
